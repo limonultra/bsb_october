@@ -46,9 +46,7 @@ public class RoomCreate extends AppCompatActivity {
         WIFI = findViewById(R.id.wifiName);
 
         checkAudioPermission();
-        checkInternetPermission();
         checkNetWorkPermission();
-        checkGPSPermission();
 
         WIFI.setText( getWIFIName() );
 
@@ -122,24 +120,6 @@ public class RoomCreate extends AppCompatActivity {
             ActivityCompat.requestPermissions( this, tempPerms, 2 );
         }
     }
-    public void checkInternetPermission(){
-        if (ContextCompat.checkSelfPermission( this, Manifest.permission.INTERNET )
-                != PackageManager.PERMISSION_GRANTED) {
-            String[] tempPerms = {Manifest.permission.INTERNET};
-            ActivityCompat.requestPermissions( this, tempPerms,3 );
-        }
-    }
-
-
-    @TargetApi( 27 )
-    public void checkGPSPermission(){
-        if (ContextCompat.checkSelfPermission( this, Manifest.permission.ACCESS_FINE_LOCATION )
-                != PackageManager.PERMISSION_GRANTED) {
-            String[] tempPerms = {Manifest.permission.ACCESS_FINE_LOCATION};
-            ActivityCompat.requestPermissions( this, tempPerms,4 );
-        }
-    }
-
 
     public  String getIp(){
         WifiManager wifiMgr = (WifiManager) getApplicationContext().getApplicationContext().getSystemService(WIFI_SERVICE);

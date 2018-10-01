@@ -355,12 +355,13 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         }
     }
 
+
+
     @Override
     protected
-    void onDestroy() {
-        super.onDestroy();
+    void onStop() {
+        super.onStop();
         ServerControl.broadcast( endSpeech );
         stopVoiceRecognition();
-
     }
 }
