@@ -78,7 +78,6 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
         ServerControl.start();
         speechIntent = new Intent( RecognizerIntent.ACTION_RECOGNIZE_SPEECH );
-        this.registerReceiver(mWifiStateChangedReceiver,new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION));
 
         pinName = findViewById( R.id.pinName );
         pupilsNo = findViewById( R.id.pupilNumber );
