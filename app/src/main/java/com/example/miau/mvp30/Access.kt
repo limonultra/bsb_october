@@ -157,6 +157,7 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
             profPin.isClickable=false
             b2.isClickable=false
             runOnUiThread {
+                supportActionBar?.title="Transcripción"
                 val fragmentManager = getSupportFragmentManager()
                 val transaction = fragmentManager.beginTransaction()
                 transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)

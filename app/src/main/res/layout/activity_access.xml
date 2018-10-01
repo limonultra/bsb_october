@@ -30,7 +30,6 @@
         android:layout_marginTop="121dp"
         android:background="@drawable/custom_button"
         android:ems="4"
-        android:hint="0000"
         android:inputType="text"
         android:maxLength="4"
         android:selectAllOnFocus="true"
