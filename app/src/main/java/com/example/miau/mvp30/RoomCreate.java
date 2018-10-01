@@ -3,6 +3,7 @@ package com.example.miau.mvp30;
 import android.Manifest;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -47,6 +48,7 @@ public class RoomCreate extends AppCompatActivity {
         checkAudioPermission();
         checkInternetPermission();
         checkNetWorkPermission();
+        checkGPSPermission();
 
         WIFI.setText( getWIFIName() );
 
@@ -109,7 +111,7 @@ public class RoomCreate extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission( this, Manifest.permission.RECORD_AUDIO )
                 != PackageManager.PERMISSION_GRANTED) {
             String[] tempPerms = {Manifest.permission.RECORD_AUDIO};
-            ActivityCompat.requestPermissions( this, tempPerms, 123 );
+            ActivityCompat.requestPermissions( this, tempPerms, 1 );
         }
     }
 
@@ -117,14 +119,24 @@ public class RoomCreate extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission( this, Manifest.permission.ACCESS_NETWORK_STATE )
                 != PackageManager.PERMISSION_GRANTED) {
             String[] tempPerms = {Manifest.permission.ACCESS_NETWORK_STATE};
-            ActivityCompat.requestPermissions( this, tempPerms, 123 );
+            ActivityCompat.requestPermissions( this, tempPerms, 2 );
         }
     }
     public void checkInternetPermission(){
         if (ContextCompat.checkSelfPermission( this, Manifest.permission.INTERNET )
                 != PackageManager.PERMISSION_GRANTED) {
             String[] tempPerms = {Manifest.permission.INTERNET};
-            ActivityCompat.requestPermissions( this, tempPerms,123 );
+            ActivityCompat.requestPermissions( this, tempPerms,3 );
+        }
+    }
+
+
+    @TargetApi( 27 )
+    public void checkGPSPermission(){
+        if (ContextCompat.checkSelfPermission( this, Manifest.permission.ACCESS_FINE_LOCATION )
+                != PackageManager.PERMISSION_GRANTED) {
+            String[] tempPerms = {Manifest.permission.ACCESS_FINE_LOCATION};
+            ActivityCompat.requestPermissions( this, tempPerms,4 );
         }
     }
 
@@ -150,12 +162,14 @@ public class RoomCreate extends AppCompatActivity {
         return String.format( "%02X", codificable );
     } // Parses int numbers into HEX code
     public String getWIFIName(){
-        WifiManager wifiManager = (WifiManager) this.getApplicationContext().getSystemService(WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
         assert wifiManager != null;
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         String[] wifiName = wifiInfo.toString().split(",");
         String wifiFinalName = wifiName[0].replace("SSID: "," ");
         wifiName[1].replace( wifiName[0]," " );
+
+        String s = wifiInfo.getSSID();
 
         return wifiFinalName;
     } // Get WiFi SSID
