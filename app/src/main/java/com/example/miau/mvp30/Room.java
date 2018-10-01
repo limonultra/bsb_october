@@ -65,23 +65,26 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     private Intent speechIntent;
 
     InetSocketAddress inetSocketAddress = new InetSocketAddress( 8080 );
-    Server ServerControl = new Server( inetSocketAddress );
+    Server serverControl;
 
     @Override
     public void onCreate(Bundle SavedInstanceState) {
         super.onCreate( SavedInstanceState );
         setContentView( R.layout.activity_room );
+        pupilsNo = findViewById( R.id.pupilNumber );
+        serverControl = new Server( inetSocketAddress, pupilsNo, this );
         btnPlay = findViewById( R.id.btnStart );
         btnStop = findViewById( R.id.btnStop );
         btnPlayPause = findViewById( R.id.btnPlayPause );
         chrono = findViewById( R.id.chronometer );
 
-        ServerControl.start();
+        serverControl.start();
         speechIntent = new Intent( RecognizerIntent.ACTION_RECOGNIZE_SPEECH );
 
         pinName = findViewById( R.id.pinName );
-        pupilsNo = findViewById( R.id.pupilNumber );
+
         wifiName = findViewById( R.id.wifiName );
+
 
         saveCurrentAudio();
         Bundle bundle;
@@ -117,7 +120,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             btnPlayPause.setBackgroundResource(R.mipmap.play);
             stopTime = chrono.getBase() - SystemClock.elapsedRealtime();
             speech.cancel();
-            ServerControl.broadcast( speechRestart );
+            serverControl.broadcast( speechRestart );
             chronoState = true;
         } else {
             chrono.start();
@@ -151,7 +154,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             speech.destroy();
             speech = null;
             try {
-                ServerControl.stop();
+                serverControl.stop();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
@@ -251,13 +254,13 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     @Override
     public void onResults(Bundle results) {
         startVoiceRecognitionCycle( speechIntent );
-        ServerControl.broadcast( speechRestart );
+        serverControl.broadcast( speechRestart );
     }
 
     @Override
     public void onPartialResults(Bundle partialResults) {
         receiveResults( partialResults );
-        this.pupilsNo.setText(String.valueOf(ServerControl.clientCount));
+        this.pupilsNo.setText(String.valueOf(serverControl.clientCount));
     }
 
     @Override
@@ -275,14 +278,14 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             }
             Log.d( TAG, String.valueOf( results.getStringArrayList( SpeechRecognizer.RESULTS_RECOGNITION ) ) );
             speechResults = results.getStringArrayList( SpeechRecognizer.RESULTS_RECOGNITION );
-            ServerControl.broadcast( speechResults.toString().replace( "[", "" ).replace( "]", "" ) );
+            serverControl.broadcast( speechResults.toString().replace( "[", "" ).replace( "]", "" ) );
         }
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        ServerControl.broadcast( endSpeech );
+        serverControl.broadcast( endSpeech );
         stopVoiceRecognition();
     }
 
@@ -323,7 +326,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             wifiName.setText( "No estás conectado" );
             pinName.setText( "0000" );
             chrono.stop();
-            ServerControl.broadcast( endSpeech );
+            serverControl.broadcast( endSpeech );
             stopVoiceRecognition();
             resetAudio();
             new AlertDialog.Builder(Room.this).
@@ -354,12 +357,4 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         }
     }
 
-
-
-    @Override
-    protected void onStop() {
-        ServerControl.broadcast( endSpeech );
-        stopVoiceRecognition();
-        super.onStop();
-    }
 }

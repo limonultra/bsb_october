@@ -1,6 +1,7 @@
 package com.example.miau.mvp30;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -26,15 +27,21 @@ import static android.content.ContentValues.TAG;
 public class Server extends WebSocketServer {
 
     public static int clientCount = 0;
+    private TextView clients;
+    private Activity context;
 
 
     public Server(int port ) throws UnknownHostException {
         super( new InetSocketAddress( port ) );
 
+
     }
 
-    public Server(InetSocketAddress address) {
+    public Server(InetSocketAddress address, TextView clients, Activity context) {
         super( address );
+        this.clients = clients;
+        this.context = context;
+
     }
 
     @Override
@@ -43,6 +50,13 @@ public class Server extends WebSocketServer {
         /*broadcast( "new connection: " + handshake.getResourceDescriptor() );//This method sends a message to all clients connected*/
         Log.d(TAG, "new connection: " + handshake.getResourceDescriptor() );
         clientCount++;
+        context.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                clients.setText(String.valueOf(clientCount));
+            }
+        });
+
 
         System.out.println( conn.getRemoteSocketAddress().getAddress().getHostAddress() + " entered the room!" );
         Log.d( TAG, "Usuarios conectados:"+ clientCount );
@@ -52,6 +66,13 @@ public class Server extends WebSocketServer {
         /*broadcast( conn + " has left the room!" );*/
         System.out.println( conn + " has left the room!" );
         clientCount --;
+        context.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                clients.setText(String.valueOf(clientCount));
+            }
+        });
+
         Log.d( TAG, "Usuarios conectados:"+ clientCount );
     }
 

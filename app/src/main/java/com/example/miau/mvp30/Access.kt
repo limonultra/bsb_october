@@ -88,7 +88,7 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                NavUtils.navigateUpFromSameTask(this)
+                onBackPressed()
                 return true
             }
         }
@@ -97,7 +97,6 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
 
     override fun onBackPressed() {
         super.onBackPressed()
-        unregisterReceiver(ConnectivityReceiver())
         if (open)
             mclient.close()
     }
