@@ -12,14 +12,16 @@ import android.content.pm.PackageManager
 import android.support.v4.content.ContextCompat
 import android.annotation.TargetApi
 import android.Manifest.permission.INTERNET
-
+import android.util.Log
 
 
 class Menu : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+        Log.i("",resources.displayMetrics.densityDpi.toString())
         checkInternetPermission()
         checkGPSPermission()
         val bprof: ImageButton = findViewById(R.id.bprof) as ImageButton

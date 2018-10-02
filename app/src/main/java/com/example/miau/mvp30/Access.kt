@@ -88,7 +88,14 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                onBackPressed()
+                val builder = AlertDialog.Builder(this@Access)
+                builder.setMessage("¿Desea salir de la sesión?")
+                builder.setNegativeButton("Salir") { _, _ ->
+                    onBackPressed()
+                }
+                builder.setPositiveButton("Seguir"){_, _ ->
+                }
+                builder.show()
                 return true
             }
         }
