@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v4.app.NavUtils
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -43,6 +44,8 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_access)
+
+        var toolbar: Toolbar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         registerReceiver(ConnectivityReceiver(), //wifi
