@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">MVP3.0</string>
     <string name="pinlockupimage">PINlockupImage</string>
+    <string name="acceso">ACCESO</string>
+    <string name="instruccion">Una vez conectado a su WIFI use el código del instructor</string>
+    <string name="continuar">Continuar</string>
+    <string name="ajustes">Ajustes</string>
 </resources>

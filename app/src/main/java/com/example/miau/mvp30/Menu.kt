@@ -13,6 +13,7 @@ import android.support.v4.content.ContextCompat
 import android.annotation.TargetApi
 import android.Manifest.permission.INTERNET
 import android.util.Log
+import android.view.MenuItem
 
 
 class Menu : AppCompatActivity() {
@@ -54,5 +55,16 @@ class Menu : AppCompatActivity() {
             val tempPerms = arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION)
             ActivityCompat.requestPermissions(this, tempPerms, 4)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.settings -> {
+                val intent = Intent(this, Settings::class.java)
+                startActivity(intent)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
