@@ -254,7 +254,7 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
         }
 
         fun escribirSubs(message: String, newtext: String){
-            profText.text = "$newtext $message"
+            profText.text = Editable.Factory.getInstance().newEditable("$newtext $message")
         }
 
         companion object {
