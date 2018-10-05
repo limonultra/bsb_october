@@ -4,19 +4,23 @@ import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.SystemClock;
+
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -284,9 +288,28 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        serverControl.broadcast( endSpeech );
-        stopVoiceRecognition();
+        new AlertDialog.Builder(Room.this).
+                setTitle("Conexion Perdida").
+                setMessage("Vas a volver a la pantalla de creacion de sala").
+                setCancelable( false ).
+                setPositiveButton( "Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public
+                    void onClick(DialogInterface dialog, int which) {
+                        serverControl.broadcast( endSpeech );
+                        stopVoiceRecognition();
+                        Log.d("DEGUB","serverClosed");
+                        finish();
+                    }
+
+                } ).setNegativeButton( "Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public
+                    void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();}
+                }).show();
+
+
     }
 
     private BroadcastReceiver mWifiStateChangedReceiver = new BroadcastReceiver() {
