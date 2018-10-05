@@ -211,6 +211,16 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
         override fun onClose(code: Int, reason: String?, remote: Boolean) {
             open = false
             Log.e("Close: ", "closed with exit code $code additional info: $reason")
+            runOnUiThread {
+                onrepeat = true
+                val builder = AlertDialog.Builder(this@Access)
+                builder.setMessage("Sesion Finalizada por su instructor")
+                builder.setNegativeButton("Ok") { _, _ ->
+                    finish()
+                }
+                builder.show()
+
+            }
         }
 
 
