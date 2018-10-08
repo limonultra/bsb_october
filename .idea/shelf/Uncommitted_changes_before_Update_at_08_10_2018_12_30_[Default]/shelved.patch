@@ -1,0 +1,259 @@
+Index: app/src/main/res/layout/activity_transcription.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<android.support.constraint.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    tools:layout_editor_absoluteY=\"81dp\"\n    android:background=\"@android:color/white\"\n    android:keyboardNavigationCluster=\"false\">\n\n    <TextView\n        android:id=\"@+id/profText\"\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"0dp\"\n        android:layout_alignParentStart=\"true\"\n        android:layout_alignParentLeft=\"true\"\n        android:layout_centerVertical=\"true\"\n        android:padding=\"12dp\"\n        android:keepScreenOn=\"true\"\n        android:text=\"Recibiendo datos...\"\n        android:textAppearance=\"?android:attr/textAppearanceLarge\"\n        android:textSize=\"14sp\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\" />\n\n</android.support.constraint.ConstraintLayout>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_transcription.xml	(revision 4142512053fc9de599b2a114fe94850f511566e4)
++++ app/src/main/res/layout/activity_transcription.xml	(date 1538732340853)
+@@ -8,21 +8,37 @@
+     android:background="@android:color/white"
+     android:keyboardNavigationCluster="false">
+ 
+-    <TextView
++    <EditText
+         android:id="@+id/profText"
++        android:layout_height="0dp"
+         android:layout_width="match_parent"
+-        android:layout_height="0dp"
++        android:layout_alignParentLeft="true"
+         android:layout_alignParentStart="true"
+-        android:layout_alignParentLeft="true"
+         android:layout_centerVertical="true"
++        android:gravity="top"
++        android:keepScreenOn="true"
+         android:padding="12dp"
+-        android:keepScreenOn="true"
+         android:text="Recibiendo datos..."
+         android:textAppearance="?android:attr/textAppearanceLarge"
+         android:textSize="14sp"
+         app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="1.0"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/toolbar3"
++        app:layout_constraintVertical_bias="0.0" />
++
++    <android.support.v7.widget.Toolbar
++        android:id="@+id/toolbar3"
++        android:layout_width="match_parent"
++        android:layout_height="61dp"
++        android:background="?attr/colorPrimary"
++        android:minHeight="?attr/actionBarSize"
++        android:theme="?attr/actionBarTheme"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toTopOf="parent" />
++        app:layout_constraintTop_toTopOf="parent"
++        app:title="Transcription"
++        />
+ 
+ </android.support.constraint.ConstraintLayout>
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/vcs.xml	(date 1538732340838)
++++ .idea/vcs.xml	(date 1538732340838)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>apply plugin: 'com.android.application'\n\napply plugin: 'kotlin-android'\n\napply plugin: 'kotlin-android-extensions'\n\nandroid {\n    compileSdkVersion 27\n    defaultConfig {\n        applicationId \"com.example.miau.mvp30\"\n        minSdkVersion 19\n        targetSdkVersion 27\n        versionCode 1\n        versionName \"1.0\"\n        testInstrumentationRunner \"android.support.test.runner.AndroidJUnitRunner\"\n        vectorDrawables.useSupportLibrary = true\n    }\n    buildTypes {\n        release {\n            minifyEnabled false\n            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'\n        }\n    }\n}\n\ndependencies {\n    implementation fileTree(dir: 'libs', include: ['*.jar'])\n    implementation \"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version\"\n    implementation 'com.android.support:appcompat-v7:27.1.1'\n    implementation 'com.android.support.constraint:constraint-layout:1.1.2'\n    implementation 'com.android.support:design:27.1.1'\n    testImplementation 'junit:junit:4.12'\n    androidTestImplementation 'com.android.support.test:runner:1.0.2'\n    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'\n    implementation \"org.java-websocket:Java-WebSocket:1.3.8\"\n    implementation \"org.jetbrains.anko:anko-sdk25-coroutines:$anko_version\"\n    implementation \"org.jetbrains.anko:anko-appcompat-v7-coroutines:$anko_version\"\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 4142512053fc9de599b2a114fe94850f511566e4)
++++ app/build.gradle	(date 1538732340843)
+@@ -8,7 +8,7 @@
+     compileSdkVersion 27
+     defaultConfig {
+         applicationId "com.example.miau.mvp30"
+-        minSdkVersion 19
++        minSdkVersion 21
+         targetSdkVersion 27
+         versionCode 1
+         versionName "1.0"
+Index: app/src/main/java/com/example/miau/mvp30/Access.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.miau.mvp30\n\nimport android.app.Dialog\nimport android.content.Context\nimport android.content.IntentFilter\nimport android.net.ConnectivityManager\nimport android.os.Bundle\nimport android.os.CountDownTimer\nimport android.support.v4.app.DialogFragment\nimport android.support.v4.app.FragmentTransaction\nimport android.support.v4.app.NavUtils\nimport android.support.v7.app.AlertDialog\nimport android.support.v7.app.AppCompatActivity\nimport android.support.v7.widget.Toolbar\nimport android.text.Editable\nimport android.text.TextWatcher\nimport android.util.Log\nimport android.view.*\nimport android.view.Menu\nimport android.view.inputmethod.InputMethodManager\nimport kotlinx.android.synthetic.main.activity_access.*\nimport kotlinx.android.synthetic.main.activity_transcription.*\nimport org.java_websocket.client.WebSocketClient\nimport org.java_websocket.drafts.Draft\nimport org.java_websocket.drafts.Draft_6455\nimport org.java_websocket.handshake.ServerHandshake\nimport java.lang.Exception\nimport java.lang.Long\nimport java.net.URI\nimport java.nio.ByteBuffer\nimport java.util.*\n\nclass Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverListener  {\n\n    var hex1 = \"\"\n    var hex2 = \"\"\n    var onrepeat = false\n    var open = false\n    var onclose = false\n    var oldtext = \"\"\n    var newtext = \"\"\n    lateinit var mclient: ChatClient\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContentView(R.layout.activity_access)\n\n        var toolbar: Toolbar\n        supportActionBar?.setDisplayHomeAsUpEnabled(true)\n\n        registerReceiver(ConnectivityReceiver(), //wifi\n                IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))\n\n\n        profPin.addTextChangedListener(object : TextWatcher {\n            override fun afterTextChanged(s: Editable?) {\n                b2.isEnabled = profPin.text.toString().length >= 4\n            }\n\n            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {\n            }\n\n            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}\n\n        })\n        b2.setOnClickListener {\n            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager\n            imm.hideSoftInputFromWindow(b2.getWindowToken(), 0)\n            if (profPin.text.toString().length == 4) {\n                var isHex = true //para saber si nos han introducido texto hexadecimal\n                val regex = \"^[0-9a-fA-F]+$\".toRegex() //expresion regular para comprobar que nos han introducido un hexadecimal\n\n                isHex = regex.matches(profPin.text.toString()) //averiguamos si el pin es hexadecimal\n\n                if (isHex) { // si hexadecimal=true\n                    mclient = ChatClient(URI(getIP()), Draft_6455(), emptyMap(), 100000)\n                    profPin.setText(\"\")\n                    mclient.connect()\n                    var count=Countdown()\n                    count.start()\n                    deviceOnline.visibility = View.VISIBLE\n                } else { // si hexadecimal=false\n                    deviceOnline.setText(\"El PIN introducido es incorrecto\")\n                    deviceOnline.visibility = View.VISIBLE\n                }\n            }\n        }\n    }\n\n\n    override fun onOptionsItemSelected(item: MenuItem): Boolean {\n        when (item.itemId) {\n            android.R.id.home -> {\n                val builder = AlertDialog.Builder(this@Access)\n                builder.setMessage(\"¿Desea salir de la sesión?\")\n                builder.setNegativeButton(\"Salir\") { _, _ ->\n                    onBackPressed()\n                }\n                builder.setPositiveButton(\"Seguir\"){_, _ ->\n                }\n                builder.show()\n                return true\n            }\n        }\n        return super.onOptionsItemSelected(item)\n    }\n\n    override fun onBackPressed() {\n        super.onBackPressed()\n        if (open)\n            mclient.close()\n    }\n\n\n    fun getIP(): String {\n        hex1 = profPin.text.substring(0, 2)\n        hex2 = profPin.text.substring(2, 4)\n        var SERVER_URL = \"\"\n\n        var toInt = Long.parseLong(hex1, 16).toString()\n        var toInt2 = Long.parseLong(hex2, 16).toString()\n\n        SERVER_URL = \"ws://192.168.$toInt.$toInt2:8080\"\n        return SERVER_URL\n\n    }\n\n\n    override fun onResume() {\n        super.onResume()\n        ConnectivityReceiver.connectivityReceiverListener = this\n    }\n\n    private fun showMessage(isConnected: Boolean) {\n        val connManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager\n        val mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)\n        if (!isConnected || !mWifi.isConnected) {\n            deviceOnline.text = \"\"\n            wifiname.text = \"No hay conexión WIFI\"\n            profPin.setEnabled(false)\n            b2.isEnabled = false\n        } else {\n            deviceOnline.text = \"\"\n            wifiname.text = mWifi.extraInfo.replace(\"\\\"\", \"\") //obtenemos nombre del wifi sin comillas\n            wifiname.visibility = View.VISIBLE\n            profPin.setEnabled(true)\n            b2.isEnabled = true\n        }\n\n\n    }\n\n    override fun onNetworkConnectionChanged(isConnected: Boolean) {\n        showMessage(isConnected)\n    }\n\n    inner class ChatClient(url: URI, draft: Draft, httpHeaders: Map<String, String>, Timeout: Int) : WebSocketClient(url, draft, httpHeaders, Timeout) {\n\n        val subFragment = SubsFragment()\n\n        fun setURI(urin: URI) {\n            this.uri = urin\n        }\n\n        override fun onOpen(handshakedata: ServerHandshake?) {\n            open = true\n            profPin.isClickable=false\n            b2.isClickable=false\n            runOnUiThread {\n                supportActionBar?.title=\"Transcripción\"\n                val fragmentManager = getSupportFragmentManager()\n                val transaction = fragmentManager.beginTransaction()\n                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)\n                transaction.add(android.R.id.content, subFragment).commit()\n            }\n            Log.e(\"Open: \", \"new connection opened\")\n        }\n\n\n        override fun onMessage(message: String) {\n            runOnUiThread {\n                subFragment.escribirSubs(message, newtext)\n                oldtext = \"$newtext $message\"\n            }\n            Log.e(\"---------- Mensaje:\", message)\n\n        }\n\n        override fun onMessage(message: ByteBuffer) {\n            if (Arrays.toString(message.array()) == \"[0, 0, 1, 1]\") {\n                runOnUiThread {\n                    onrepeat = true\n                    val builder = AlertDialog.Builder(this@Access)\n                    builder.setMessage(\"Sesion Finalizada por su instructor\")\n                    builder.setNegativeButton(\"Ok\") { _, _ ->\n                        finish()\n                    }\n                    builder.show()\n\n                }\n            } else if (Arrays.toString(message.array()) == \"[1, 1, 0, 0]\") {\n                //todo check when text ends and update in the dialog\n                newtext = oldtext\n            }\n\n\n            Log.e(\"Bytes: \", onclose.toString())\n        }\n\n\n        override fun onClose(code: Int, reason: String?, remote: Boolean) {\n            open = false\n            Log.e(\"Close: \", \"closed with exit code $code additional info: $reason\")\n        }\n\n\n        override fun onError(ex: Exception) {\n            open = false\n            Log.e(\"Error: \", \"an error occurred:$ex\")\n\n        }\n\n\n    }\n\n    class SubsFragment : DialogFragment() {\n        private var rootView: View? = null\n\n\n        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {\n\n            rootView = inflater.inflate(R.layout.activity_transcription, container, false)\n            return rootView\n        }\n\n        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {\n//dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);\n            return super.onCreateDialog(savedInstanceState)\n        }\n\n        override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {\n            menu!!.clear()\n        }\n\n        override fun onOptionsItemSelected(item: MenuItem?): Boolean {\n            val id = item!!.itemId\n\n            if (id == android.R.id.home) {\n                // handle close button click here\n                dismiss()\n                return true\n            }\n            return super.onOptionsItemSelected(item)\n        }\n\n        fun escribirSubs(message: String, newtext: String){\n            profText.text = Editable.Factory.getInstance().newEditable(\"$newtext $message\")\n        }\n\n        companion object {\n\n            private val TAG = \"Access\"\n        }\n    }\n    inner class Countdown(): CountDownTimer(3000,1000){\n        override fun onTick(p0: kotlin.Long) {\n        }\n\n        override fun onFinish() {\n            if(!open)\n                deviceOnline.setText(\"No se encuentra conexión\")\n        }\n\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/miau/mvp30/Access.kt	(revision 4142512053fc9de599b2a114fe94850f511566e4)
++++ app/src/main/java/com/example/miau/mvp30/Access.kt	(date 1538735497285)
+@@ -19,6 +19,7 @@
+ import android.view.Menu
+ import android.view.inputmethod.InputMethodManager
+ import kotlinx.android.synthetic.main.activity_access.*
++import kotlinx.android.synthetic.main.activity_settings.*
+ import kotlinx.android.synthetic.main.activity_transcription.*
+ import org.java_websocket.client.WebSocketClient
+ import org.java_websocket.drafts.Draft
+@@ -45,13 +46,11 @@
+         super.onCreate(savedInstanceState)
+         setContentView(R.layout.activity_access)
+ 
+-        var toolbar: Toolbar
+         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+ 
+         registerReceiver(ConnectivityReceiver(), //wifi
+                 IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+ 
+-
+         profPin.addTextChangedListener(object : TextWatcher {
+             override fun afterTextChanged(s: Editable?) {
+                 b2.isEnabled = profPin.text.toString().length >= 4
+@@ -167,7 +166,6 @@
+             profPin.isClickable=false
+             b2.isClickable=false
+             runOnUiThread {
+-                supportActionBar?.title="Transcripción"
+                 val fragmentManager = getSupportFragmentManager()
+                 val transaction = fragmentManager.beginTransaction()
+                 transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+@@ -254,7 +252,15 @@
+         }
+ 
+         fun escribirSubs(message: String, newtext: String){
+-            profText.text = Editable.Factory.getInstance().newEditable("$newtext $message")
++            if(ciegos_mode.isChecked)
++                profText.text = Editable.Factory.getInstance().newEditable("$newtext $message")
++                if(message==""){
++            profText.text=Editable.Factory.getInstance().newEditable("\n$profText.text")
++           }
++            else
++                profText.text = Editable.Factory.getInstance().newEditable("$newtext $message")
++
++
+         }
+ 
+         companion object {
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>*.iml\n.gradle\n/local.properties\n/.idea/libraries\n/.idea/modules.xml\n/.idea/workspace.xml\n.DS_Store\n/build\n/captures\n.externalNativeBuild\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .gitignore	(revision 4142512053fc9de599b2a114fe94850f511566e4)
++++ .gitignore	(date 1538732340832)
+@@ -8,3 +8,4 @@
+ /build
+ /captures
+ .externalNativeBuild
++
+Index: app/src/main/res/layout/activity_settings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<android.support.constraint.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    tools:context=\"com.example.miau.mvp30.Settings\">\n\n    <android.support.v7.widget.Toolbar\n        android:id=\"@+id/toolbar2\"\n        android:layout_width=\"0dp\"\n        android:layout_height=\"wrap_content\"\n        android:background=\"?attr/colorPrimary\"\n        android:minHeight=\"?attr/actionBarSize\"\n        android:theme=\"?attr/actionBarTheme\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\" />\n\n    <Switch\n        android:id=\"@+id/switch1\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginEnd=\"32dp\"\n        app:layout_constraintBottom_toBottomOf=\"@+id/textView5\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"@+id/textView5\" />\n\n    <TextView\n        android:id=\"@+id/textView5\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"32dp\"\n        android:layout_marginTop=\"32dp\"\n        android:text=\"Habilitar modo sordo/ciego\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/toolbar2\" />\n\n    <SeekBar\n        android:id=\"@+id/seekBar2\"\n        style=\"@style/Widget.AppCompat.SeekBar.Discrete\"\n        android:layout_width=\"0dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginEnd=\"8dp\"\n        android:layout_marginStart=\"8dp\"\n        android:max=\"10\"\n        android:progress=\"3\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        tools:layout_editor_absoluteY=\"320dp\" />\n</android.support.constraint.ConstraintLayout>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_settings.xml	(revision 4142512053fc9de599b2a114fe94850f511566e4)
++++ app/src/main/res/layout/activity_settings.xml	(date 1538733488268)
+@@ -18,7 +18,7 @@
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+     <Switch
+-        android:id="@+id/switch1"
++        android:id="@+id/ciegos_mode"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginEnd="32dp"
+@@ -36,16 +36,4 @@
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+ 
+-    <SeekBar
+-        android:id="@+id/seekBar2"
+-        style="@style/Widget.AppCompat.SeekBar.Discrete"
+-        android:layout_width="0dp"
+-        android:layout_height="wrap_content"
+-        android:layout_marginEnd="8dp"
+-        android:layout_marginStart="8dp"
+-        android:max="10"
+-        android:progress="3"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        tools:layout_editor_absoluteY="320dp" />
+ </android.support.constraint.ConstraintLayout>
+Index: app/src/main/java/com/example/miau/mvp30/Settings.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.miau.mvp30\n\nimport android.support.v7.app.AppCompatActivity\nimport android.os.Bundle\nimport android.support.v7.app.AlertDialog\nimport android.view.MenuItem\n\nclass Settings : AppCompatActivity() {\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContentView(R.layout.activity_settings)\n\n\n    }\n\n\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/miau/mvp30/Settings.kt	(revision 4142512053fc9de599b2a114fe94850f511566e4)
++++ app/src/main/java/com/example/miau/mvp30/Settings.kt	(date 1538734190589)
+@@ -5,6 +5,7 @@
+ import android.support.v7.app.AlertDialog
+ import android.view.MenuItem
+ 
++var mode_cieg:Boolean=false
+ class Settings : AppCompatActivity() {
+ 
+     override fun onCreate(savedInstanceState: Bundle?) {
+Index: app/src/main/res/layout/activity_access.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<android.support.constraint.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:fitsSystemWindows=\"true\"\n    tools:layout_editor_absoluteY=\"81dp\"\n     >\n\n    <android.support.v7.widget.Toolbar\n        android:id=\"@+id/toolbar\"\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"wrap_content\"\n        android:layout_alignParentStart=\"true\"\n        android:layout_alignParentTop=\"true\"\n        android:background=\"?attr/colorPrimary\"\n        android:minHeight=\"?attr/actionBarSize\"\n        android:theme=\"?attr/actionBarTheme\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:title=\"@string/acceso\"\n        app:titleTextColor=\"@android:color/white\"/>\n\n    <TextView\n        android:id=\"@+id/textView\"\n        android:layout_width=\"270dp\"\n        android:layout_height=\"54dp\"\n        android:layout_alignParentTop=\"true\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_marginEnd=\"8dp\"\n        android:layout_marginStart=\"8dp\"\n        android:layout_marginTop=\"16dp\"\n        android:text=\"@string/instruccion\"\n        android:textAlignment=\"center\"\n        android:textAppearance=\"?android:attr/textAppearanceLarge\"\n        android:textColor=\"@color/colorPrimary\"\n        android:textSize=\"14sp\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/toolbar\" />\n\n    <EditText\n        android:id=\"@+id/profPin\"\n        android:layout_width=\"270dp\"\n        android:layout_height=\"54dp\"\n        android:layout_alignParentTop=\"true\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_marginTop=\"16dp\"\n        android:background=\"@drawable/custom_button\"\n        android:ems=\"4\"\n        android:inputType=\"text\"\n        android:maxLength=\"4\"\n        android:selectAllOnFocus=\"true\"\n        android:singleLine=\"false\"\n        android:textAlignment=\"center\"\n        app:layout_constraintEnd_toEndOf=\"@+id/textView\"\n        app:layout_constraintStart_toStartOf=\"@+id/textView\"\n        app:layout_constraintTop_toBottomOf=\"@+id/textView\">\n\n        <requestFocus />\n    </EditText>\n\n\n    <TextView\n        android:id=\"@+id/deviceOnline\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_alignParentTop=\"true\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_marginTop=\"8dp\"\n        android:text=\"\"\n        android:textAppearance=\"?android:attr/textAppearanceLarge\"\n        android:textSize=\"14sp\"\n        android:visibility=\"invisible\"\n        app:layout_constraintEnd_toEndOf=\"@+id/profPin\"\n        app:layout_constraintStart_toStartOf=\"@+id/profPin\"\n        app:layout_constraintTop_toBottomOf=\"@+id/profPin\" />\n\n    <Button\n        android:id=\"@+id/b2\"\n        android:layout_width=\"270dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_alignParentTop=\"true\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_marginTop=\"8dp\"\n        android:background=\"@color/colorPrimary\"\n        android:enabled=\"false\"\n        android:text=\"@string/continuar\"\n        android:textColor=\"@android:color/white\"\n        app:layout_constraintEnd_toEndOf=\"@+id/profPin\"\n        app:layout_constraintStart_toStartOf=\"@+id/profPin\"\n        app:layout_constraintTop_toBottomOf=\"@+id/deviceOnline\" />\n\n    <TextView\n        android:id=\"@+id/wifiname\"\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"68dp\"\n        android:layout_alignParentBottom=\"true\"\n        android:layout_alignParentStart=\"true\"\n        android:background=\"@color/light\"\n        android:gravity=\"center\"\n        android:text=\"\"\n        android:textAppearance=\"?android:attr/textAppearanceLarge\"\n        android:textColor=\"@android:color/background_light\"\n        android:textSize=\"14sp\"\n        app:layout_constraintBottom_toBottomOf=\"parent\" />\n\n\n</android.support.constraint.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_access.xml	(revision 4142512053fc9de599b2a114fe94850f511566e4)
++++ app/src/main/res/layout/activity_access.xml	(date 1538732340850)
+@@ -108,4 +108,5 @@
+         app:layout_constraintBottom_toBottomOf="parent" />
+ 
+ 
++
+ </android.support.constraint.ConstraintLayout>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"NullableNotNullManager\">\n    <option name=\"myDefaultNullable\" value=\"android.support.annotation.Nullable\" />\n    <option name=\"myDefaultNotNull\" value=\"android.support.annotation.NonNull\" />\n    <option name=\"myNullables\">\n      <value>\n        <list size=\"5\">\n          <item index=\"0\" class=\"java.lang.String\" itemvalue=\"org.jetbrains.annotations.Nullable\" />\n          <item index=\"1\" class=\"java.lang.String\" itemvalue=\"javax.annotation.Nullable\" />\n          <item index=\"2\" class=\"java.lang.String\" itemvalue=\"javax.annotation.CheckForNull\" />\n          <item index=\"3\" class=\"java.lang.String\" itemvalue=\"edu.umd.cs.findbugs.annotations.Nullable\" />\n          <item index=\"4\" class=\"java.lang.String\" itemvalue=\"android.support.annotation.Nullable\" />\n        </list>\n      </value>\n    </option>\n    <option name=\"myNotNulls\">\n      <value>\n        <list size=\"4\">\n          <item index=\"0\" class=\"java.lang.String\" itemvalue=\"org.jetbrains.annotations.NotNull\" />\n          <item index=\"1\" class=\"java.lang.String\" itemvalue=\"javax.annotation.Nonnull\" />\n          <item index=\"2\" class=\"java.lang.String\" itemvalue=\"edu.umd.cs.findbugs.annotations.NonNull\" />\n          <item index=\"3\" class=\"java.lang.String\" itemvalue=\"android.support.annotation.NonNull\" />\n        </list>\n      </value>\n    </option>\n  </component>\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_7\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\n  </component>\n  <component name=\"ProjectType\">\n    <option name=\"id\" value=\"Android\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(revision 4142512053fc9de599b2a114fe94850f511566e4)
++++ .idea/misc.xml	(date 1538994331308)
+@@ -25,7 +25,7 @@
+       </value>
+     </option>
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
+Index: app/src/main/res/layout/activity_room.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<android.support.constraint.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:background=\"@color/background\"\n    tools:context=\"talentum.mvp40.Room\">\n\n    <RelativeLayout\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"wrap_content\"\n        android:id=\"@+id/chronoRelative\"\n        android:layout_marginTop=\"100dp\"\n        android:gravity=\"center\">\n\n        <Chronometer\n            android:id=\"@+id/chronometer\"\n            android:layout_width=\"154dp\"\n            android:layout_height=\"154dp\"\n            android:layout_marginBottom=\"40dp\"\n            android:layout_marginTop=\"100dp\"\n            android:textColor=\"@color/light\"\n            android:background=\"@mipmap/cronocircle\"\n            android:textAlignment=\"center\"\n            android:gravity=\"center_vertical\"\n            android:textSize=\"36sp\"\n            tools:ignore=\"HardcodedText\" />\n\n    </RelativeLayout>\n\n    <LinearLayout\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginEnd=\"8dp\"\n        android:layout_marginStart=\"8dp\"\n        android:layout_marginTop=\"40dp\"\n        android:gravity=\"center\"\n        android:orientation=\"horizontal\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/chronoRelative\">\n\n        <Button\n            android:id=\"@+id/btnPlayPause\"\n            android:layout_width=\"88dp\"\n            android:layout_height=\"88dp\"\n            android:layout_marginLeft=\"20dp\"\n            android:layout_marginRight=\"20dp\"\n            android:background=\"@mipmap/pause\"\n            android:checked=\"false\"\n            android:gravity=\"center_vertical\"\n            android:onClick=\"ButtonPlayPauseEvent\"\n            android:visibility=\"invisible\" />\n\n        <Button\n            android:id=\"@+id/btnStart\"\n            android:layout_width=\"100dp\"\n            android:layout_height=\"97dp\"\n            android:layout_marginLeft=\"20dp\"\n            android:layout_marginRight=\"20dp\"\n            android:background=\"@mipmap/play\"\n            android:gravity=\"center\"\n            android:onClick=\"ButtonStartEvent\" />\n\n        <Button\n            android:id=\"@+id/btnStop\"\n            android:layout_width=\"88dp\"\n            android:layout_height=\"88dp\"\n            android:layout_marginLeft=\"20dp\"\n            android:layout_marginRight=\"20dp\"\n            android:background=\"@mipmap/stop\"\n            android:gravity=\"center_vertical\"\n            android:onClick=\"ButtonStopEvent\"\n            android:visibility=\"invisible\" />\n\n    </LinearLayout>\n\n    <LinearLayout\n        android:id=\"@+id/bottomLinear\"\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"wrap_content\"\n        android:background=\"@color/light\"\n        android:gravity=\"center\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\">\n\n        <TextView\n            android:id=\"@+id/wifiName\"\n            android:layout_width=\"142dp\"\n            android:layout_height=\"wrap_content\"\n            android:layout_gravity=\"center_vertical\"\n            android:layout_marginBottom=\"8dp\"\n            android:layout_marginStart=\"16dp\"\n            android:layout_marginTop=\"8dp\"\n            android:hint=\"WIFIName\"\n            android:textColor=\"@android:color/white\"\n            android:textSize=\"14sp\"\n            app:layout_constraintBottom_toBottomOf=\"@+id/pinImage\"\n            app:layout_constraintStart_toStartOf=\"parent\"\n            app:layout_constraintTop_toTopOf=\"@+id/pinImage\"\n            tools:ignore=\"HardcodedText\" />\n\n        <ImageView\n            android:id=\"@+id/pinImage\"\n            android:layout_width=\"36dp\"\n            android:layout_height=\"36dp\"\n            android:layout_gravity=\"center_vertical\"\n            android:layout_marginEnd=\"2dp\"\n            android:contentDescription=\"ff\"\n            app:layout_constraintBottom_toBottomOf=\"parent\"\n            app:layout_constraintEnd_toStartOf=\"@+id/pinName\"\n            app:layout_constraintHorizontal_bias=\"1.0\"\n            app:layout_constraintStart_toEndOf=\"@+id/wifiName\"\n            app:srcCompat=\"@mipmap/code\"\n            tools:ignore=\"HardcodedText\" />\n\n        <TextView\n            android:id=\"@+id/pinName\"\n            android:layout_width=\"wrap_content\"\n            android:layout_height=\"wrap_content\"\n            android:layout_gravity=\"center_vertical\"\n            android:layout_marginBottom=\"8dp\"\n            android:layout_marginEnd=\"2dp\"\n            android:layout_marginTop=\"8dp\"\n            android:hint=\"Clave de la Sala\"\n            android:textAlignment=\"center\"\n            android:textColor=\"@android:color/white\"\n            android:textSize=\"14sp\"\n            app:layout_constraintBottom_toBottomOf=\"@+id/pupilsImage\"\n            app:layout_constraintEnd_toStartOf=\"@+id/pupilsImage\"\n            app:layout_constraintTop_toTopOf=\"@+id/pupilsImage\"\n            tools:ignore=\"HardcodedText\" />\n\n        <ImageView\n            android:id=\"@+id/pupilsImage\"\n            android:layout_width=\"36dp\"\n            android:layout_height=\"36dp\"\n            android:layout_gravity=\"center_vertical\"\n            android:layout_marginEnd=\"2dp\"\n            android:contentDescription=\"ff\"\n            app:layout_constraintBottom_toBottomOf=\"@+id/pinImage\"\n            app:layout_constraintEnd_toStartOf=\"@+id/pupilNumber\"\n            app:layout_constraintTop_toTopOf=\"@+id/pinImage\"\n            app:srcCompat=\"@mipmap/people\"\n            tools:ignore=\"HardcodedText\" />\n\n        <TextView\n            android:id=\"@+id/pupilNumber\"\n            android:layout_width=\"wrap_content\"\n            android:layout_height=\"wrap_content\"\n            android:layout_gravity=\"center_vertical\"\n            android:layout_marginBottom=\"8dp\"\n            android:layout_marginEnd=\"16dp\"\n            android:layout_marginTop=\"8dp\"\n            android:text=\"0\"\n            android:textAlignment=\"center\"\n            android:textColor=\"@android:color/white\"\n            android:textSize=\"14sp\"\n            app:layout_constraintBottom_toBottomOf=\"@+id/pupilsImage\"\n            app:layout_constraintEnd_toEndOf=\"parent\"\n            app:layout_constraintTop_toTopOf=\"@+id/pupilsImage\"\n            tools:ignore=\"HardcodedText\" />\n\n    </LinearLayout>\n\n\n</android.support.constraint.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_room.xml	(revision 4142512053fc9de599b2a114fe94850f511566e4)
++++ app/src/main/res/layout/activity_room.xml	(date 1538732340878)
+@@ -5,7 +5,7 @@
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:background="@color/background"
+-    tools:context="talentum.mvp40.Room">
++    >
+ 
+     <RelativeLayout
+         android:layout_width="match_parent"
