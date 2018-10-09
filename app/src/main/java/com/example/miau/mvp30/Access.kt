@@ -3,16 +3,13 @@ package com.example.miau.mvp30
 import android.app.Dialog
 import android.content.Context
 import android.content.IntentFilter
-import android.content.pm.ActivityInfo
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentTransaction
-import android.support.v4.app.NavUtils
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -20,7 +17,6 @@ import android.view.*
 import android.view.Menu
 import android.view.inputmethod.InputMethodManager
 import kotlinx.android.synthetic.main.activity_access.*
-import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.activity_transcription.*
 import org.java_websocket.client.WebSocketClient
 import org.java_websocket.drafts.Draft
@@ -39,9 +35,11 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
     var onrepeat = false
     var open = false
     var onclose = false
+    var timing = false
     var oldtext = ""
     var newtext = ""
     lateinit var mclient: ChatClient
+    lateinit var subsFragment: SubsFragment
     var isHex=false
     lateinit var regex: Regex
 
@@ -104,7 +102,8 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
                         mclient = ChatClient(URI(getIP()), Draft_6455(), emptyMap(), 100000)
                         profPin.setText("")
                         mclient.connect()
-                        var count = Countdown()
+                        val count = Countdown()
+                        deviceOnline.setText("Estableciendo conexión...")
                         count.start()
                         deviceOnline.visibility = View.VISIBLE
                     } else { // si hexadecimal=false
@@ -187,13 +186,15 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
 
     inner class ChatClient(url: URI, draft: Draft, httpHeaders: Map<String, String>, Timeout: Int) : WebSocketClient(url, draft, httpHeaders, Timeout) {
 
-        val subFragment = SubsFragment()
+
+        val countDownParrafo = CountDownParrafo();
 
         fun setURI(urin: URI) {
             this.uri = urin
         }
 
         override fun onOpen(handshakedata: ServerHandshake?) {
+            subsFragment = SubsFragment()
             open = true
             profPin.isClickable=false
             b2.isClickable=false
@@ -201,7 +202,7 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
                 val fragmentManager = getSupportFragmentManager()
                 val transaction = fragmentManager.beginTransaction()
                 transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                transaction.add(android.R.id.content, subFragment).commit()
+                transaction.add(android.R.id.content, subsFragment).commit()
             }
             Log.e("Open: ", "new connection opened")
         }
@@ -209,8 +210,15 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
 
         override fun onMessage(message: String) {
             runOnUiThread {
-                subFragment.escribirSubs(message, newtext)
+                subsFragment.escribirSubs(message, newtext)
                 oldtext = "$newtext $message"
+                if(timing) {
+                    countDownParrafo.cancel()
+                    countDownParrafo.start()
+                } else {
+                    countDownParrafo.start()
+                    timing = true
+                }
             }
             Log.e("---------- Mensaje:", message)
 
@@ -318,6 +326,24 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
         override fun onFinish() {
             if(!open)
                 deviceOnline.setText("No se encuentra conexión")
+            else {
+                //todo put buttons to not clickable
+            }
+        }
+
+    }
+
+    inner class CountDownParrafo() : CountDownTimer(3000,1000){
+
+
+
+        override fun onTick(p0: kotlin.Long) {
+
+        }
+
+        override fun onFinish() {
+            oldtext = "$newtext \"\\\\\\n\""
+            subsFragment.escribirSubs("\\\n", newtext)
         }
 
     }
