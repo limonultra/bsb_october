@@ -13,8 +13,4 @@ class Settings : AppCompatActivity() {
 
 
     }
-
-
-
-
 }

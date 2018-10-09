@@ -43,6 +43,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     private static Queue<String> recordingQueue = new LinkedList<>();
     private static String fullRecord = "";
     private static boolean responseReceived = true;
+    private static boolean isPausePressed = false;
     private String response;
 
     private static boolean chronoState = false;
