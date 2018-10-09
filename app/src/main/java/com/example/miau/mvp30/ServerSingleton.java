@@ -6,9 +6,6 @@ import android.widget.TextView;
 
 import java.net.InetSocketAddress;
 
-/**
- * Created by Alex on 05/10/2018.
- */
 
 public class ServerSingleton {
     private static ServerSingleton ourInstance;

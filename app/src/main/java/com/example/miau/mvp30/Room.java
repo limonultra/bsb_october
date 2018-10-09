@@ -127,12 +127,14 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             speech.cancel();
             serverControl.broadcast(speechRestart);
             chronoState = true;
+            btnStop.setEnabled(false);
         } else {
             chrono.start();
             btnPlayPause.setBackgroundResource(R.mipmap.pause);
             chrono.setBase(SystemClock.elapsedRealtime() + stopTime);
             startVoiceRecognitionCycle(speechIntent);
             chronoState = false;
+            btnStop.setEnabled(true);
         }
     }
 
