@@ -3,20 +3,27 @@ package com.example.miau.mvp30
 import android.app.Dialog
 import android.content.Context
 import android.content.IntentFilter
+import android.content.pm.ActivityInfo
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentTransaction
+import android.support.v4.app.NavUtils
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.text.Editable
+import android.text.InputFilter
+import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
 import android.view.*
 import android.view.Menu
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import kotlinx.android.synthetic.main.activity_access.*
+import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.activity_transcription.*
 import org.java_websocket.client.WebSocketClient
 import org.java_websocket.drafts.Draft
@@ -30,12 +37,12 @@ import java.util.*
 
 class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverListener  {
 
+    var timing = false
     var hex1 = ""
     var hex2 = ""
     var onrepeat = false
     var open = false
     var onclose = false
-    var timing = false
     var oldtext = ""
     var newtext = ""
     lateinit var mclient: ChatClient
@@ -52,12 +59,14 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
         registerReceiver(ConnectivityReceiver(), //wifi
                 IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
 
+        profPin.setFilters(arrayOf(InputFilter.LengthFilter(4), InputFilter.AllCaps()))
+
         profPin.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 b2.isEnabled = profPin.text.toString().length >= 4
             }
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -104,6 +113,7 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
                         mclient.connect()
                         val count = Countdown()
                         deviceOnline.setText("Estableciendo conexión...")
+                        var count = Countdown()
                         count.start()
                         deviceOnline.visibility = View.VISIBLE
                     } else { // si hexadecimal=false
@@ -188,6 +198,7 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
 
 
         val countDownParrafo = CountDownParrafo();
+        val subFragment = SubsFragment()
 
         fun setURI(urin: URI) {
             this.uri = urin
@@ -202,7 +213,7 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
                 val fragmentManager = getSupportFragmentManager()
                 val transaction = fragmentManager.beginTransaction()
                 transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                transaction.add(android.R.id.content, subsFragment).commit()
+                transaction.add(android.R.id.content, subFragment).commit()
             }
             Log.e("Open: ", "new connection opened")
         }
@@ -211,8 +222,16 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
         override fun onMessage(message: String) {
             runOnUiThread {
                 subsFragment.escribirSubs(message, newtext)
+
+                var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                profText.setOnTouchListener { v, m ->
+                    val imm = v.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm?.hideSoftInputFromWindow(v.windowToken, 0)
+                    true
+                }
+                subFragment.escribirSubs(message, newtext)
                 oldtext = "$newtext $message"
-                if(timing) {
+               if(timing) {
                     countDownParrafo.cancel()
                     countDownParrafo.start()
                 } else {
