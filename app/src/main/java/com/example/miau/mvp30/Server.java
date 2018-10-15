@@ -1,9 +1,13 @@
 package com.example.miau.mvp30;
 
 import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 import android.widget.TextView;
+
+import org.java_websocket.WebSocket;
+import org.java_websocket.WebSocketImpl;
+import org.java_websocket.handshake.ClientHandshake;
+import org.java_websocket.server.WebSocketServer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,12 +16,6 @@ import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 
-import org.java_websocket.WebSocket;
-import org.java_websocket.WebSocketImpl;
-import org.java_websocket.handshake.ClientHandshake;
-import org.java_websocket.server.WebSocketServer;
-
-import static android.app.PendingIntent.getActivity;
 import static android.content.ContentValues.TAG;
 
 /**
@@ -54,6 +52,7 @@ public class Server extends WebSocketServer {
             @Override
             public void run() {
                 clients.setText(String.valueOf(clientCount));
+                ((Room) context).restartSpeechOnNewConnection();
             }
         });
 

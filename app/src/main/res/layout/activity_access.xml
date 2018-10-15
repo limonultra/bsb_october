@@ -51,7 +51,7 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/custom_button"
         android:ems="4"
-        android:inputType="text"
+        android:inputType="textCapCharacters"
         android:maxLength="4"
         android:selectAllOnFocus="true"
         android:singleLine="false"
