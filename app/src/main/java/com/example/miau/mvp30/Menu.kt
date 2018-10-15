@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat
 import android.os.Build
 import android.util.Log
 import android.view.MenuItem
+import android.widget.Button
 
 
 class Menu : AppCompatActivity() {
@@ -34,6 +35,12 @@ class Menu : AppCompatActivity() {
         bpup.setOnClickListener {
             // Handler code here.
             val intent = Intent(this, Access::class.java)
+            startActivity(intent)
+        }
+
+        val bsm = findViewById (R.id.bsm) as Button
+        bsm.setOnClickListener{
+            val intent = Intent(this,SoloMode::class.java)
             startActivity(intent)
         }
 

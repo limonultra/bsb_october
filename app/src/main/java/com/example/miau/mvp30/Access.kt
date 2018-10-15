@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
-import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.Log
 import android.view.*
@@ -190,6 +189,9 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
     }
 
     inner class ChatClient(url: URI, draft: Draft, httpHeaders: Map<String, String>, Timeout: Int) : WebSocketClient(url, draft, httpHeaders, Timeout) {
+
+
+        val countDownParrafo = CountDownParrafo();
 
         fun setURI(urin: URI) {
             this.uri = urin

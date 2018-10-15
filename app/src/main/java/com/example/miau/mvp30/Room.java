@@ -4,19 +4,24 @@ import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
+
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +30,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -158,12 +164,17 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
     //Cancel speech recognition
     public void stopVoiceRecognition() {
-        if (speech != null) {
-            speech.stopListening();
-            speech.cancel();
-            speech.destroy();
-            speech = null;
+        if(isPausePressed) {
+            if (speech != null) {
+                speech.stopListening();
+                speech.cancel();
+                speech.destroy();
+                speech = null;
 
+            }
+        }else{
+            btnStop.setEnabled( false );
+            btnStop.setBackgroundResource(R.mipmap.people );
         }
     }
 
