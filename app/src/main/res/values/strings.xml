@@ -5,4 +5,5 @@
     <string name="instruccion">Una vez conectado a su WIFI use el código del instructor</string>
     <string name="continuar">Continuar</string>
     <string name="ajustes">Ajustes</string>
+    <string name="salto_linea">\n</string>
 </resources>
