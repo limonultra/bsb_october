@@ -126,8 +126,8 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
                     public void onClick(DialogInterface dialog, int which) {
                         if(listening) {
                             stopVoiceRecognition();
-                            finish();
                         }
+                        finish();
                     }
 
                 }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
