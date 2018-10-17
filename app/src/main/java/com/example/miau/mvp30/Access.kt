@@ -9,21 +9,16 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentTransaction
-import android.support.v4.app.NavUtils
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.InputFilter
-import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
 import android.view.*
 import android.view.Menu
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import kotlinx.android.synthetic.main.activity_access.*
-import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.activity_transcription.*
 import org.java_websocket.client.WebSocketClient
 import org.java_websocket.drafts.Draft
@@ -35,8 +30,9 @@ import java.net.URI
 import java.nio.ByteBuffer
 import java.util.*
 
-class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverListener  {
+class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverListener {
 
+    var timing = false
     var hex1 = ""
     var hex2 = ""
     var onrepeat = false
@@ -44,13 +40,14 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
     var onclose = false
     var oldtext = ""
     var newtext = ""
+    var salto_linea = "\n"
     lateinit var mclient: ChatClient
-    var isHex=false
+    lateinit var subsFragment: SubsFragment
+    var isHex = false
     lateinit var regex: Regex
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_access)
 
@@ -65,6 +62,7 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
             override fun afterTextChanged(s: Editable?) {
                 b2.isEnabled = profPin.text.toString().length >= 4
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
@@ -73,31 +71,57 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
 
         })
 //        if(ciegos_mode.isChecked) {
-            b2.visibility=View.VISIBLE
-            b2.setOnClickListener {
-                var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(b2.getWindowToken(), 0)
+        b2.visibility = View.VISIBLE
+        b2.setOnClickListener {
+            var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(b2.getWindowToken(), 0)
+            if (profPin.text.toString().length == 4) {
+                isHex = true //para saber si nos han introducido texto hexadecimal
+                regex = "^[0-9a-fA-F]+$".toRegex() //expresion regular para comprobar que nos han introducido un hexadecimal
+
+                isHex = regex.matches(profPin.text.toString()) //averiguamos si el pin es hexadecimal
+                if (isHex) { // si hexadecimal=true
+                    mclient = ChatClient(URI(getIP()), Draft_6455(), emptyMap(), 100000)
+                    profPin.setText("")
+                    mclient.connect()
+                    var count = Countdown()
+                    count.start()
+                    deviceOnline.visibility = View.VISIBLE
+                } else { // si hexadecimal=false
+                    deviceOnline.setText("El PIN introducido es incorrecto")
+                    deviceOnline.visibility = View.VISIBLE
+                }
+            }
+        }
+        //  }
+        //else {
+
+        profPin.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                 if (profPin.text.toString().length == 4) {
                     isHex = true //para saber si nos han introducido texto hexadecimal
                     regex = "^[0-9a-fA-F]+$".toRegex() //expresion regular para comprobar que nos han introducido un hexadecimal
-
-                    isHex = regex.matches(profPin.text.toString()) //averiguamos si el pin es hexadecimal
-                    if (isHex) { // si hexadecimal=true
-                        mclient = ChatClient(URI(getIP()), Draft_6455(), emptyMap(), 100000)
-                        profPin.setText("")
-                        mclient.connect()
-                        var count = Countdown()
-                        count.start()
-                        deviceOnline.visibility = View.VISIBLE
-                    } else { // si hexadecimal=false
-                        deviceOnline.setText("El PIN introducido es incorrecto")
-                        deviceOnline.visibility = View.VISIBLE
-                    }
                 }
+                isHex = regex.matches(profPin.text.toString()) //averiguamos si el pin es hexadecimal
+                if (isHex) { // si hexadecimal=true
+                    var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(b2.getWindowToken(), 0)
+                    mclient = ChatClient(URI(getIP()), Draft_6455(), emptyMap(), 100000)
+                    profPin.setText("")
+                    mclient.connect()
+                    val count = Countdown()
+                    deviceOnline.setText("Estableciendo conexión...")
+                    count.start()
+                    deviceOnline.visibility = View.VISIBLE
+                } else { // si hexadecimal=false
+                    deviceOnline.setText("El PIN introducido es incorrecto")
+                    deviceOnline.visibility = View.VISIBLE
+                }
+                return@OnKeyListener true
             }
-      //  }
-        //else {
-
+            false
+        })
+        // }
             profPin.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
                 if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                     if (profPin.text.toString().length == 4) {
@@ -134,7 +158,7 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
                 builder.setNegativeButton("Salir") { _, _ ->
                     onBackPressed()
                 }
-                builder.setPositiveButton("Seguir"){_, _ ->
+                builder.setPositiveButton("Seguir") { _, _ ->
                 }
                 builder.show()
                 return true
@@ -194,47 +218,44 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
 
     inner class ChatClient(url: URI, draft: Draft, httpHeaders: Map<String, String>, Timeout: Int) : WebSocketClient(url, draft, httpHeaders, Timeout) {
 
-        val subFragment = SubsFragment()
+
 
         fun setURI(urin: URI) {
             this.uri = urin
         }
 
         override fun onOpen(handshakedata: ServerHandshake?) {
+            subsFragment = SubsFragment()
             open = true
-            profPin.isClickable=false
-            b2.isClickable=false
+            profPin.isClickable = false
+            b2.isClickable = false
             runOnUiThread {
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                 val fragmentManager = getSupportFragmentManager()
                 val transaction = fragmentManager.beginTransaction()
                 transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                transaction.add(android.R.id.content, subFragment).commit()
+                transaction.add(android.R.id.content, subsFragment).commit()
             }
             Log.e("Open: ", "new connection opened")
-
-
         }
 
 
         override fun onMessage(message: String) {
             runOnUiThread {
-
-                var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                profText.setOnTouchListener { v, m ->
-                    val imm = v.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm?.hideSoftInputFromWindow(v.windowToken, 0)
-                    true
-                }
-                subFragment.escribirSubs(message, newtext)
+                //                var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//                profText.setOnTouchListener { v, m ->
+//                    val imm = v.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//                    imm?.hideSoftInputFromWindow(v.windowToken, 0)
+//                    true
+//                }
+//                if (timing) {
+//                    countDownParrafo.cancel()
+//                    countDownParrafo.start()
+//                } else {
+//                    countDownParrafo.start()
+//                    timing = true
+//                }
                 oldtext = "$newtext $message"
-               /* if(timing) {
-                    countDownParrafo.cancel()
-                    countDownParrafo.start()
-                } else {
-                    countDownParrafo.start()
-                    timing = true
-                }*/
+                subsFragment.escribirSubs(message, newtext)
             }
             Log.e("---------- Mensaje:", message)
 
@@ -255,6 +276,11 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
             } else if (Arrays.toString(message.array()) == "[1, 1, 0, 0]") {
                 //todo check when text ends and update in the dialog
                 newtext = oldtext
+            } else if (Arrays.toString(message.array()) == "[0, 1, 1, 0]") {
+                oldtext = "$newtext $salto_linea"
+                subsFragment.appendSalto(salto_linea, newtext)
+                Log.i("BYTES", "SALTO")
+                Log.i("CONTENT", oldtext)
             }
 
 
@@ -266,7 +292,7 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
             open = false
             Log.e("Close: ", "closed with exit code $code additional info: $reason")
             runOnUiThread {
-                if(!onrepeat&&open) {
+                if (!onrepeat && open) {
                     val builder = AlertDialog.Builder(this@Access)
                     builder.setMessage("Conexión finalizada")
                     builder.setNegativeButton("Ok") { _, _ ->
@@ -301,7 +327,6 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 //dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             return super.onCreateDialog(savedInstanceState)
-
         }
 
         override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -319,16 +344,18 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
             return super.onOptionsItemSelected(item)
         }
 
-        fun escribirSubs(message: String, newtext: String){
-           // if(ciegos_mode.isChecked)
-                profText.text = Editable.Factory.getInstance().newEditable("$newtext $message")
-                //if(message==""){
+        fun escribirSubs(message: String, newtext: String) {
+            // if(ciegos_mode.isChecked)
+            profText.text = Editable.Factory.getInstance().newEditable("$newtext $message")
+            //if(message==""){
             //profText.text=Editable.Factory.getInstance().newEditable("\n$profText.text")
-           //}
+            //}
             //else
-               // profText.text = Editable.Factory.getInstance().newEditable("$newtext $message")
+            // profText.text = Editable.Factory.getInstance().newEditable("$newtext $message")
+        }
 
-
+        fun appendSalto(message: String, newtext: String) {
+            profText.text = Editable.Factory.getInstance().newEditable("$newtext $message")
         }
 
         companion object {
@@ -336,12 +363,13 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
             private val TAG = "Access"
         }
     }
-    inner class Countdown(): CountDownTimer(3000,1000){
+
+    inner class Countdown() : CountDownTimer(3000, 1000) {
         override fun onTick(p0: kotlin.Long) {
         }
 
         override fun onFinish() {
-            if(!open)
+            if (!open)
                 deviceOnline.setText("No se encuentra conexión")
             else {
                 //todo put buttons to not clickable
@@ -350,18 +378,4 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
 
     }
 
-    inner class CountDownParrafo() : CountDownTimer(3000,1000){
-
-
-
-        override fun onTick(p0: kotlin.Long) {
-
-        }
-
-        override fun onFinish() {
-            oldtext = "$newtext \"\\\\\\n\""
-            //subsFragment.escribirSubs("\\\n", newtext)
-        }
-
-    }
 }

@@ -12,6 +12,7 @@ import android.net.NetworkInfo;
 
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 
 import android.speech.RecognitionListener;
@@ -43,7 +44,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     private static Queue<String> recordingQueue = new LinkedList<>();
     private static String fullRecord = "";
     private static boolean responseReceived = true;
+    private static boolean isPausePressed = false;
     private String response;
+    private CountDownParrafo countDownParrafo;
 
     private static boolean chronoState = false;
     long stopTime = 0;
@@ -52,6 +55,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
     byte[] endSpeech = new byte[]{0, 0, 1, 1};
     byte[] speechRestart = new byte[]{1, 1, 0, 0};
+    byte[] speechSalto = new byte[]{0, 1, 1, 0};
 
     int current_volume;
     AudioManager audio;
@@ -82,6 +86,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         btnStop = findViewById(R.id.btnStop);
         btnPlayPause = findViewById(R.id.btnPlayPause);
         chrono = findViewById(R.id.chronometer);
+        countDownParrafo = new CountDownParrafo(4000, 2000);
 
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
@@ -109,6 +114,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         chrono.setBase(SystemClock.elapsedRealtime() + stopTime);
         chronoState = false;
         startVoiceRecognitionCycle(speechIntent);
+        countDownParrafo.start();
 
     }
 
@@ -127,6 +133,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             serverControl.broadcast(speechRestart);
             chronoState = true;
             btnStop.setEnabled(false);
+            countDownParrafo.cancel();
         } else {
             chrono.start();
             btnPlayPause.setBackgroundResource(R.mipmap.pause);
@@ -134,6 +141,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             startVoiceRecognitionCycle(speechIntent);
             chronoState = false;
             btnStop.setEnabled(true);
+            countDownParrafo.start();
         }
     }
 
@@ -156,12 +164,17 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
     //Cancel speech recognition
     public void stopVoiceRecognition() {
-        if (speech != null) {
-            speech.stopListening();
-            speech.cancel();
-            speech.destroy();
-            speech = null;
+        if(isPausePressed) {
+            if (speech != null) {
+                speech.stopListening();
+                speech.cancel();
+                speech.destroy();
+                speech = null;
 
+            }
+        }else{
+            btnStop.setEnabled( false );
+            btnStop.setBackgroundResource(R.mipmap.people );
         }
     }
 
@@ -262,6 +275,10 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     @Override
     public void onPartialResults(Bundle partialResults) {
         receiveResults(partialResults);
+
+        countDownParrafo.cancel();
+        countDownParrafo.start();
+
         this.pupilsNo.setText(String.valueOf(serverControl.clientCount));
     }
 
@@ -384,6 +401,32 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public class CountDownParrafo extends CountDownTimer {
+
+        public CountDownParrafo(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+
+        }
+
+        @Override
+        public void onFinish() {
+            serverControl.broadcast(speechSalto);
+            serverControl.broadcast(speechRestart);
+            getSpeechRecognizer().cancel();
+            startVoiceRecognitionCycle(speechIntent);
+            this.cancel();
+        }
+    }
+
+    public void restartSpeechOnNewConnection() {
+        getSpeechRecognizer().cancel();
+        startVoiceRecognitionCycle(speechIntent);
     }
 
 }

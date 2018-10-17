@@ -5,4 +5,25 @@
     <string name="instruccion">Una vez conectado a su WIFI use el código del instructor</string>
     <string name="continuar">Continuar</string>
     <string name="ajustes">Ajustes</string>
+    <string name="salto_linea">\n</string>
+
+    <array name="temas">
+        <item>Negro - Blanco</item>
+        <item>Negro - Amarillo</item>
+        <item>Rojo - Blanco</item>
+        <item>Verde - Blanco</item>
+        <item>Blanco - Rojo</item>
+        <item>Amarillo - Negro</item>
+        <item>Blanco - Verde</item>
+    </array>
+
+    <array name="idiomas">
+        <item>Español (ES)</item>
+        <item>Español (LAT)</item>
+        <item>Inglés</item>
+        <item>Francés</item>
+        <item>Alemán</item>
+        <item>Amarillo - Negro</item>
+        <item>Blanco - Verde</item>
+    </array>
 </resources>

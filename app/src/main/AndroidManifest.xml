@@ -53,7 +53,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Settings"></activity>
+        <activity android:name=".Settings" />
+        <activity
+            android:name=".SoloMode"
+            android:label="SoloMode"
+            android:parentActivityName=".Menu"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Menu" />
+        </activity>
     </application>
 
 </manifest>
