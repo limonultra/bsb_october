@@ -47,7 +47,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
     lateinit var regex: Regex
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_access)
 
