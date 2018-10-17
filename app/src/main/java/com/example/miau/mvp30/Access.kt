@@ -37,7 +37,6 @@ import java.util.*
 
 class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverListener  {
 
-    var timing = false
     var hex1 = ""
     var hex2 = ""
     var onrepeat = false
@@ -46,11 +45,12 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
     var oldtext = ""
     var newtext = ""
     lateinit var mclient: ChatClient
-    lateinit var subsFragment: SubsFragment
     var isHex=false
     lateinit var regex: Regex
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_access)
 
@@ -111,8 +111,6 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
                         mclient = ChatClient(URI(getIP()), Draft_6455(), emptyMap(), 100000)
                         profPin.setText("")
                         mclient.connect()
-                        val count = Countdown()
-                        deviceOnline.setText("Estableciendo conexión...")
                         var count = Countdown()
                         count.start()
                         deviceOnline.visibility = View.VISIBLE
@@ -196,8 +194,6 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
 
     inner class ChatClient(url: URI, draft: Draft, httpHeaders: Map<String, String>, Timeout: Int) : WebSocketClient(url, draft, httpHeaders, Timeout) {
 
-
-        val countDownParrafo = CountDownParrafo();
         val subFragment = SubsFragment()
 
         fun setURI(urin: URI) {
@@ -205,23 +201,24 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
         }
 
         override fun onOpen(handshakedata: ServerHandshake?) {
-            subsFragment = SubsFragment()
             open = true
             profPin.isClickable=false
             b2.isClickable=false
             runOnUiThread {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                 val fragmentManager = getSupportFragmentManager()
                 val transaction = fragmentManager.beginTransaction()
                 transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 transaction.add(android.R.id.content, subFragment).commit()
             }
             Log.e("Open: ", "new connection opened")
+
+
         }
 
 
         override fun onMessage(message: String) {
             runOnUiThread {
-                subsFragment.escribirSubs(message, newtext)
 
                 var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 profText.setOnTouchListener { v, m ->
@@ -231,13 +228,13 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
                 }
                 subFragment.escribirSubs(message, newtext)
                 oldtext = "$newtext $message"
-               if(timing) {
+               /* if(timing) {
                     countDownParrafo.cancel()
                     countDownParrafo.start()
                 } else {
                     countDownParrafo.start()
                     timing = true
-                }
+                }*/
             }
             Log.e("---------- Mensaje:", message)
 
@@ -304,6 +301,7 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 //dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             return super.onCreateDialog(savedInstanceState)
+
         }
 
         override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -362,7 +360,7 @@ class Access : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiverList
 
         override fun onFinish() {
             oldtext = "$newtext \"\\\\\\n\""
-            subsFragment.escribirSubs("\\\n", newtext)
+            //subsFragment.escribirSubs("\\\n", newtext)
         }
 
     }

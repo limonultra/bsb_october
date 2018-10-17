@@ -21,8 +21,6 @@ public class ServerSingleton {
         server = new Server(address, clients, activity);
         server.setReuseAddr(true);
         server.start();
-
-
     }
 
     public static void setServerNull() {
