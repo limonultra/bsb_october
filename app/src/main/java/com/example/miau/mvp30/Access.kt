@@ -359,7 +359,6 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         }
 
         companion object {
-
             private val TAG = "Access"
         }
     }
