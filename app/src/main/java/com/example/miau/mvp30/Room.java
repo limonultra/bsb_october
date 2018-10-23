@@ -132,7 +132,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             speech.cancel();
             serverControl.broadcast(speechRestart);
             chronoState = true;
-            btnStop.setEnabled(false);
+            btnStop.setEnabled(true);
             countDownParrafo.cancel();
         } else {
             chrono.start();
@@ -140,7 +140,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             chrono.setBase(SystemClock.elapsedRealtime() + stopTime);
             startVoiceRecognitionCycle(speechIntent);
             chronoState = false;
-            btnStop.setEnabled(true);
+            btnStop.setEnabled(false);
             countDownParrafo.start();
         }
     }
@@ -425,8 +425,10 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     }
 
     public void restartSpeechOnNewConnection() {
-        getSpeechRecognizer().cancel();
-        startVoiceRecognitionCycle(speechIntent);
+        if(listening) {
+            getSpeechRecognizer().cancel();
+            startVoiceRecognitionCycle(speechIntent);
+        }
     }
 
 }

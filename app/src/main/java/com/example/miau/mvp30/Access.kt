@@ -274,7 +274,6 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
 
                 }
             } else if (Arrays.toString(message.array()) == "[1, 1, 0, 0]") {
-                //todo check when text ends and update in the dialog
                 newtext = oldtext
             } else if (Arrays.toString(message.array()) == "[0, 1, 1, 0]") {
                 oldtext = "$newtext $salto_linea"
@@ -355,7 +354,8 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         }
 
         fun appendSalto(message: String, newtext: String) {
-            profText.text = Editable.Factory.getInstance().newEditable("$newtext $message")
+            if(!profText.text.endsWith("\n"))
+                profText.text = Editable.Factory.getInstance().newEditable("$newtext $message")
         }
 
         companion object {
