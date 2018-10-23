@@ -417,9 +417,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         @Override
         public void onFinish() {
             serverControl.broadcast(speechSalto);
-            serverControl.broadcast(speechRestart);
-            getSpeechRecognizer().cancel();
-            startVoiceRecognitionCycle(speechIntent);
+            restartSpeechOnNewConnection();
             this.cancel();
         }
     }

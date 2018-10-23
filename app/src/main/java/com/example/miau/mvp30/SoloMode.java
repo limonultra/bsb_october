@@ -43,6 +43,9 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
     private Button btnPlayPause;
     private TextView transcription;
 
+    private String newText ="";
+    private String oldText="";
+
 
     @Override
     public
@@ -59,6 +62,18 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
 
         saveCurrentAudio();
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("oldText", transcription.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        transcription.setText(savedInstanceState.getString("oldText"));
     }
 
     public void ButtonStartEvent(View view) {
@@ -248,6 +263,7 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
     public
     void onResults(Bundle results) {
         startVoiceRecognitionCycle( speechIntent );
+        newText = oldText.concat(" ");
     }
 
     @Override
@@ -273,7 +289,9 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
             }
             Log.d( TAG, String.valueOf( results.getStringArrayList( SpeechRecognizer.RESULTS_RECOGNITION ) ) );
             speechResults = results.getStringArrayList( SpeechRecognizer.RESULTS_RECOGNITION );
-            transcription.setText(speechResults.toString().replace("[", "").replace("]", ""));
+            String message = speechResults.toString().replace("[", "").replace("]", "");
+            oldText = newText.concat(message);
+            transcription.setText(newText.concat(message));
         }
     }
 }

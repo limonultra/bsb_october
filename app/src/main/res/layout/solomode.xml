@@ -8,9 +8,9 @@
 
     <TextView
         android:id="@+id/transcription"
-        android:layout_width="349dp"
-        android:layout_height="370dp"
-        android:layout_marginBottom="35dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
         android:layout_marginEnd="19dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
@@ -22,55 +22,46 @@
 
     <Button
         android:id="@+id/btnPlayPause"
-        android:layout_width="88dp"
-        android:layout_height="88dp"
-        android:layout_marginBottom="26dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="67dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="16dp"
         android:background="@mipmap/pause"
         android:checked="false"
         android:gravity="center_vertical"
         android:onClick="ButtonPlayPauseEvent"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnStart"
-        app:layout_constraintTop_toBottomOf="@+id/transcription" />
+        app:layout_constraintEnd_toEndOf="@+id/transcription"
+        app:layout_constraintTop_toTopOf="@+id/btnStart" />
 
     <Button
         android:id="@+id/btnStart"
-        android:layout_width="100dp"
-        android:layout_height="97dp"
-        android:layout_marginBottom="49dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:background="@mipmap/play"
         android:gravity="center"
         android:onClick="ButtonStartEvent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnPlayPause"
-        app:layout_constraintStart_toEndOf="@+id/btnStop"
-        app:layout_constraintTop_toBottomOf="@+id/transcription"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btnStop"
-        android:layout_width="88dp"
-        android:layout_height="88dp"
-        android:layout_marginBottom="26dp"
-        android:layout_marginEnd="29dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="67dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="16dp"
         android:background="@mipmap/stop"
         android:gravity="center_vertical"
         android:onClick="ButtonStopEvent"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnStart"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/transcription" />
+        app:layout_constraintStart_toStartOf="@+id/transcription"
+        app:layout_constraintTop_toTopOf="@+id/btnStart" />
 
 </android.support.constraint.ConstraintLayout>
