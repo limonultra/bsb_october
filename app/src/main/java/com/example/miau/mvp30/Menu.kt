@@ -4,7 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageButton
+import android.widget.ImageView
 import android.support.v4.app.ActivityCompat
 import android.content.pm.PackageManager
 import android.support.v4.content.ContextCompat
@@ -24,21 +24,21 @@ class Menu : AppCompatActivity() {
         checkInternetPermission()
         if(Build.VERSION.SDK_INT>25){
             checkGPSPermission();}
-        val bprof: ImageButton = findViewById(R.id.bprof) as ImageButton
+        val bprof: ImageView = findViewById(R.id.bprof) as ImageView
         bprof.setOnClickListener {
             // Handler code here.
             val intent = Intent(this, RoomCreate::class.java)
             startActivity(intent)
         }
 
-        val bpup: ImageButton = findViewById(R.id.bpup) as ImageButton
+        val bpup: ImageView = findViewById(R.id.bpup) as ImageView
         bpup.setOnClickListener {
             // Handler code here.
             val intent = Intent(this, Access::class.java)
             startActivity(intent)
         }
 
-        val bsm = findViewById (R.id.bsm) as Button
+        val bsm = findViewById (R.id.bsm) as ImageView
         bsm.setOnClickListener{
             val intent = Intent(this,SoloMode::class.java)
             startActivity(intent)
