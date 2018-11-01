@@ -2,16 +2,16 @@ package com.example.miau.mvp30
 
 import android.Manifest
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
-import android.widget.ImageView
-import android.support.v4.app.ActivityCompat
 import android.content.pm.PackageManager
-import android.support.v4.content.ContextCompat
 import android.os.Build
+import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.MenuItem
-import android.widget.Button
+import android.widget.ImageView
+import org.jetbrains.anko.defaultSharedPreferences
 
 
 class Menu : AppCompatActivity() {
@@ -24,6 +24,9 @@ class Menu : AppCompatActivity() {
         checkInternetPermission()
         if(Build.VERSION.SDK_INT>25){
             checkGPSPermission();}
+
+        checkForTutorial()
+
         val bprof: ImageView = findViewById(R.id.bprof) as ImageView
         bprof.setOnClickListener {
             // Handler code here.
@@ -70,5 +73,15 @@ class Menu : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+
+    fun checkForTutorial() {
+        val sharedPreferences = defaultSharedPreferences
+        if (!sharedPreferences.getBoolean("tutorial", false)) {
+            val intent = Intent(this, TutorialActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }

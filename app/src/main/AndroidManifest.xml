@@ -63,6 +63,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Menu" />
         </activity>
+        <activity android:name=".TutorialActivity"></activity>
     </application>
 
 </manifest>
