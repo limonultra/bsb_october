@@ -5,6 +5,7 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.miau.mvp30.R;
 
@@ -21,6 +22,10 @@ public class TutorialPagerAdapter extends PagerAdapter {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         ViewGroup layout = (ViewGroup) inflater.inflate(getLayoutResId(position), collection, false);
         collection.addView(layout);
+        if (getLayoutResId(position) == R.layout.screen_tutorial_3) {
+            TextView saltar = layout.findViewById(R.id.saltar);
+            saltar.setText("Continuar");
+        }
         return layout;
     }
 
