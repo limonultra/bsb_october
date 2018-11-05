@@ -47,6 +47,12 @@ class Menu : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val sett = findViewById (R.id.ajustes) as ImageView
+        sett.setOnClickListener{
+            val intent = Intent(this,Settings::class.java)
+            startActivity(intent)
+        }
+
     }
 
     fun checkInternetPermission() {

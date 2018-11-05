@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/colors_pref"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -47,33 +47,34 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/color_spinner"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="8dp"
         android:entries="@array/temas"
-        app:layout_constraintBottom_toBottomOf="@+id/textView6"
+        app:layout_constraintBottom_toBottomOf="@+id/colors_pref"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toTopOf="@+id/textView6" />
+        app:layout_constraintStart_toEndOf="@+id/colors_pref"
+        app:layout_constraintTop_toTopOf="@+id/colors_pref" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/idiom_pref"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/textView6"
-        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintEnd_toEndOf="@+id/colors_pref"
+        app:layout_constraintStart_toStartOf="@+id/colors_pref"
         tools:layout_editor_absoluteY="299dp" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/idiom_spinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/textView7"
-        app:layout_constraintEnd_toEndOf="@+id/spinner"
-        app:layout_constraintStart_toStartOf="@+id/spinner"
-        app:layout_constraintTop_toTopOf="@+id/textView7" />
+        android:entries="@array/idiomas"
+        app:layout_constraintBottom_toBottomOf="@+id/idiom_pref"
+        app:layout_constraintEnd_toEndOf="@+id/color_spinner"
+        app:layout_constraintStart_toStartOf="@+id/color_spinner"
+        app:layout_constraintTop_toTopOf="@+id/idiom_pref" />
 
 </android.support.constraint.ConstraintLayout>
