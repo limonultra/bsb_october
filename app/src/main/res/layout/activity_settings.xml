@@ -17,64 +17,55 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView5" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="478dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2">
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="Habilitar modo sordo/ciego"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+        <TextView
+            android:id="@+id/idiom_pref"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/colors_pref"
+            app:layout_constraintStart_toStartOf="@+id/colors_pref"
+            tools:layout_editor_absoluteY="299dp" />
 
-    <TextView
-        android:id="@+id/colors_pref"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/textView5"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        <Spinner
+            android:id="@+id/idiom_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/idiomas"
+            app:layout_constraintBottom_toBottomOf="@+id/idiom_pref"
+            app:layout_constraintEnd_toEndOf="@+id/color_spinner"
+            app:layout_constraintStart_toStartOf="@+id/color_spinner"
+            app:layout_constraintTop_toTopOf="@+id/idiom_pref" />
 
-    <Spinner
-        android:id="@+id/color_spinner"
-        android:layout_width="0dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:entries="@array/temas"
-        app:layout_constraintBottom_toBottomOf="@+id/colors_pref"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/colors_pref"
-        app:layout_constraintTop_toTopOf="@+id/colors_pref" />
+        <TextView
+            android:id="@+id/colors_pref"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar2"
+            app:layout_constraintStart_toStartOf="@+id/toolbar2"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
 
-    <TextView
-        android:id="@+id/idiom_pref"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/colors_pref"
-        app:layout_constraintStart_toStartOf="@+id/colors_pref"
-        tools:layout_editor_absoluteY="299dp" />
+        <Spinner
+            android:id="@+id/color_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:entries="@array/temas"
+            app:layout_constraintBottom_toBottomOf="@+id/colors_pref"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/colors_pref"
+            app:layout_constraintTop_toTopOf="@+id/colors_pref" />
 
-    <Spinner
-        android:id="@+id/idiom_spinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:entries="@array/idiomas"
-        app:layout_constraintBottom_toBottomOf="@+id/idiom_pref"
-        app:layout_constraintEnd_toEndOf="@+id/color_spinner"
-        app:layout_constraintStart_toStartOf="@+id/color_spinner"
-        app:layout_constraintTop_toTopOf="@+id/idiom_pref" />
+    </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>
