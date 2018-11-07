@@ -9,6 +9,8 @@ import android.widget.Spinner;
 
 public class Settings extends AppCompatActivity {
     final String MY_PREFS_NAME = "MyPrefsFile";
+    SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+    SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,17 +23,15 @@ public class Settings extends AppCompatActivity {
         color.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                final String MY_PREFS_NAME = "MyPrefsFile";
-                SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                 String value = color.getSelectedItem().toString();
                 editor.putString("color",value);
+                editor.apply();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-                String restoredText = prefs.getString("color", color.getSelectedItem().toString());
+                String restoredText = prefs.getString("text", null);
                 if (restoredText != null) {
-                    String name = prefs.getString("name", "No name defined");//"No name defined" is the default value.
+                    String name = prefs.getString("color", "No color defined");//"No name defined" is the default value.
             }
 
         }
@@ -41,17 +41,15 @@ public class Settings extends AppCompatActivity {
         idiom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                final String MY_PREFS_NAME = "MyPrefsFile";
-                SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                 String value = idiom.getSelectedItem().toString();
-                editor.putString("color",value);
+                editor.putString("idiom",value);
+                editor.apply();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
                 String restoredText = prefs.getString("text", null);
                 if (restoredText != null) {
-                    String name = prefs.getString("name", "No name defined");//"No name defined" is the default value.
+                    String name = prefs.getString("idiom", "No idiom defined");//"No name defined" is the default value.
                 }
 
             }
