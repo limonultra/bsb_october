@@ -11,7 +11,7 @@
 
         <bitmap
             android:src="@mipmap/fondo"
-            android:gravity="center"/>
+            />
 
     </item>
 
