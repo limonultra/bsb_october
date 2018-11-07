@@ -9,8 +9,8 @@ import android.widget.Spinner;
 
 public class Settings extends AppCompatActivity {
     final String MY_PREFS_NAME = "MyPrefsFile";
-    SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-    SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+    //SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+    //SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
     String selected_color;
     String selected_idiom;
 
@@ -22,7 +22,7 @@ public class Settings extends AppCompatActivity {
         final Spinner color = findViewById (R.id.color_spinner);
         final Spinner idiom= findViewById (R.id.idiom_spinner);
 
-        color.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        /*color.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String value = color.getSelectedItem().toString();
@@ -57,6 +57,8 @@ public class Settings extends AppCompatActivity {
             }
 
         });
+        */
     }
+
     }
 
