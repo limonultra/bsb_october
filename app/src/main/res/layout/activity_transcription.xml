@@ -9,38 +9,57 @@
     android:keyboardNavigationCluster="false"
     android:windowSoftInputMode="stateHidden|adjustResize">
 
+    <TextView
+        android:id="@+id/wifiname2"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/open_regular"
+        android:gravity="center"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/profText"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/toolbar3"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3"
+        app:layout_constraintVertical_bias="0.0" />
+
     <EditText
         android:id="@+id/profText"
-        android:layout_height="0dp"
-        android:layout_width="match_parent"
+        android:layout_width="379dp"
+        android:layout_height="467dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
+        android:fontFamily="@font/open_regular"
         android:gravity="top"
         android:keepScreenOn="true"
+        android:keyboardNavigationCluster="false"
         android:padding="12dp"
         android:text="Recibiendo datos..."
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="14sp"
-        android:keyboardNavigationCluster="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar3"
         android:layout_width="match_parent"
-        android:layout_height="61dp"
-        android:background="?attr/colorPrimary"
+        android:layout_height="63dp"
+        android:background="@color/colorAccent"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Transcription"
-        />
+        app:title="Transcripción"
+        app:titleTextColor="@color/background" />
 
 </android.support.constraint.ConstraintLayout>

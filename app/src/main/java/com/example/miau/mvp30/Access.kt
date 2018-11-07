@@ -45,6 +45,9 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
     lateinit var subsFragment: SubsFragment
     var isHex = false
     lateinit var regex: Regex
+    var info_trans = ""
+    lateinit var toInt : String
+    lateinit var toInt2 :String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
@@ -133,6 +136,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
                         var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                         imm.hideSoftInputFromWindow(b2.getWindowToken(), 0)
                         mclient = ChatClient(URI(getIP()), Draft_6455(), emptyMap(), 100000)
+                        wifiname2.text="$wifiname.text  |  $toInt$toInt2"
                         profPin.setText("")
                         mclient.connect()
                         var count = Countdown()
@@ -179,8 +183,8 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         hex2 = profPin.text.substring(2, 4)
         var SERVER_URL = ""
 
-        var toInt = Long.parseLong(hex1, 16).toString()
-        var toInt2 = Long.parseLong(hex2, 16).toString()
+        toInt = Long.parseLong(hex1, 16).toString()
+        toInt2 = Long.parseLong(hex2, 16).toString()
 
         SERVER_URL = "ws://192.168.$toInt.$toInt2:8080"
         return SERVER_URL
