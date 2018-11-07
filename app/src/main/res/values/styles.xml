@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:homeAsUpIndicator">@drawable/selector</item>
+        <item name="android:statusBarColor">@color/barra_estado</item>
     </style>
 
     <style name="AppTheme.NoTitleBar" parent="Theme.AppCompat.Light.NoActionBar">
@@ -14,6 +15,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:homeAsUpIndicator">@drawable/selector</item>
+        <item name="android:statusBarColor">@color/barra_estado</item>
     </style>
     <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/splash</item>
