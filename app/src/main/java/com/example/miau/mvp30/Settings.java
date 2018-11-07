@@ -11,6 +11,8 @@ public class Settings extends AppCompatActivity {
     final String MY_PREFS_NAME = "MyPrefsFile";
     SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
     SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+    String selected_color;
+    String selected_idiom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +33,9 @@ public class Settings extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parentView) {
                 String restoredText = prefs.getString("text", null);
                 if (restoredText != null) {
-                    String name = prefs.getString("color", "No color defined");//"No name defined" is the default value.
+                   selected_color = prefs.getString("color", "No color defined");//"No name defined" is the default value.
             }
-
+                //if(selected_color==)
         }
 
         });
@@ -49,7 +51,7 @@ public class Settings extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parentView) {
                 String restoredText = prefs.getString("text", null);
                 if (restoredText != null) {
-                    String name = prefs.getString("idiom", "No idiom defined");//"No name defined" is the default value.
+                    selected_idiom = prefs.getString("idiom", "No idiom defined");//"No name defined" is the default value.
                 }
 
             }
