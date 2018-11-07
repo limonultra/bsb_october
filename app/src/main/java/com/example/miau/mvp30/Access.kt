@@ -324,7 +324,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         }
 
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-//dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             return super.onCreateDialog(savedInstanceState)
         }
 

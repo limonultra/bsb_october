@@ -1,11 +1,14 @@
 package com.example.miau.mvp30;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.FragmentManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -15,17 +18,29 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 
+import android.preference.PreferenceManager;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.util.Log;
 
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Chronometer;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -79,7 +94,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     @Override
     public void onCreate(Bundle SavedInstanceState) {
         super.onCreate(SavedInstanceState);
-        setContentView(R.layout.activity_room);
+        setContentView(R.layout.activity_room );
         pupilsNo = findViewById(R.id.pupilNumber);
         serverControl = ServerSingleton.getInstance(inetSocketAddress, pupilsNo, this);
         btnPlay = findViewById(R.id.btnStart);
@@ -143,6 +158,15 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             btnStop.setEnabled(false);
             countDownParrafo.start();
         }
+    }
+
+    public void TranscriptionButtonEvent(View view){
+
+            TranscriptionDialog fragment = new TranscriptionDialog();
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(android.R.id.content, fragment );
+            fragmentTransaction.commit();
     }
 
     private SpeechRecognizer getSpeechRecognizer() {
@@ -429,4 +453,64 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         }
     }
 
+
+    public static class TranscriptionDialog extends DialogFragment {
+
+        private static final String TAG = "AKDialogFragment";
+
+        private View rootView;
+        private TextView profText;
+
+
+
+
+        @Override
+        public  View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+            rootView = inflater.inflate(R.layout.activity_transcription, container, false);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+
+            profText.findViewById( R.id.profText);
+
+
+            setHasOptionsMenu(true);
+            return rootView;
+        }
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            Dialog dialog = super.onCreateDialog(savedInstanceState);
+            return dialog;
+        }
+
+        @Override
+        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+            menu.clear();
+        }
+
+        /*@Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            int id = item.getItemId();
+
+            if (id == android.R.id.home) {
+                // handle close button click here
+                dismiss();
+                return true;
+            }
+            return super.onOptionsItemSelected(item);
+        }
+
+        public void  escribirSubs() {
+
+            profText.setText(Editable.Factory.getInstance().newEditable("$newtext $message"));
+        }
+
+        public void  appendSalto() {
+            if(!profText.setText().endsWith("\n"))
+                profText.setText(Editable.Factory.getInstance().newEditable("$newtext $message"));
+        }*/
+    }
+
 }
+

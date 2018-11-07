@@ -48,8 +48,7 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
 
 
     @Override
-    public
-    void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView(R.layout.solomode);
 
@@ -161,6 +160,7 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
                 speech.cancel();
                 speech.destroy();
                 speech = null;
+                isPausePressed = true;
 
             }
         }else{
@@ -169,8 +169,7 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
         }
     }
 
-    private
-    SpeechRecognizer getSpeechRecognizer() {
+    private SpeechRecognizer getSpeechRecognizer() {
         if (speech == null) {
             speech = SpeechRecognizer.createSpeechRecognizer( this );
             speech.setRecognitionListener( this );
@@ -178,8 +177,7 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
         return speech;
     }
 
-    public
-    void startVoiceRecognitionCycle(Intent speechIntent) {
+    public void startVoiceRecognitionCycle(Intent speechIntent) {
         speechIntent.putExtra( RecognizerIntent.EXTRA_LANGUAGE, "es-ES" );
         speechIntent.putExtra( RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM );
         speechIntent.putExtra( RecognizerIntent.EXTRA_PARTIAL_RESULTS, true );
@@ -189,40 +187,34 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
 
     //Listener Class
     @Override
-    public
-    void onReadyForSpeech(Bundle params) {
+    public void onReadyForSpeech(Bundle params) {
         Log.d( TAG, "onReadyForSpeech" );
     }
 
     @Override
-    public
-    void onBeginningOfSpeech() {
+    public void onBeginningOfSpeech() {
         Log.d( TAG, "onBeginningOfSpeech" );
     }
 
     @Override
-    public
-    void onRmsChanged(float rmsdB) {
+    public void onRmsChanged(float rmsdB) {
 
     }
 
     @Override
-    public
-    void onBufferReceived(byte[] buffer) {
+    public void onBufferReceived(byte[] buffer) {
         Log.d( TAG, "onBufferReceived" );
 
     }
 
     @Override
-    public
-    void onEndOfSpeech() {
+    public void onEndOfSpeech() {
         Log.d( TAG, "onEndOfSpeech" );
 
     }
 
     @Override
-    public
-    void onError(int error) {
+    public void onError(int error) {
         String message = null;
         switch (error) {
             case SpeechRecognizer.ERROR_AUDIO:
@@ -260,22 +252,19 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
     }
 
     @Override
-    public
-    void onResults(Bundle results) {
+    public void onResults(Bundle results) {
         startVoiceRecognitionCycle( speechIntent );
         newText = oldText.concat(" ");
     }
 
     @Override
-    public
-    void onPartialResults(Bundle partialResults) {
+    public void onPartialResults(Bundle partialResults) {
         receiveResults( partialResults );
 
     }
 
     @Override
-    public
-    void onEvent(int eventType, Bundle params) {
+    public void onEvent(int eventType, Bundle params) {
         Log.d( TAG, "onEvent" );
     }
 
