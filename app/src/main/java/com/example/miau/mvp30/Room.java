@@ -131,6 +131,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     public void ButtonPlayPauseEvent(View view) {
         if (!chronoState) {
             chrono.stop();
+            listening = false;
             btnPlayPause.setBackgroundResource(R.mipmap.play);
             stopTime = chrono.getBase() - SystemClock.elapsedRealtime();
             speech.cancel();
@@ -144,6 +145,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             chrono.setBase(SystemClock.elapsedRealtime() + stopTime);
             startVoiceRecognitionCycle(speechIntent);
             chronoState = false;
+            listening = true;
             btnStop.setEnabled(false);
             countDownParrafo.start();
         }
@@ -437,7 +439,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
     public void restartSpeechOnNewConnection() {
         if(listening) {
-            getSpeechRecognizer().cancel();
+            stopVoiceRecognition();
             startVoiceRecognitionCycle(speechIntent);
         }
     }
