@@ -69,6 +69,7 @@ public class Server extends WebSocketServer {
             @Override
             public void run() {
                 clients.setText(String.valueOf(clientCount));
+                ((Room) context).restartSpeechOnNewConnection();
             }
         });
 

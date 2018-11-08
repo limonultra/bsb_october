@@ -95,7 +95,7 @@ class Menu : AppCompatActivity() {
 
     fun checkForTutorial() {
         val sharedPreferences = defaultSharedPreferences
-        if (sharedPreferences.getBoolean("tutorial", false)) {
+        if (!sharedPreferences.getBoolean("tutorial", false)) {
             sharedPreferences.edit().putBoolean("tutorial", true).apply();
             val intent = Intent(this, TutorialActivity::class.java)
             intent.putExtra("First", true)

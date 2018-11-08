@@ -2,35 +2,27 @@ package com.example.miau.mvp30;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.FragmentManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
-
 import android.preference.PreferenceManager;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
-
 import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.util.Log;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,14 +30,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.Chronometer;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -470,7 +459,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             rootView = inflater.inflate(R.layout.activity_transcription, container, false);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
 
-            profText.findViewById( R.id.profText);
+            rootView.findViewById(R.id.profText);
 
 
             setHasOptionsMenu(true);
