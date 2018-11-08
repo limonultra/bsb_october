@@ -6,6 +6,7 @@
     <string name="continuar">Continuar</string>
     <string name="ajustes">Ajustes</string>
     <string name="salto_linea">\n</string>
+    <string name="saltar">Saltar</string>
 
     <array name="temas">
         <item>Negro - Blanco</item>

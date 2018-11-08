@@ -53,6 +53,13 @@ class Menu : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val info = findViewById(R.id.info) as ImageView
+        info.setOnClickListener {
+            val intent = Intent(this, TutorialActivity::class.java)
+            intent.putExtra("First", false)
+            startActivity(intent)
+        }
+
     }
 
     fun checkInternetPermission() {
@@ -84,9 +91,10 @@ class Menu : AppCompatActivity() {
 
     fun checkForTutorial() {
         val sharedPreferences = defaultSharedPreferences
-        if (!sharedPreferences.getBoolean("tutorial", false)) {
+        if (sharedPreferences.getBoolean("tutorial", false)) {
             sharedPreferences.edit().putBoolean("tutorial", true).apply();
             val intent = Intent(this, TutorialActivity::class.java)
+            intent.putExtra("First", true)
             startActivity(intent)
         }
 
