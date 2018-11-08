@@ -15,7 +15,8 @@ public class TutorialActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tutorial);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
-        viewPager.setAdapter(new TutorialPagerAdapter(this));
+        viewPager.setAdapter(new TutorialPagerAdapter(this, getIntent().getBooleanExtra("First", false)));
+
     }
 
     public void saltar(View v) {

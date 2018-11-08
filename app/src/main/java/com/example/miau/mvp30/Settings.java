@@ -1,16 +1,16 @@
 package com.example.miau.mvp30;
 
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
 public class Settings extends AppCompatActivity {
     final String MY_PREFS_NAME = "MyPrefsFile";
-    //SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-    //SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+    SharedPreferences.Editor editor;
+    SharedPreferences prefs;
     String selected_color;
     String selected_idiom;
 
@@ -22,7 +22,10 @@ public class Settings extends AppCompatActivity {
         final Spinner color = findViewById (R.id.color_spinner);
         final Spinner idiom= findViewById (R.id.idiom_spinner);
 
-        /*color.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+
+        color.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String value = color.getSelectedItem().toString();
@@ -57,8 +60,6 @@ public class Settings extends AppCompatActivity {
             }
 
         });
-        */
     }
-
     }
 

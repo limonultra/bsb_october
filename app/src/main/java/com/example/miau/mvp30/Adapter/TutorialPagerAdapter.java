@@ -12,9 +12,12 @@ import com.example.miau.mvp30.R;
 public class TutorialPagerAdapter extends PagerAdapter {
 
     private Context mContext;
+    private boolean first;
 
-    public TutorialPagerAdapter(Context context) {
+    public TutorialPagerAdapter(Context context, boolean first) {
         mContext = context;
+        this.first = first;
+
     }
 
     @Override
@@ -22,8 +25,12 @@ public class TutorialPagerAdapter extends PagerAdapter {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         ViewGroup layout = (ViewGroup) inflater.inflate(getLayoutResId(position), collection, false);
         collection.addView(layout);
+        TextView saltar = layout.findViewById(R.id.saltar);
+        if (first) {
+            saltar.setVisibility(View.INVISIBLE);
+        }
         if (getLayoutResId(position) == R.layout.screen_tutorial_3) {
-            TextView saltar = layout.findViewById(R.id.saltar);
+            saltar.setVisibility(View.VISIBLE);
             saltar.setText("Continuar");
         }
         return layout;
