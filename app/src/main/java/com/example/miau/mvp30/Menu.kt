@@ -8,7 +8,9 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import org.jetbrains.anko.defaultSharedPreferences
@@ -20,6 +22,8 @@ class Menu : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+        val toolbar = findViewById(R.id.toolbar4) as Toolbar
+        setSupportActionBar(toolbar)
         Log.i("",resources.displayMetrics.densityDpi.toString())
         checkInternetPermission()
         if(Build.VERSION.SDK_INT>25){
@@ -47,11 +51,6 @@ class Menu : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val sett = findViewById (R.id.ajustes) as ImageView
-        sett.setOnClickListener{
-            val intent = Intent(this,Settings::class.java)
-            startActivity(intent)
-        }
 
         val info = findViewById(R.id.info) as ImageView
         info.setOnClickListener {
@@ -88,6 +87,11 @@ class Menu : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.settings, menu)
+        return true
+    }
 
     fun checkForTutorial() {
         val sharedPreferences = defaultSharedPreferences
