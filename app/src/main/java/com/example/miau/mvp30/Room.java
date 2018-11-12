@@ -66,6 +66,8 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     String WIFI;
     String PIN;
 
+    //private TranscriptionDialog transcriptionDialog;
+
     private Button btnPlay;
     private Button btnStop;
     private Button btnPlayPause;
@@ -84,7 +86,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     public void onCreate(Bundle SavedInstanceState) {
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.activity_room );
-        pupilsNo = findViewById(R.id.pupilNumber);
+        //pupilsNo = findViewById(R.id.pupilNumber);
         serverControl = ServerSingleton.getInstance(inetSocketAddress, pupilsNo, this);
         btnPlay = findViewById(R.id.btnStart);
         btnStop = findViewById(R.id.btnStop);
@@ -94,18 +96,19 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
-        pinName = findViewById(R.id.pinName);
+        //pinName = findViewById(R.id.pinName);
 
-        wifiName = findViewById(R.id.wifiName);
+        //wifiName = findViewById(R.id.wifiName);
 
+        //transcriptionDialog = new TranscriptionDialog();
 
         saveCurrentAudio();
         Bundle bundle;
         bundle = getIntent().getExtras();
         PIN = bundle.getString("PIN");
         WIFI = bundle.getString("wifiName");
-        pinName.setText(PIN);
-        wifiName.setText(WIFI);
+        //pinName.setText(PIN);
+        //wifiName.setText(WIFI);
 
     }
 
@@ -132,33 +135,35 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         if (!chronoState) {
             chrono.stop();
             listening = false;
-            btnPlayPause.setBackgroundResource(R.mipmap.play);
+            btnPlayPause.setBackgroundResource(R.drawable.ic_pauseboton2);
             stopTime = chrono.getBase() - SystemClock.elapsedRealtime();
             speech.cancel();
             serverControl.broadcast(speechRestart);
             chronoState = true;
+            isPausePressed = true;
             btnStop.setEnabled(true);
             countDownParrafo.cancel();
         } else {
             chrono.start();
-            btnPlayPause.setBackgroundResource(R.mipmap.pause);
+            btnPlayPause.setBackgroundResource(R.drawable.ic_pauseboton1);
             chrono.setBase(SystemClock.elapsedRealtime() + stopTime);
             startVoiceRecognitionCycle(speechIntent);
             chronoState = false;
+            isPausePressed = false;
             listening = true;
             btnStop.setEnabled(false);
             countDownParrafo.start();
         }
     }
 
-    public void TranscriptionButtonEvent(View view){
+    /*public void TranscriptionButtonEvent(View view){
 
             TranscriptionDialog fragment = new TranscriptionDialog();
             android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(android.R.id.content, fragment );
             fragmentTransaction.commit();
-    }
+    }*/
 
     private SpeechRecognizer getSpeechRecognizer() {
         if (speech == null) {
@@ -180,6 +185,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     //Cancel speech recognition
     public void stopVoiceRecognition() {
         if(isPausePressed) {
+            btnStop.setBackgroundResource(R.drawable.ic_stopboton2);
             if (speech != null) {
                 speech.stopListening();
                 speech.cancel();
@@ -189,7 +195,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             }
         }else{
             btnStop.setEnabled( false );
-            btnStop.setBackgroundResource(R.mipmap.people );
+            btnStop.setBackgroundResource(R.drawable.ic_stopboton1);
         }
     }
 
@@ -294,7 +300,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         countDownParrafo.cancel();
         countDownParrafo.start();
 
-        this.pupilsNo.setText(String.valueOf(serverControl.clientCount));
+        //this.pupilsNo.setText(String.valueOf(serverControl.clientCount));
     }
 
     @Override
@@ -312,7 +318,10 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             }
             Log.d(TAG, String.valueOf(results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)));
             speechResults = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-            serverControl.broadcast(speechResults.toString().replace("[", "").replace("]", ""));
+            String transcription = speechResults.toString().replace("[", "").replace("]", "");
+            serverControl.broadcast(transcription);
+            //transcriptionDialog.escribirSubs(transcription);
+
         }
     }
 
@@ -432,6 +441,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         @Override
         public void onFinish() {
             serverControl.broadcast(speechSalto);
+            //transcriptionDialog.appendSalto();
             restartSpeechOnNewConnection();
             this.cancel();
         }
@@ -445,7 +455,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     }
 
 
-    public static class TranscriptionDialog extends DialogFragment {
+    /*public static class TranscriptionDialog extends DialogFragment {
 
         private static final String TAG = "AKDialogFragment";
 
@@ -461,7 +471,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             rootView = inflater.inflate(R.layout.activity_transcription, container, false);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
 
-            rootView.findViewById(R.id.profText);
+            profText = rootView.findViewById(R.id.profText);
 
 
             setHasOptionsMenu(true);
@@ -480,7 +490,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             menu.clear();
         }
 
-        /*@Override
+        @Override
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
 
@@ -492,16 +502,16 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             return super.onOptionsItemSelected(item);
         }
 
-        public void  escribirSubs() {
+        public void  escribirSubs(String transcription) {
 
-            profText.setText(Editable.Factory.getInstance().newEditable("$newtext $message"));
+            profText.setText(profText.toString().concat("$newtext"));
         }
 
         public void  appendSalto() {
-            if(!profText.setText().endsWith("\n"))
-                profText.setText(Editable.Factory.getInstance().newEditable("$newtext $message"));
-        }*/
-    }
+            if(!profText.getText().toString().endsWith("\n"))
+                profText.setText(profText.toString().concat("$newtext"));
+        }
+    }*/
 
 }
 

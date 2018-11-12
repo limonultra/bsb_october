@@ -4,43 +4,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorAccent"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/solomode"
+        app:titleTextColor="@android:color/white" />
 
     <TextView
         android:id="@+id/transcription"
-        android:layout_width="0dp"
+        android:layout_width="376dp"
         android:layout_height="249dp"
-        android:layout_marginEnd="19dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="76dp"
+        android:background="@color/transcription_color"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnPlayPause"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="16dp"
-        android:background="@mipmap/pause"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginBottom="92dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="12dp"
+        android:background="@drawable/ic_pauseboton2"
         android:checked="false"
         android:gravity="center_vertical"
         android:onClick="ButtonPlayPauseEvent"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/transcription"
-        app:layout_constraintTop_toTopOf="@+id/btnStart" />
+        app:layout_constraintEnd_toStartOf="@+id/btnStart"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editText" />
 
     <Button
         android:id="@+id/btnStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginBottom="92dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:background="@mipmap/play"
+        android:background="@drawable/ic_playboton1"
         android:gravity="center"
         android:onClick="ButtonStartEvent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,36 +68,42 @@
 
     <Button
         android:id="@+id/btnStop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginStart="16dp"
-        android:background="@mipmap/stop"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginBottom="92dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/ic_stopboton1"
         android:gravity="center_vertical"
         android:onClick="ButtonStopEvent"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/transcription"
-        app:layout_constraintTop_toTopOf="@+id/btnStart" />
+        app:layout_constraintEnd_toEndOf="@+id/editText"
+        app:layout_constraintHorizontal_bias="0.923"
+        app:layout_constraintStart_toEndOf="@+id/btnStart" />
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="348dp"
+        android:layout_width="377dp"
         android:layout_height="87dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@color/transcription_color"
         android:ems="10"
-        android:background="@null"
+        android:fontFamily="@font/open_regular"
         android:hint="Escriba su texto aqui"
         android:inputType="textPersonName"
         android:selectAllOnFocus="false"
         android:singleLine="false"
+        android:textColor="#666666"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/btnStart"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/transcription" />
+        app:layout_constraintTop_toBottomOf="@+id/transcription"
+        app:layout_constraintVertical_bias="0.076" />
 
 </android.support.constraint.ConstraintLayout>

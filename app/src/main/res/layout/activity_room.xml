@@ -4,27 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="#ffffff"
     >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <Toolbar
+        android:id="@+id/toolbar5"
+        android:layout_width="393dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="8dp"
+        android:background="#00b6c7"
+        app:layout_constraintBottom_toTopOf="@+id/bottomLinear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></Toolbar>
+
+    <LinearLayout
+        android:id="@+id/bottomLinear"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="1dp"
+        android:background="#ffffff"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/chronoRelative"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar5"
+        tools:ignore="MissingConstraints,Orientation">
+
+    </LinearLayout>
+
+    <RelativeLayout
         android:id="@+id/chronoRelative"
-        android:layout_marginTop="100dp"
-        android:gravity="center">
+        android:layout_width="match_parent"
+        android:layout_height="264dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottomLinear"
+        tools:ignore="MissingConstraints">
 
         <Chronometer
             android:id="@+id/chronometer"
-            android:layout_width="154dp"
-            android:layout_height="154dp"
+            android:layout_width="269dp"
+            android:layout_height="172dp"
             android:layout_marginBottom="40dp"
             android:layout_marginTop="100dp"
-            android:textColor="@color/light"
-            android:background="@mipmap/cronocircle"
-            android:textAlignment="center"
+            android:fontFamily="@font/opensans_bold"
             android:gravity="center_vertical"
-            android:textSize="36sp"
+            android:textAlignment="center"
+            android:textColor="#666666"
+            android:textSize="50sp"
             tools:ignore="HardcodedText" />
 
     </RelativeLayout>
@@ -33,14 +67,18 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="76dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="12dp"
         android:gravity="center"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chronoRelative">
+        app:layout_constraintTop_toBottomOf="@+id/chronoRelative"
+        tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/btnPlayPause"
@@ -48,7 +86,7 @@
             android:layout_height="88dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="@mipmap/pause"
+            android:background="@drawable/ic_pauseboton1"
             android:checked="false"
             android:gravity="center_vertical"
             android:onClick="ButtonPlayPauseEvent"
@@ -60,7 +98,7 @@
             android:layout_height="97dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="@mipmap/play"
+            android:background="@drawable/ic_playboton1"
             android:gravity="center"
             android:onClick="ButtonStartEvent" />
 
@@ -70,116 +108,12 @@
             android:layout_height="88dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="@mipmap/stop"
+            android:background="@drawable/ic_stopboton1"
             android:gravity="center_vertical"
             android:onClick="ButtonStopEvent"
             android:visibility="invisible" />
 
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/bottomLinear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/light"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/wifiName"
-            android:layout_width="142dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:hint="WIFIName"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/pinImage"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/pinImage"
-            tools:ignore="HardcodedText" />
-
-        <ImageView
-            android:id="@+id/pinImage"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="2dp"
-            android:contentDescription="ff"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/pinName"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/wifiName"
-            app:srcCompat="@mipmap/code"
-            tools:ignore="HardcodedText" />
-
-        <TextView
-            android:id="@+id/pinName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="2dp"
-            android:layout_marginTop="8dp"
-            android:hint="Clave de la Sala"
-            android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/pupilsImage"
-            app:layout_constraintEnd_toStartOf="@+id/pupilsImage"
-            app:layout_constraintTop_toTopOf="@+id/pupilsImage"
-            tools:ignore="HardcodedText" />
-
-        <ImageView
-            android:id="@+id/pupilsImage"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="2dp"
-            android:contentDescription="ff"
-            app:layout_constraintBottom_toBottomOf="@+id/pinImage"
-            app:layout_constraintEnd_toStartOf="@+id/pupilNumber"
-            app:layout_constraintTop_toTopOf="@+id/pinImage"
-            app:srcCompat="@mipmap/people"
-            tools:ignore="HardcodedText" />
-
-        <TextView
-            android:id="@+id/pupilNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
-            android:text="0"
-            android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/pupilsImage"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/pupilsImage"
-            tools:ignore="HardcodedText" />
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:onClick="TranscriptionButtonEvent"
-        android:text="Transcription"
-        app:layout_constraintBottom_toTopOf="@+id/bottomLinear"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 
 </android.support.constraint.ConstraintLayout>
