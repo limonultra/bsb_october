@@ -64,6 +64,7 @@
                 android:value=".Menu" />
         </activity>
         <activity android:name=".TutorialActivity"></activity>
+        <activity android:name=".SharedPreferences"></activity>
     </application>
 
 </manifest>

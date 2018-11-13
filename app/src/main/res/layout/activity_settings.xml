@@ -1,88 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.miau.mvp30.Settings">
+    <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <CheckBoxPreference
+            android:key="pref_sync"
+            android:title="date"
+            android:summary="we"
+            android:defaultValue="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </PreferenceScreen>
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar2"
-        android:layout_width="0dp"
-        android:layout_height="61dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="462dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2">
-
-        <TextView
-            android:id="@+id/idiom_pref"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintEnd_toEndOf="@+id/colors_pref"
-            app:layout_constraintStart_toStartOf="@+id/colors_pref"
-            tools:layout_editor_absoluteY="299dp" />
-
-        <Spinner
-            android:id="@+id/idiom_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/idiomas"
-            app:layout_constraintBottom_toBottomOf="@+id/idiom_pref"
-            app:layout_constraintEnd_toEndOf="@+id/color_spinner"
-            app:layout_constraintStart_toStartOf="@+id/color_spinner"
-            app:layout_constraintTop_toTopOf="@+id/idiom_pref" />
-
-        <TextView
-            android:id="@+id/colors_pref"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="TextView"
-            app:layout_constraintEnd_toEndOf="@+id/toolbar2"
-            app:layout_constraintStart_toStartOf="@+id/toolbar2"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
-
-        <Spinner
-            android:id="@+id/color_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="8dp"
-            android:entries="@array/temas"
-            app:layout_constraintBottom_toBottomOf="@+id/colors_pref"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/colors_pref"
-            app:layout_constraintTop_toTopOf="@+id/colors_pref" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="@+id/color_spinner"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/color_spinner"
-            app:layout_constraintTop_toTopOf="@+id/color_spinner" />/>
-
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Switch" />
-
-    </LinearLayout>
-
-
-</android.support.constraint.ConstraintLayout>
