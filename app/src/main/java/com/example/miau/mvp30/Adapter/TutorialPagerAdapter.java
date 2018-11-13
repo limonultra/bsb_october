@@ -43,7 +43,7 @@ public class TutorialPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 
     @Override
@@ -63,9 +63,12 @@ public class TutorialPagerAdapter extends PagerAdapter {
                 id = R.layout.screen_tutorial_1;
                 break;
             case 1:
-                id = R.layout.screen_tutorial_2;
+                id = R.layout.screen_tutorial_4;
                 break;
             case 2:
+                id = R.layout.screen_tutorial_2;
+                break;
+            case 3:
                 id = R.layout.screen_tutorial_3;
                 break;
             default:
