@@ -86,7 +86,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     public void onCreate(Bundle SavedInstanceState) {
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.activity_room );
-        //pupilsNo = findViewById(R.id.pupilNumber);
+        pupilsNo = findViewById(R.id.pupilNumber);
         serverControl = ServerSingleton.getInstance(inetSocketAddress, pupilsNo, this);
         btnPlay = findViewById(R.id.btnStart);
         btnStop = findViewById(R.id.btnStop);
@@ -96,9 +96,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
-        //pinName = findViewById(R.id.pinName);
+        pinName = findViewById(R.id.pinName);
 
-        //wifiName = findViewById(R.id.wifiName);
+        wifiName = findViewById(R.id.wifiName);
 
         //transcriptionDialog = new TranscriptionDialog();
 
@@ -107,8 +107,8 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         bundle = getIntent().getExtras();
         PIN = bundle.getString("PIN");
         WIFI = bundle.getString("wifiName");
-        //pinName.setText(PIN);
-        //wifiName.setText(WIFI);
+        pinName.setText(PIN);
+        wifiName.setText(WIFI);
 
     }
 
@@ -300,7 +300,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         countDownParrafo.cancel();
         countDownParrafo.start();
 
-        //this.pupilsNo.setText(String.valueOf(serverControl.clientCount));
+        this.pupilsNo.setText(String.valueOf(serverControl.clientCount));
     }
 
     @Override
