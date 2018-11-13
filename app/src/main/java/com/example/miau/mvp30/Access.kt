@@ -48,6 +48,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
     var info_trans = ""
     lateinit var toInt : String
     lateinit var toInt2 :String
+    lateinit var wifi:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
@@ -98,33 +99,6 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         }
         //  }
         //else {
-
-        profPin.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
-                if (profPin.text.toString().length == 4) {
-                    isHex = true //para saber si nos han introducido texto hexadecimal
-                    regex = "^[0-9a-fA-F]+$".toRegex() //expresion regular para comprobar que nos han introducido un hexadecimal
-                }
-                isHex = regex.matches(profPin.text.toString()) //averiguamos si el pin es hexadecimal
-                if (isHex) { // si hexadecimal=true
-                    var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(b2.getWindowToken(), 0)
-                    mclient = ChatClient(URI(getIP()), Draft_6455(), emptyMap(), 100000)
-                    profPin.setText("")
-                    mclient.connect()
-                    val count = Countdown()
-                    deviceOnline.setText("Estableciendo conexión...")
-                    count.start()
-                    deviceOnline.visibility = View.VISIBLE
-                } else { // si hexadecimal=false
-                    deviceOnline.setText("El PIN introducido es incorrecto")
-                    deviceOnline.visibility = View.VISIBLE
-                }
-                return@OnKeyListener true
-            }
-            false
-        })
-        // }
             profPin.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
                 if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                     if (profPin.text.toString().length == 4) {
@@ -136,7 +110,6 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
                         var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                         imm.hideSoftInputFromWindow(b2.getWindowToken(), 0)
                         mclient = ChatClient(URI(getIP()), Draft_6455(), emptyMap(), 100000)
-                        wifiname2.text="$wifiname.text  |  $toInt$toInt2"
                         profPin.setText("")
                         mclient.connect()
                         var count = Countdown()
@@ -174,7 +147,8 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
     override fun onBackPressed() {
         super.onBackPressed()
         if (open)
-            mclient.close()
+                mclient.close()
+
     }
 
 
@@ -208,6 +182,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         } else {
             deviceOnline.text = ""
             wifiname.text = mWifi.extraInfo.replace("\"", "") //obtenemos nombre del wifi sin comillas
+            wifi= mWifi.extraInfo.replace("\"", "")
             wifiname.visibility = View.VISIBLE
             profPin.setEnabled(true)
             b2.isEnabled = true
@@ -294,17 +269,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         override fun onClose(code: Int, reason: String?, remote: Boolean) {
             open = false
             Log.e("Close: ", "closed with exit code $code additional info: $reason")
-            runOnUiThread {
-                if (!onrepeat && open) {
-                    val builder = AlertDialog.Builder(this@Access)
-                    builder.setMessage("Conexión finalizada")
-                    builder.setNegativeButton("Ok") { _, _ ->
-                        finish()
-                    }
-                    builder.show()
-                }
 
-            }
         }
 
 

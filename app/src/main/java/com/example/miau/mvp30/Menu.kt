@@ -52,13 +52,6 @@ class Menu : AppCompatActivity() {
         }
 
 
-        val info = findViewById(R.id.info) as ImageView
-        info.setOnClickListener {
-            val intent = Intent(this, TutorialActivity::class.java)
-            intent.putExtra("First", false)
-            startActivity(intent)
-        }
-
     }
 
     fun checkInternetPermission() {
@@ -79,7 +72,7 @@ class Menu : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.settings -> {
-                val intent = Intent(this, Settings::class.java)
+                val intent = Intent(this, SharedPreferences::class.java)
                 startActivity(intent)
                 return true
             }
