@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <ListPreference     android:title="Idioma"
-        android:summary="Selecciona el idioma que vas a oir"
-        android:key="Idiom"
-        android:defaultValue="1"
-        android:entries="@array/Idioms"
-        android:entryValues="@array/listValues2" />
-    <CheckBoxPreference android:title="Modo Sordo/Ciego"
-        android:defaultValue="false"
-        android:summary=""
-        android:key="applicationUpdates" />
-    <ListPreference     android:title="Colores"
-        android:summary="Selecciona el tema de colores"
-        android:key="Color"
-        android:defaultValue="1"
-        android:entries="@array/Colors"
-        android:entryValues="@array/listValues" />
-</PreferenceScreen>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/preferenceScreen"
+    app:layout_constraintBottom_toTopOf="parent"
+    app:layout_constraintEnd_toStartOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/Idioms"
+            android:entryValues="@array/listValues2"
+            android:key="Idiom"
+            android:title="Reconocimiento de voz" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="applicationUpdates"
+            android:summary=""
+            android:title="Modo Sordo/Ciego" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/Colors"
+            android:entryValues="@array/listValues"
+            android:key="Color"
+            android:summary="Cambia los colores de la aplicación"
+            android:title="Colores" />
+    </PreferenceScreen>

@@ -51,6 +51,11 @@ class Menu : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val info= findViewById(R.id.info) as ImageView
+        info.setOnClickListener{
+            val intent = Intent(this,TutorialActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
