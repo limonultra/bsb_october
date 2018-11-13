@@ -24,7 +24,7 @@
         android:id="@+id/bprof"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="56dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.20"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,8 +36,8 @@
         android:id="@+id/info"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/info" />
@@ -53,7 +53,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10"
         app:layout_constraintWidth_percent="0.4"
-        app:srcCompat="@drawable/asistente" />
+        app:srcCompat="@drawable/asistentes" />
 
     <ImageView
         android:id="@+id/bsm"
@@ -65,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_percent="0.4"
-        app:srcCompat="@drawable/solomode" />
+        app:srcCompat="@drawable/solo_mode" />
 
     <TextView
         android:id="@+id/textView7"

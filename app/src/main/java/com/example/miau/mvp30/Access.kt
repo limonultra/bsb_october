@@ -358,7 +358,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         }
 
         fun appendSalto(message: String, newtext: String) {
-            if(!profText.text.endsWith("\n"))
+            if (!profText.text.endsWith("\n") || profText.text.length > 0)
                 profText.text = Editable.Factory.getInstance().newEditable("$newtext $message")
         }
 
