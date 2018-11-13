@@ -22,6 +22,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -31,6 +32,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -50,7 +52,8 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     private static boolean responseReceived = true;
     private static boolean isPausePressed = false;
     private String response;
-    private CountDownParrafo countDownParrafo;
+    private static CountDownParrafo countDownParrafo;
+    private static TranscriptionDialog transcriptionDialog;
 
     private static boolean chronoState = false;
     long stopTime = 0;
@@ -77,6 +80,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
     private Intent speechIntent;
 
+    private String newText = "";
+    private String oldText = "";
+
     InetSocketAddress inetSocketAddress = new InetSocketAddress(8080);
     Server serverControl;
 
@@ -91,6 +97,8 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         btnPlayPause = findViewById(R.id.btnPlayPause);
         chrono = findViewById(R.id.chronometer);
         countDownParrafo = new CountDownParrafo(4000, 2000);
+
+        transcriptionDialog = new TranscriptionDialog();
 
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
@@ -152,11 +160,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     }
 
     public void TranscriptionButtonEvent(View view){
-
-            TranscriptionDialog fragment = new TranscriptionDialog();
             android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(android.R.id.content, fragment );
+        fragmentTransaction.replace(android.R.id.content, transcriptionDialog);
             fragmentTransaction.commit();
     }
 
@@ -285,6 +291,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     public void onResults(Bundle results) {
         startVoiceRecognitionCycle(speechIntent);
         serverControl.broadcast(speechRestart);
+        newText = oldText;
     }
 
     @Override
@@ -312,7 +319,12 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             }
             Log.d(TAG, String.valueOf(results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)));
             speechResults = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-            serverControl.broadcast(speechResults.toString().replace("[", "").replace("]", ""));
+            String message = speechResults.toString().replace("[", "").replace("]", "");
+            serverControl.broadcast(message);
+            oldText = newText.concat(message);
+            transcriptionDialog.escribirSubs(message, newText);
+
+
         }
     }
 
@@ -432,6 +444,8 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         @Override
         public void onFinish() {
             serverControl.broadcast(speechSalto);
+            oldText = newText.concat("\n");
+            transcriptionDialog.appendSalto(newText);
             restartSpeechOnNewConnection();
             this.cancel();
         }
@@ -450,23 +464,23 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         private static final String TAG = "AKDialogFragment";
 
         private View rootView;
-        private TextView profText;
+        private EditText profText;
 
 
 
 
         @Override
-        public  View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
             rootView = inflater.inflate(R.layout.activity_transcription, container, false);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
 
-            rootView.findViewById(R.id.profText);
-
+            profText = (EditText) rootView.findViewById(R.id.profText);
 
             setHasOptionsMenu(true);
             return rootView;
         }
+
 
         @NonNull
         @Override
@@ -480,7 +494,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             menu.clear();
         }
 
-        /*@Override
+        @Override
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
 
@@ -492,15 +506,14 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             return super.onOptionsItemSelected(item);
         }
 
-        public void  escribirSubs() {
-
-            profText.setText(Editable.Factory.getInstance().newEditable("$newtext $message"));
+        public void escribirSubs(String message, String newText) {
+            profText.setText(Editable.Factory.getInstance().newEditable(newText.concat(message)));
         }
 
-        public void  appendSalto() {
-            if(!profText.setText().endsWith("\n"))
-                profText.setText(Editable.Factory.getInstance().newEditable("$newtext $message"));
-        }*/
+        public void appendSalto(String newText) {
+            if (!profText.getText().toString().endsWith("\n"))
+                profText.setText(Editable.Factory.getInstance().newEditable(newText.concat("\n")));
+        }
     }
 
 }
