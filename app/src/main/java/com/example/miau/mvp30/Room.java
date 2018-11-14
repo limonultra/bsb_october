@@ -69,6 +69,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     String WIFI;
     String PIN;
 
+
     private Button btnPlay;
     private Button btnStop;
     private Button btnPlayPause;
@@ -106,6 +107,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
         wifiName = findViewById(R.id.wifiName);
 
+        //transcriptionDialog = new TranscriptionDialog();
 
         saveCurrentAudio();
         Bundle bundle;
@@ -131,16 +133,24 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     }
 
     public void ButtonStopEvent(View view) {
-        chrono.stop();
-        onBackPressed();
-        resetAudio();
+        if(isPausePressed) {
+            btnStop.setBackgroundResource(R.drawable.ic_stopboton2);
+            btnStop.setEnabled( true );
+            chrono.stop();
+            onBackPressed();
+            resetAudio();
+
+        }else{
+            btnStop.setEnabled( false );
+            btnStop.setBackgroundResource(R.drawable.ic_stopboton1);
+        }
     }
 
     public void ButtonPlayPauseEvent(View view) {
         if (!chronoState) {
             chrono.stop();
             listening = false;
-            btnPlayPause.setBackgroundResource(R.mipmap.play);
+            btnPlayPause.setBackgroundResource(R.drawable.ic_pauseboton2);
             stopTime = chrono.getBase() - SystemClock.elapsedRealtime();
             speech.cancel();
             serverControl.broadcast(speechRestart);
@@ -149,10 +159,11 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             countDownParrafo.cancel();
         } else {
             chrono.start();
-            btnPlayPause.setBackgroundResource(R.mipmap.pause);
+            btnPlayPause.setBackgroundResource(R.drawable.ic_pauseboton1);
             chrono.setBase(SystemClock.elapsedRealtime() + stopTime);
             startVoiceRecognitionCycle(speechIntent);
             chronoState = false;
+            isPausePressed = false;
             listening = true;
             btnStop.setEnabled(false);
             countDownParrafo.start();
@@ -162,7 +173,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     public void TranscriptionButtonEvent(View view){
             android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(android.R.id.content, transcriptionDialog);
+            fragmentTransaction.replace(android.R.id.content, fragment );
             fragmentTransaction.commit();
     }
 
@@ -185,7 +196,6 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
     //Cancel speech recognition
     public void stopVoiceRecognition() {
-        if(isPausePressed) {
             if (speech != null) {
                 speech.stopListening();
                 speech.cancel();
@@ -193,10 +203,6 @@ public class Room extends AppCompatActivity implements RecognitionListener {
                 speech = null;
 
             }
-        }else{
-            btnStop.setEnabled( false );
-            btnStop.setBackgroundResource(R.mipmap.people );
-        }
     }
 
     //Mutes Beep Speech Sound
@@ -338,7 +344,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if(listening) {
-                            serverControl.broadcast(endSpeech);
+                            serverControl.broadcast( endSpeech );
                             stopVoiceRecognition();
                         }
                         try {
@@ -470,17 +476,17 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        public  View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
             rootView = inflater.inflate(R.layout.activity_transcription, container, false);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
 
-            profText = (EditText) rootView.findViewById(R.id.profText);
+            profText = rootView.findViewById(R.id.profText);
+
 
             setHasOptionsMenu(true);
             return rootView;
         }
-
 
         @NonNull
         @Override
@@ -506,13 +512,14 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             return super.onOptionsItemSelected(item);
         }
 
-        public void escribirSubs(String message, String newText) {
-            profText.setText(Editable.Factory.getInstance().newEditable(newText.concat(message)));
+        public void  escribirSubs(String transcription) {
+
+            profText.setText(profText.toString().concat("$newtext"));
         }
 
-        public void appendSalto(String newText) {
-            if (!profText.getText().toString().endsWith("\n"))
-                profText.setText(Editable.Factory.getInstance().newEditable(newText.concat("\n")));
+        public void  appendSalto() {
+            if(!profText.getText().toString().endsWith("\n"))
+                profText.setText(profText.toString().concat("$newtext"));
         }
     }
 
