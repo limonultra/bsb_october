@@ -22,7 +22,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -32,7 +31,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -52,8 +50,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     private static boolean responseReceived = true;
     private static boolean isPausePressed = false;
     private String response;
-    private static CountDownParrafo countDownParrafo;
-    private static TranscriptionDialog transcriptionDialog;
+    private CountDownParrafo countDownParrafo;
 
     private static boolean chronoState = false;
     long stopTime = 0;
@@ -69,7 +66,6 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     String WIFI;
     String PIN;
 
-
     private Button btnPlay;
     private Button btnStop;
     private Button btnPlayPause;
@@ -80,9 +76,6 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     private boolean listening = false;
 
     private Intent speechIntent;
-
-    private String newText = "";
-    private String oldText = "";
 
     InetSocketAddress inetSocketAddress = new InetSocketAddress(8080);
     Server serverControl;

@@ -88,12 +88,12 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
 
     public void ButtonPlayPauseEvent(View view) {
         if (!chronoState) {
-            btnPlayPause.setBackgroundResource(R.mipmap.play);
+            btnPlayPause.setBackgroundResource(R.drawable.ic_pauseboton2);
             speech.cancel();
             chronoState = true;
             isPausePressed = true;
         } else {
-            btnPlayPause.setBackgroundResource(R.mipmap.pause);
+            btnPlayPause.setBackgroundResource(R.drawable.ic_pauseboton1);
             startVoiceRecognitionCycle(speechIntent);
             chronoState = false;
         }
