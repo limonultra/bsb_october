@@ -126,9 +126,17 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     }
 
     public void ButtonStopEvent(View view) {
-        chrono.stop();
-        onBackPressed();
-        resetAudio();
+        if(isPausePressed) {
+            btnStop.setBackgroundResource(R.drawable.ic_stopboton2);
+            btnStop.setEnabled( true );
+            chrono.stop();
+            onBackPressed();
+            resetAudio();
+
+        }else{
+            btnStop.setEnabled( false );
+            btnStop.setBackgroundResource(R.drawable.ic_stopboton1);
+        }
     }
 
     public void ButtonPlayPauseEvent(View view) {
@@ -184,8 +192,6 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
     //Cancel speech recognition
     public void stopVoiceRecognition() {
-        if(isPausePressed) {
-            btnStop.setBackgroundResource(R.drawable.ic_stopboton2);
             if (speech != null) {
                 speech.stopListening();
                 speech.cancel();
@@ -193,10 +199,6 @@ public class Room extends AppCompatActivity implements RecognitionListener {
                 speech = null;
 
             }
-        }else{
-            btnStop.setEnabled( false );
-            btnStop.setBackgroundResource(R.drawable.ic_stopboton1);
-        }
     }
 
     //Mutes Beep Speech Sound
