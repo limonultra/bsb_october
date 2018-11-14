@@ -43,6 +43,7 @@
         android:background="@color/light"
         android:gravity="center"
         android:hint="Nombre del WIFI"
+        android:text="No se detecta red WiFi"
         android:textColor="@android:color/white"
         android:textSize="14sp"
         tools:ignore="HardcodedText" />

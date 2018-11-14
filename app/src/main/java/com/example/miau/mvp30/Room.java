@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -97,7 +98,10 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         Toolbar toolbar = findViewById(R.id.toolbar5);
         setSupportActionBar(toolbar);
 
+
+
         transcriptionDialog = new TranscriptionDFragment();
+        this.registerReceiver(mWifiStateChangedReceiver,new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION));
 
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
@@ -130,7 +134,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     }
 
     public void ButtonStopEvent(View view) {
-        if(isPausePressed) {
+        if(!isPausePressed) {
             btnStop.setBackgroundResource(R.drawable.ic_stopboton2);
             btnStop.setEnabled( true );
             chrono.stop();
@@ -152,6 +156,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             speech.cancel();
             serverControl.broadcast(speechRestart);
             chronoState = true;
+            isPausePressed = false;
             btnStop.setEnabled(true);
             countDownParrafo.cancel();
             serverControl.broadcast(speechSalto);
@@ -161,7 +166,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             chrono.setBase(SystemClock.elapsedRealtime() + stopTime);
             startVoiceRecognitionCycle(speechIntent);
             chronoState = false;
-            isPausePressed = false;
+            isPausePressed = true;
             listening = true;
             btnStop.setEnabled(false);
             countDownParrafo.start();
@@ -342,7 +347,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
                         try {
                             serverControl.stop();
                             ServerSingleton.setServerNull();
-                            transcriptionDialog.dismissAllowingStateLoss();
+                            //transcriptionDialog.dismissAllowingStateLoss();
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (InterruptedException e) {
@@ -431,12 +436,12 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         }
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater findMenuItems = getMenuInflater();
         findMenuItems.inflate(R.menu.menu_profesor, menu);
         return super.onCreateOptionsMenu(menu);
-    }
+    }*/
 
     public class CountDownParrafo extends CountDownTimer {
 

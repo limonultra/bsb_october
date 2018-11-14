@@ -36,57 +36,56 @@
 
     <Button
         android:id="@+id/btnPlayPause"
-        android:layout_width="72dp"
+        android:layout_width="66dp"
         android:layout_height="72dp"
-        android:layout_marginBottom="92dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="12dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/ic_pauseboton2"
         android:checked="false"
         android:gravity="center_vertical"
         android:onClick="ButtonPlayPauseEvent"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnStart"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editText" />
+        app:layout_constraintStart_toStartOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
 
     <Button
         android:id="@+id/btnStart"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_marginBottom="92dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/ic_playboton1"
         android:gravity="center"
         android:onClick="ButtonStartEvent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btnStop"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_marginBottom="92dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/ic_stopboton1"
         android:gravity="center_vertical"
         android:onClick="ButtonStopEvent"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/editText"
         app:layout_constraintHorizontal_bias="0.923"
-        app:layout_constraintStart_toEndOf="@+id/btnStart" />
+        app:layout_constraintStart_toEndOf="@+id/btnStart"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="377dp"
         android:layout_height="87dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -99,11 +98,9 @@
         android:singleLine="false"
         android:textColor="#666666"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/btnStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/transcription"
-        app:layout_constraintVertical_bias="0.076" />
+        app:layout_constraintTop_toBottomOf="@+id/transcription" />
 
 </android.support.constraint.ConstraintLayout>
