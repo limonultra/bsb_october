@@ -19,6 +19,7 @@
         <activity
             android:name=".Access"
             android:label="Acceso"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Menu"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <meta-data
@@ -28,6 +29,7 @@
         <activity
             android:name=".RoomCreate"
             android:label="Crear sala"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Menu"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <meta-data
@@ -58,13 +60,22 @@
             android:name=".SoloMode"
             android:label="SoloMode"
             android:parentActivityName=".Menu"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Menu" />
         </activity>
-        <activity android:name=".TutorialActivity"></activity>
-        <activity android:name=".Settings"></activity>
+        <activity
+            android:name=".TutorialActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".Settings"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>
