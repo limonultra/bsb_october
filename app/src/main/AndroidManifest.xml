@@ -27,7 +27,7 @@
         </activity>
         <activity
             android:name=".RoomCreate"
-            android:label="Inicio"
+            android:label="Crear sala"
             android:parentActivityName=".Menu"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <meta-data
@@ -46,7 +46,8 @@
         </activity>
         <activity
             android:name=".Menu"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

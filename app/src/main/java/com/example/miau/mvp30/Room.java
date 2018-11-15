@@ -139,7 +139,6 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             btnStop.setEnabled( true );
             chrono.stop();
             onBackPressed();
-            resetAudio();
 
         }else{
             btnStop.setEnabled( false );
@@ -157,6 +156,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             serverControl.broadcast(speechRestart);
             chronoState = true;
             isPausePressed = false;
+            btnStop.setBackgroundResource( R.drawable.ic_stopboton1 );
             btnStop.setEnabled(true);
             countDownParrafo.cancel();
             serverControl.broadcast(speechSalto);
@@ -165,6 +165,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             btnPlayPause.setBackgroundResource(R.drawable.ic_pauseboton1);
             chrono.setBase(SystemClock.elapsedRealtime() + stopTime);
             startVoiceRecognitionCycle(speechIntent);
+            btnStop.setBackgroundResource( R.drawable.ic_stop_off );
             chronoState = false;
             isPausePressed = true;
             listening = true;
@@ -343,6 +344,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
                         if(listening) {
                             serverControl.broadcast( endSpeech );
                             stopVoiceRecognition();
+                            resetAudio();
                         }
                         try {
                             serverControl.stop();
@@ -360,6 +362,8 @@ public class Room extends AppCompatActivity implements RecognitionListener {
                 }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                isPausePressed = true;
+                btnStop.setBackgroundResource( R.drawable.ic_stopboton1);
                 dialog.dismiss();
             }
         }).show();
@@ -436,12 +440,12 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         }
     }
 
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater findMenuItems = getMenuInflater();
         findMenuItems.inflate(R.menu.menu_profesor, menu);
         return super.onCreateOptionsMenu(menu);
-    }*/
+    }
 
     public class CountDownParrafo extends CountDownTimer {
 

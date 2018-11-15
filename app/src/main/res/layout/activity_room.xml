@@ -9,13 +9,19 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar5"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:background="#00b6c7"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorAccent"
+        android:minHeight="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Sesion"
+        app:titleTextColor="@android:color/white"
+        android:theme="@style/ToolbarTheme"
+        app:titleTextAppearance="@style/ToolbarTheme">
 
     </android.support.v7.widget.Toolbar>
 
@@ -125,17 +131,6 @@
             app:layout_constraintStart_toEndOf="@+id/imageView5"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="380dp"
-            android:layout_height="1dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginStart="1dp"
-            android:background="#666666"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
     <RelativeLayout
