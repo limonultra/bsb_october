@@ -1,10 +1,10 @@
-package com.example.miau.mvp30
+package com.example.miau.mvp30.utils
 
 import android.content.Context
 import android.content.SharedPreferences
 
 object AppPreferences {
-    private const val NAME = "Config"
+    private const val NAME = "config"
     private const val MODE = Context.MODE_PRIVATE
     private lateinit var preferences: SharedPreferences
 

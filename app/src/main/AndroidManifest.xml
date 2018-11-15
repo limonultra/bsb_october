@@ -5,9 +5,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -19,7 +21,6 @@
         <activity
             android:name=".Access"
             android:label="Acceso"
-            android:screenOrientation="portrait"
             android:parentActivityName=".Menu"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <meta-data
@@ -28,8 +29,7 @@
         </activity>
         <activity
             android:name=".RoomCreate"
-            android:label="Crear sala"
-            android:screenOrientation="portrait"
+            android:label="Inicio"
             android:parentActivityName=".Menu"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <meta-data

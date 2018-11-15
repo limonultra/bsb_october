@@ -102,7 +102,7 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
             chronoState = false;
             isPausePressed= true;
             btnStop.setEnabled(false);
-            btnStop.setBackgroundResource( R.drawable.ic_stop_off );
+            btnStop.setBackgroundResource(R.drawable.ic_stop_off);
         }
     }
 

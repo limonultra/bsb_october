@@ -1,6 +1,5 @@
 package com.example.miau.mvp30
 
-import android.app.Application
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.Uri
@@ -10,7 +9,7 @@ import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
-import android.widget.ImageView
+import com.example.miau.mvp30.utils.AppPreferences
 
 class Settings : AppCompatActivity() {
 
@@ -29,23 +28,22 @@ class Settings : AppCompatActivity() {
         val color_button: Button = findViewById(R.id.color_button) as Button
         color_button.setOnClickListener {
             // Handler code here.
-           // val intent = Intent(this, RoomCreate::class.java)
-           // startActivity(intent)
+//            val intent = Intent(this, RoomCreate::class.java)
+//            startActivity(intent)
         }
 
         val idiom_button: Button = findViewById(R.id.idiom_button) as Button
         idiom_button.setOnClickListener {
             // Handler code here.
-            //val intent = Intent(this, idiomaActivity::class.java)
-            //startActivity(intent)
+            val intent = Intent(this, IdiomaActivity::class.java)
+            startActivity(intent)
         }
 
         val privacity_button: Button= findViewById(R.id.privacity_button) as Button
         privacity_button.setOnClickListener {
             // Handler code here.
-            val intent = Intent(Intent.ACTION_VIEW,
-                    Uri.parse("https://www.talentumtelefonica.com/POL%C3%8DTICA%20DE%20PROTECCI%C3%93N%20DE%20DATOS.pdf"))
-            startActivity(intent)
+//            val intent = Intent(this, RoomCreate::class.java)
+//            startActivity(intent)
         }
 
         val facebook: ImageButton= findViewById(R.id.facebook) as ImageButton

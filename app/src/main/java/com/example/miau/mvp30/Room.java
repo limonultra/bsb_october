@@ -184,7 +184,8 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
     //Init speech recognizer
     public void startVoiceRecognitionCycle(Intent speechIntent) {
-        speechIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "es-ES");
+        android.content.SharedPreferences preferences = this.getSharedPreferences("config", MODE_PRIVATE);
+        speechIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, preferences.getString("idioma", "es_ES"));
         speechIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         speechIntent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
         getSpeechRecognizer().startListening(speechIntent);

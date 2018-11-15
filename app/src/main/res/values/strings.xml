@@ -20,10 +20,12 @@
     </array>
 
     <array name="idiomas">
-        <item>Español (ES)</item>
-        <item>Español (LAT)</item>
-        <item>Inglés</item>
-        <item>Francés</item>
-        <item>Alemán</item>
+        <item>es_ES</item>
+        <item>en_US</item>
+        <item>de_DE</item>
+        <item>fr_FR</item>
+        <item>pt_PT</item>
+        <item>es_MX</item>
     </array>
+
 </resources>
