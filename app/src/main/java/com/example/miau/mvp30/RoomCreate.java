@@ -1,29 +1,23 @@
 package com.example.miau.mvp30;
 
 import android.Manifest;
-
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
-
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-
 import android.text.format.Formatter;
 import android.util.Log;
-
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -137,7 +131,8 @@ public class RoomCreate extends AppCompatActivity {
         String ip = getIp();
         String[] ipNumbers = ip.split( "[.]" );
         if(ipNumbers.length > 3)
-            return codify( Integer.parseInt( ipNumbers[2] ) ) + codify( Integer.parseInt( ipNumbers[3] ) );
+            return codify(Integer.parseInt(ipNumbers[0])) + Integer.parseInt(ipNumbers[1])
+                    + Integer.parseInt(ipNumbers[2]) + codify(Integer.parseInt(ipNumbers[3]));
         return "Error";
     } // Returns HEX code from IP address
 

@@ -49,6 +49,8 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
     var info_trans = ""
     lateinit var toInt : String
     lateinit var toInt2 :String
+    lateinit var toInt3: String
+    lateinit var toInt4: String
     lateinit var wifi:String
     var trans=false
 
@@ -163,8 +165,10 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
 
         toInt = Long.parseLong(hex1, 16).toString()
         toInt2 = Long.parseLong(hex2, 16).toString()
+        toInt3 = Long.parseLong(hex2, 16).toString()
+        toInt4 = Long.parseLong(hex2, 16).toString()
 
-        SERVER_URL = "ws://192.168.$toInt.$toInt2:8080"
+        SERVER_URL = "ws://$toInt3.$toInt4.$toInt.$toInt2:8080"
         return SERVER_URL
 
     }
