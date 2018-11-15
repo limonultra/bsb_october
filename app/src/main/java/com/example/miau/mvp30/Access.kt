@@ -49,6 +49,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
     lateinit var toInt : String
     lateinit var toInt2 :String
     lateinit var wifi:String
+    var trans=false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
@@ -146,8 +147,10 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
 
     override fun onBackPressed() {
         super.onBackPressed()
-        if (open)
-                mclient.close()
+        if (open) {
+            trans = false
+            mclient.close()
+        }
 
     }
 
@@ -206,6 +209,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         override fun onOpen(handshakedata: ServerHandshake?) {
             subsFragment = SubsFragment()
             open = true
+            trans=true
             profPin.isClickable = false
             b2.isClickable = false
             runOnUiThread {
@@ -268,6 +272,17 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
 
         override fun onClose(code: Int, reason: String?, remote: Boolean) {
             open = false
+            runOnUiThread {
+                if(trans) {
+                    val builder = AlertDialog.Builder(this@Access)
+                    builder.setMessage("Sesion Finalizada")
+                    builder.setNegativeButton("Ok") { _, _ ->
+                        finish()
+                    }
+                    trans=false
+                    builder.show()
+                }
+            }
             Log.e("Close: ", "closed with exit code $code additional info: $reason")
 
         }
@@ -275,6 +290,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
 
         override fun onError(ex: Exception) {
             open = false
+            trans=false
             Log.e("Error: ", "an error occurred:$ex")
 
         }

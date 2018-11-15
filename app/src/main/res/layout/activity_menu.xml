@@ -9,16 +9,19 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar4"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorAccent"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="Inicio"
-        app:titleTextColor="@android:color/background_light" />
+        app:titleTextColor="@android:color/white"
+        android:theme="@style/ToolbarTheme"
+        app:titleTextAppearance="@style/ToolbarTheme" />
 
     <ImageView
         android:id="@+id/bprof"

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 
@@ -39,6 +40,7 @@ public class RoomCreate extends AppCompatActivity {
     public void onCreate(Bundle SavedInstanceState) {
         super.onCreate( SavedInstanceState );
         setContentView( R.layout.activity_room_create );
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         this.registerReceiver(mWifiStateChangedReceiver,new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION));
 

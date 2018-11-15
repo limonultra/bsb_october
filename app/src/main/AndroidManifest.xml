@@ -53,7 +53,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Settings" />
         <activity
             android:name=".SoloMode"
             android:label="SoloMode"
@@ -64,7 +63,7 @@
                 android:value=".Menu" />
         </activity>
         <activity android:name=".TutorialActivity"></activity>
-        <activity android:name=".SharedPreferences"></activity>
+        <activity android:name=".Settings"></activity>
     </application>
 
 </manifest>

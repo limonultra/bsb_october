@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
@@ -51,6 +52,7 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView(R.layout.solomode);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         transcription = findViewById( R.id.transcription );
         btnPlay = findViewById( R.id.btnStart );
