@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.net.ConnectivityManager
+import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.support.v4.app.DialogFragment
@@ -175,21 +176,27 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
     }
 
     private fun showMessage(isConnected: Boolean) {
-        val connManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
-        if (!isConnected || !mWifi.isConnected) {
-            deviceOnline.text = ""
-            wifiname.text = "No hay conexión WIFI"
-            profPin.setEnabled(false)
-            b2.isEnabled = false
-        } else {
-            deviceOnline.text = ""
-            wifiname.text = mWifi.extraInfo.replace("\"", "") //obtenemos nombre del wifi sin comillas
-            wifi= mWifi.extraInfo.replace("\"", "")
-            wifiname.visibility = View.VISIBLE
-            profPin.setEnabled(true)
-            b2.isEnabled = true
+        if (Build.VERSION.SDK_INT <=27) {
+            val connManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
+            if (!isConnected || !mWifi.isConnected) {
+                deviceOnline.text = ""
+                wifiname.text = "No hay conexión WIFI"
+                profPin.setEnabled(false)
+                b2.isEnabled = false
+            } else {
+                deviceOnline.text = ""
+                wifiname.text = mWifi.extraInfo.replace("\"", "") //obtenemos nombre del wifi sin comillas
+                wifi = mWifi.extraInfo.replace("\"", "")
+                wifiname.visibility = View.VISIBLE
+                profPin.setEnabled(true)
+                b2.isEnabled = true
+            }
         }
+        else
+            wifiname.text="detección del nombre del wifi en desarrollo para android 9"
+            wifiname.visibility = View.VISIBLE
+
 
 
     }
