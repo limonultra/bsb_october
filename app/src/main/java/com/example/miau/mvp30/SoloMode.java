@@ -90,22 +90,33 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
 
     public void ButtonPlayPauseEvent(View view) {
         if (!chronoState) {
-            btnPlayPause.setBackgroundResource(R.drawable.ic_pauseboton1);
+            btnPlayPause.setBackgroundResource(R.drawable.ic_pauseboton2);
             speech.cancel();
             chronoState = true;
             isPausePressed = true;
+            btnStop.setBackgroundResource( R.drawable.ic_stopboton1 );
+            btnStop.setEnabled(true);
         } else {
-            btnPlayPause.setBackgroundResource(R.drawable.ic_pauseboton2);
+            btnPlayPause.setBackgroundResource(R.drawable.ic_pauseboton1);
             startVoiceRecognitionCycle(speechIntent);
             chronoState = false;
+            isPausePressed= true;
+            btnStop.setEnabled(false);
+            btnStop.setBackgroundResource( R.drawable.ic_stop_off );
         }
     }
 
     public void ButtonStopEvent(View view) {
-        if(!isPausePressed){
-            onBackPressed();}
-            else{
-        resetAudio();}
+        if(!isPausePressed) {
+            btnStop.setBackgroundResource(R.drawable.ic_stopboton2);
+            btnStop.setEnabled( true );
+            onBackPressed();
+
+        }else{
+            btnStop.setEnabled( false );
+            btnStop.setBackgroundResource(R.drawable.ic_stopboton1);
+        }
+
     }
 
     //Reset to beginning
@@ -141,6 +152,7 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
                     public void onClick(DialogInterface dialog, int which) {
                         if(listening) {
                             stopVoiceRecognition();
+                            resetAudio();
                         }
                         finish();
                     }
@@ -148,6 +160,8 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
                 }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                isPausePressed = true;
+                btnStop.setBackgroundResource( R.drawable.ic_stopboton1 );
                 dialog.dismiss();
             }
         }).show();
