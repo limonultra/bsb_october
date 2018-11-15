@@ -178,9 +178,6 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
                 isPausePressed = true;
 
             }
-        }else{
-            btnStop.setEnabled( false );
-            btnStop.setBackgroundResource(R.mipmap.people );
         }
     }
 
