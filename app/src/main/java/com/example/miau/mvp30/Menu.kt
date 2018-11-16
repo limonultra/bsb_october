@@ -1,6 +1,9 @@
 package com.example.miau.mvp30
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -35,8 +38,8 @@ class Menu : AppCompatActivity() {
         val bprof: ImageView = findViewById(R.id.bprof) as ImageView
         bprof.setOnClickListener {
             // Handler code here.
-            val intent = Intent(this, RoomCreate::class.java)
-            startActivity(intent)
+            checkDoNotDisturb();
+
         }
 
         val bpup: ImageView = findViewById(R.id.bpup) as ImageView
@@ -58,6 +61,40 @@ class Menu : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+
+
+    @SuppressLint("NewApi")
+    private fun checkDoNotDisturb() {
+        val mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (mNotificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_NONE)
+                startActivityForResult(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0);
+            else
+                goToInstructor()
+
+        } else {
+            if (android.provider.Settings.Global.getInt(contentResolver, "zen_mode") != 0)
+                startActivityForResult(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0);
+            else
+                goToInstructor()
+        }
+    }
+
+    @SuppressLint("NewApi")
+    private fun deactivateDoNotDisturb() {
+        val mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (mNotificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_NONE) {
+                mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE)
+                goToInstructor()
+            }
+        } else {
+            if (android.provider.Settings.Global.getInt(contentResolver, "zen_mode") != 0) {
+                android.provider.Settings.Global.putInt(getContentResolver(), "zen_mode", 0)
+                goToInstructor()
+            }
+        }
     }
 
     fun checkInternetPermission() {
@@ -101,6 +138,21 @@ class Menu : AppCompatActivity() {
             intent.putExtra("First", true)
             startActivity(intent)
         }
+    }
 
+    fun goToInstructor() {
+        val intent = Intent(this, RoomCreate::class.java)
+        startActivity(intent)
+    }
+
+
+    @SuppressLint("NewApi")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 0) {
+            val mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            if (mNotificationManager.isNotificationPolicyAccessGranted)
+                deactivateDoNotDisturb()
+        }
     }
 }

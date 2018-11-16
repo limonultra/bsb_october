@@ -131,8 +131,7 @@ public class RoomCreate extends AppCompatActivity {
         String ip = getIp();
         String[] ipNumbers = ip.split( "[.]" );
         if(ipNumbers.length > 3)
-            return codify(Integer.parseInt(ipNumbers[0])) + Integer.parseInt(ipNumbers[1])
-                    + Integer.parseInt(ipNumbers[2]) + codify(Integer.parseInt(ipNumbers[3]));
+            return codify(Integer.parseInt(ipNumbers[2])) + codify(Integer.parseInt(ipNumbers[3]));
         return "Error";
     } // Returns HEX code from IP address
 

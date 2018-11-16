@@ -49,8 +49,6 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
     var info_trans = ""
     lateinit var toInt : String
     lateinit var toInt2 :String
-    lateinit var toInt3: String
-    lateinit var toInt4: String
     lateinit var wifi:String
     var trans=false
 
@@ -58,25 +56,17 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_access)
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         registerReceiver(ConnectivityReceiver(), //wifi
                 IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
-
         profPin.setFilters(arrayOf(InputFilter.LengthFilter(4), InputFilter.AllCaps()))
-
         profPin.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 b2.isEnabled = profPin.text.toString().length >= 4
             }
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
             }
-
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
         })
 //        if(ciegos_mode.isChecked) {
         b2.visibility = View.VISIBLE
@@ -86,7 +76,6 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
             if (profPin.text.toString().length == 4) {
                 isHex = true //para saber si nos han introducido texto hexadecimal
                 regex = "^[0-9a-fA-F]+$".toRegex() //expresion regular para comprobar que nos han introducido un hexadecimal
-
                 isHex = regex.matches(profPin.text.toString()) //averiguamos si el pin es hexadecimal
                 if (isHex) { // si hexadecimal=true
                     mclient = ChatClient(URI(getIP()), Draft_6455(), emptyMap(), 100000)
@@ -103,34 +92,32 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         }
         //  }
         //else {
-            profPin.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
-                if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
-                    if (profPin.text.toString().length == 4) {
-                        isHex = true //para saber si nos han introducido texto hexadecimal
-                        regex = "^[0-9a-fA-F]+$".toRegex() //expresion regular para comprobar que nos han introducido un hexadecimal
-                    }
-                    isHex = regex.matches(profPin.text.toString()) //averiguamos si el pin es hexadecimal
-                    if (isHex) { // si hexadecimal=true
-                        var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                        imm.hideSoftInputFromWindow(b2.getWindowToken(), 0)
-                        mclient = ChatClient(URI(getIP()), Draft_6455(), emptyMap(), 100000)
-                        profPin.setText("")
-                        mclient.connect()
-                        var count = Countdown()
-                        count.start()
-                        deviceOnline.visibility = View.VISIBLE
-                    } else { // si hexadecimal=false
-                        deviceOnline.setText("El PIN introducido es incorrecto")
-                        deviceOnline.visibility = View.VISIBLE
-                    }
-                    return@OnKeyListener true
+        profPin.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                if (profPin.text.toString().length == 4) {
+                    isHex = true //para saber si nos han introducido texto hexadecimal
+                    regex = "^[0-9a-fA-F]+$".toRegex() //expresion regular para comprobar que nos han introducido un hexadecimal
                 }
-                false
-            })
-       // }
+                isHex = regex.matches(profPin.text.toString()) //averiguamos si el pin es hexadecimal
+                if (isHex) { // si hexadecimal=true
+                    var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(b2.getWindowToken(), 0)
+                    mclient = ChatClient(URI(getIP()), Draft_6455(), emptyMap(), 100000)
+                    profPin.setText("")
+                    mclient.connect()
+                    var count = Countdown()
+                    count.start()
+                    deviceOnline.visibility = View.VISIBLE
+                } else { // si hexadecimal=false
+                    deviceOnline.setText("El PIN introducido es incorrecto")
+                    deviceOnline.visibility = View.VISIBLE
+                }
+                return@OnKeyListener true
+            }
+            false
+        })
+        // }
     }
-
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
@@ -147,38 +134,26 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         }
         return super.onOptionsItemSelected(item)
     }
-
     override fun onBackPressed() {
         super.onBackPressed()
         if (open) {
             trans = false
             mclient.close()
         }
-
     }
-
-
     fun getIP(): String {
         hex1 = profPin.text.substring(0, 2)
         hex2 = profPin.text.substring(2, 4)
         var SERVER_URL = ""
-
         toInt = Long.parseLong(hex1, 16).toString()
         toInt2 = Long.parseLong(hex2, 16).toString()
-        toInt3 = Long.parseLong(hex2, 16).toString()
-        toInt4 = Long.parseLong(hex2, 16).toString()
-
-        SERVER_URL = "ws://$toInt3.$toInt4.$toInt.$toInt2:8080"
+        SERVER_URL = "ws://192.168.$toInt.$toInt2:8080"
         return SERVER_URL
-
     }
-
-
     override fun onResume() {
         super.onResume()
         ConnectivityReceiver.connectivityReceiverListener = this
     }
-
     private fun showMessage(isConnected: Boolean) {
         if (Build.VERSION.SDK_INT <=27) {
             val connManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -199,24 +174,15 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         }
         else
             wifiname.text="detección del nombre del wifi en desarrollo para android 9"
-            wifiname.visibility = View.VISIBLE
-
-
-
+        wifiname.visibility = View.VISIBLE
     }
-
     override fun onNetworkConnectionChanged(isConnected: Boolean) {
         showMessage(isConnected)
     }
-
     inner class ChatClient(url: URI, draft: Draft, httpHeaders: Map<String, String>, Timeout: Int) : WebSocketClient(url, draft, httpHeaders, Timeout) {
-
-
-
         fun setURI(urin: URI) {
             this.uri = urin
         }
-
         override fun onOpen(handshakedata: ServerHandshake?) {
             subsFragment = SubsFragment()
             open = true
@@ -231,8 +197,6 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
             }
             Log.e("Open: ", "new connection opened")
         }
-
-
         override fun onMessage(message: String) {
             runOnUiThread {
                 //                var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -252,9 +216,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
                 subsFragment.escribirSubs(message, newtext)
             }
             Log.e("---------- Mensaje:", message)
-
         }
-
         override fun onMessage(message: ByteBuffer) {
             if (Arrays.toString(message.array()) == "[0, 0, 1, 1]") {
                 runOnUiThread {
@@ -265,7 +227,6 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
                         finish()
                     }
                     builder.show()
-
                 }
             } else if (Arrays.toString(message.array()) == "[1, 1, 0, 0]") {
                 newtext = oldtext
@@ -275,12 +236,8 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
                 Log.i("BYTES", "SALTO")
                 Log.i("CONTENT", oldtext)
             }
-
-
             Log.e("Bytes: ", onclose.toString())
         }
-
-
         override fun onClose(code: Int, reason: String?, remote: Boolean) {
             open = false
             runOnUiThread {
@@ -295,42 +252,28 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
                 }
             }
             Log.e("Close: ", "closed with exit code $code additional info: $reason")
-
         }
-
-
         override fun onError(ex: Exception) {
             open = false
             trans=false
             Log.e("Error: ", "an error occurred:$ex")
-
         }
-
-
     }
-
     class SubsFragment : DialogFragment() {
         private var rootView: View? = null
-
-
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
             rootView = inflater.inflate(R.layout.activity_transcription, container, false)
             return rootView
         }
-
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        //dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            //dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             return super.onCreateDialog(savedInstanceState)
         }
-
         override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
             menu!!.clear()
         }
-
         override fun onOptionsItemSelected(item: MenuItem?): Boolean {
             val id = item!!.itemId
-
             if (id == android.R.id.home) {
                 // handle close button click here
                 dismiss()
@@ -338,7 +281,6 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
             }
             return super.onOptionsItemSelected(item)
         }
-
         fun escribirSubs(message: String, newtext: String) {
             // if(ciegos_mode.isChecked)
             profText.text = Editable.Factory.getInstance().newEditable("$newtext $message")
@@ -348,21 +290,17 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
             //else
             // profText.text = Editable.Factory.getInstance().newEditable("$newtext $message")
         }
-
         fun appendSalto(message: String, newtext: String) {
             if (!profText.text.endsWith("\n") || profText.text.length > 0)
                 profText.text = Editable.Factory.getInstance().newEditable("$newtext $message")
         }
-
         companion object {
             private val TAG = "Access"
         }
     }
-
     inner class Countdown() : CountDownTimer(3000, 1000) {
         override fun onTick(p0: kotlin.Long) {
         }
-
         override fun onFinish() {
             if (!open)
                 deviceOnline.setText("No se encuentra conexión")
@@ -370,7 +308,5 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
                 //todo put buttons to not clickable
             }
         }
-
     }
-
 }

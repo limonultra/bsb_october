@@ -194,13 +194,13 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
     //Cancel speech recognition
     public void stopVoiceRecognition() {
-            if (speech != null) {
-                speech.stopListening();
-                speech.cancel();
-                speech.destroy();
-                speech = null;
+        if (speech != null) {
+            speech.stopListening();
+            speech.cancel();
+            speech.destroy();
+            speech = null;
 
-            }
+        }
     }
 
     //Mutes Beep Speech Sound
@@ -481,4 +481,3 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
 
 }
-

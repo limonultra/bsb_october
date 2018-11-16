@@ -90,7 +90,7 @@ public class Server extends WebSocketServer {
 
     public static void main( String[] args ) throws InterruptedException , IOException {
         WebSocketImpl.DEBUG = true;
-        int port = 8080; // 843 flash policy port
+        int port = 80; // 843 flash policy port
         try {
             port = Integer.parseInt( args[ 0 ] );
         } catch ( Exception ex ) {
