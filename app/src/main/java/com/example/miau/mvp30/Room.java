@@ -80,7 +80,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
     private TranscriptionDFragment transcriptionDialog;
 
-    InetSocketAddress inetSocketAddress = new InetSocketAddress(8080);
+    InetSocketAddress inetSocketAddress = new InetSocketAddress(80);
     Server serverControl;
 
     @Override
@@ -126,6 +126,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         btnPlayPause.setVisibility(View.VISIBLE);
         btnStop.setVisibility(View.VISIBLE);
         chrono.start();
+        btnStop.setBackgroundResource( R.drawable.ic_stop_off );
         chrono.setBase(SystemClock.elapsedRealtime() + stopTime);
         chronoState = false;
         startVoiceRecognitionCycle(speechIntent);
@@ -363,7 +364,6 @@ public class Room extends AppCompatActivity implements RecognitionListener {
                 }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                isPausePressed = true;
                 btnStop.setBackgroundResource( R.drawable.ic_stopboton1);
                 dialog.dismiss();
             }

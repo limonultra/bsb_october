@@ -1,10 +1,12 @@
 package com.example.miau.mvp30
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.net.ConnectivityManager
+import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -15,6 +17,7 @@ import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
+import android.text.format.Formatter
 import android.util.Log
 import android.view.*
 import android.view.Menu
@@ -147,13 +150,17 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         var SERVER_URL = ""
         toInt = Long.parseLong(hex1, 16).toString()
         toInt2 = Long.parseLong(hex2, 16).toString()
-        SERVER_URL = "ws://192.168.$toInt.$toInt2:8080"
+
+        val prefixIp = splitIp()
+
+        SERVER_URL = "ws://$prefixIp.$toInt.$toInt2:80"
         return SERVER_URL
     }
     override fun onResume() {
         super.onResume()
         ConnectivityReceiver.connectivityReceiverListener = this
     }
+
     private fun showMessage(isConnected: Boolean) {
         if (Build.VERSION.SDK_INT <=27) {
             val connManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -309,4 +316,21 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
             }
         }
     }
+     fun getIp(): String {
+        val wifiMgr = applicationContext.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        @SuppressLint("MissingPermission") val wifiInfo = wifiMgr!!.connectionInfo
+        val ip = wifiInfo.ipAddress
+        Log.d("DEBUG" , (ip).toString())
+        val ipAddress = Formatter.formatIpAddress(ip)
+        return ipAddress
+    }
+    fun splitIp(): String {
+        val ip = getIp()
+        val ipNumbers = ip.split("[.]".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+        if (ipNumbers.size < 3) {
+            return ipNumbers[0] + "." + ipNumbers[1]
+        }
+        return "Error"
+    }
+
 }

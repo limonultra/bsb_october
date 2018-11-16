@@ -81,28 +81,32 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
         muteAudio();
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         btnPlay.setVisibility(View.GONE);
+        btnStop.setBackgroundResource( R.drawable.ic_stop_off );
         btnPlayPause.setVisibility(View.VISIBLE);
         btnStop.setVisibility(View.VISIBLE);
         chronoState = false;
+
         startVoiceRecognitionCycle(speechIntent);
 
     }
 
     public void ButtonPlayPauseEvent(View view) {
         if (!chronoState) {
+            listening = false;
             btnPlayPause.setBackgroundResource(R.drawable.ic_pauseboton2);
             speech.cancel();
             chronoState = true;
-            isPausePressed = true;
+            isPausePressed = false;
             btnStop.setBackgroundResource( R.drawable.ic_stopboton1 );
             btnStop.setEnabled(true);
         } else {
             btnPlayPause.setBackgroundResource(R.drawable.ic_pauseboton1);
             startVoiceRecognitionCycle(speechIntent);
+            btnStop.setBackgroundResource( R.drawable.ic_stop_off );
             chronoState = false;
-            isPausePressed= true;
+            isPausePressed = true;
+            listening = true;
             btnStop.setEnabled(false);
-            btnStop.setBackgroundResource(R.drawable.ic_stop_off);
         }
     }
 
@@ -116,7 +120,6 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
             btnStop.setEnabled( false );
             btnStop.setBackgroundResource(R.drawable.ic_stopboton1);
         }
-
     }
 
     //Reset to beginning
@@ -160,7 +163,6 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
                 }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                isPausePressed = true;
                 btnStop.setBackgroundResource( R.drawable.ic_stopboton1 );
                 dialog.dismiss();
             }
