@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.miau.mvp30.Adapter.CustomAdapter;
+
+import static com.example.miau.mvp30.Adapter.CustomAdapter.getStringFromIdiom;
 
 public class IdiomaActivity extends AppCompatActivity {
 
@@ -28,10 +31,10 @@ public class IdiomaActivity extends AppCompatActivity {
         }
 
 
-        ArrayAdapter<String> idiomasAdapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, formatedIdiomas);
-        ListView listView = findViewById(R.id.list);
-        listView.setAdapter(idiomasAdapter);
+        final CustomAdapter customAdapter = new CustomAdapter(formatedIdiomas, this);
+        final ListView listView = findViewById(R.id.list);
+        listView.setAdapter(customAdapter);
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -40,36 +43,11 @@ public class IdiomaActivity extends AppCompatActivity {
                 String formatSelected = getStringFromIdiom(idiomas[position]);
                 preferences.edit().putString("idioma", selected).apply();
                 idiomaSeleccionado.setText(formatSelected);
+                customAdapter.notifyDataSetChanged();
             }
         });
 
     }
 
 
-    private String getStringFromIdiom(String idioma) {
-        String defIdioma = "";
-        switch (idioma) {
-            case "es_ES":
-                defIdioma = "Español";
-                break;
-            case "en_US":
-                defIdioma = "Inglés";
-                break;
-            case "de_DE":
-                defIdioma = "Alemán";
-                break;
-            case "fr_FR":
-                defIdioma = "Francés";
-                break;
-            case "pt_PT":
-                defIdioma = "Portugués";
-                break;
-            case "es_MX":
-                defIdioma = "Español (MX)";
-                break;
-            default:
-                break;
-        }
-        return defIdioma;
-    }
 }

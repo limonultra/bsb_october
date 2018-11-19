@@ -28,7 +28,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/statebar"
         android:layout_width="0dp"
-        android:layout_height="77dp"
+        android:layout_height="84dp"
         android:background="#ffffff"
         app:layout_constraintBottom_toTopOf="@+id/chronoRelative"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,21 +39,23 @@
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="26dp"
+            android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginStart="44dp"
             android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/textView11"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_nombredelawifi" />
+            app:srcCompat="@drawable/ic_wifi" />
 
         <ImageView
             android:id="@+id/imageView5"
             android:layout_width="25dp"
             android:layout_height="26dp"
-            android:layout_marginStart="124dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_codigos" />
 
@@ -61,11 +63,9 @@
             android:id="@+id/imageView6"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginEnd="44dp"
-            android:layout_marginStart="116dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView5"
+            app:layout_constraintStart_toEndOf="@+id/textView12"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_numerodeasistentess" />
 
@@ -73,35 +73,34 @@
             android:id="@+id/wifiName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
             android:text="TextView"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/pinName"
             app:layout_constraintEnd_toEndOf="@+id/imageView4"
-            app:layout_constraintHorizontal_bias="0.424"
             app:layout_constraintStart_toStartOf="@+id/imageView4"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+            app:layout_constraintTop_toTopOf="@+id/pinName" />
 
         <TextView
             android:id="@+id/pinName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="TextView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/imageView5"
-            app:layout_constraintHorizontal_bias="0.585"
-            app:layout_constraintStart_toStartOf="@+id/imageView5" />
+            app:layout_constraintStart_toStartOf="@+id/imageView5"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
         <TextView
             android:id="@+id/pupilNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
             android:text="0"
+            app:layout_constraintBottom_toBottomOf="@+id/pinName"
             app:layout_constraintEnd_toEndOf="@+id/imageView6"
-            app:layout_constraintHorizontal_bias="0.545"
             app:layout_constraintStart_toStartOf="@+id/imageView6"
-            app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+            app:layout_constraintTop_toTopOf="@+id/pinName" />
 
         <TextView
             android:id="@+id/textView11"
@@ -113,8 +112,9 @@
             android:layout_marginTop="8dp"
             android:background="#666666"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView5"
-            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.33"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -127,8 +127,9 @@
             android:layout_marginTop="8dp"
             android:background="#666666"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView6"
-            app:layout_constraintStart_toEndOf="@+id/imageView5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.66"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
