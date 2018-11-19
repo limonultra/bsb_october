@@ -71,6 +71,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     private TextView pinName;
     private TextView wifiName;
     private TextView pupilsNo;
+    private TextView playText;
+    private TextView pauseText;
+    private TextView stopText;
     private boolean listening = false;
 
     private Intent speechIntent;
@@ -106,8 +109,10 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
         pinName = findViewById(R.id.pinName);
-
         wifiName = findViewById(R.id.wifiName);
+        pauseText = findViewById( R.id.pauseText );
+        playText = findViewById( R.id.playText );
+        stopText = findViewById( R.id.stopText );
 
         saveCurrentAudio();
         Bundle bundle;
@@ -123,8 +128,11 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     public void ButtonStartEvent(View view) {
         muteAudio();
         btnPlay.setVisibility(View.GONE);
+        playText.setVisibility( View.GONE );
         btnPlayPause.setVisibility(View.VISIBLE);
+        pauseText.setVisibility( View.VISIBLE );
         btnStop.setVisibility(View.VISIBLE);
+        stopText.setVisibility( View.VISIBLE );
         chrono.start();
         btnStop.setBackgroundResource( R.drawable.ic_stop_off );
         chrono.setBase(SystemClock.elapsedRealtime() + stopTime);

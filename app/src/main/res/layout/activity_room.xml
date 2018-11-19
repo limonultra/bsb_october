@@ -159,53 +159,106 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="123dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chronoRelative"
         tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/btnPlayPause"
-            android:layout_width="88dp"
-            android:layout_height="88dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_width="66dp"
+            android:layout_height="66dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/ic_pauseboton1"
             android:checked="false"
             android:gravity="center_vertical"
             android:onClick="ButtonPlayPauseEvent"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            app:layout_constraintEnd_toStartOf="@+id/btnStart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btnStart"
-            android:layout_width="88dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_width="66dp"
+            android:layout_height="66dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/ic_playboton1"
-            android:gravity="center"
-            android:onClick="ButtonStartEvent" />
+            android:onClick="ButtonStartEvent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="159dp" />
 
         <Button
             android:id="@+id/btnStop"
-            android:layout_width="88dp"
-            android:layout_height="88dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_width="66dp"
+            android:layout_height="66dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/ic_stopboton1"
             android:gravity="center_vertical"
             android:onClick="ButtonStopEvent"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnStart"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/playText"
+            android:layout_width="52dp"
+            android:layout_height="21dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/open_regular"
+            android:text="Iniciar"
+            android:visibility="invisible"
+            android:textColor="#005466"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/btnStart"
+            app:layout_constraintStart_toStartOf="@+id/btnStart"
+            tools:layout_editor_absoluteY="92dp" />
+
+        <TextView
+            android:id="@+id/pauseText"
+            android:layout_width="wrap_content"
+            android:layout_height="23dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/open_regular"
+            android:text="Pausar"
+            android:visibility="invisible"
+            android:textColor="#005466"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/btnPlayPause"
+            app:layout_constraintStart_toStartOf="@+id/btnPlayPause"
+            tools:layout_editor_absoluteY="92dp" />
+
+        <TextView
+            android:id="@+id/stopText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/open_regular"
+            android:text="Detener"
+            android:visibility="invisible"
+            android:textColor="#005466"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/btnStop"
+            app:layout_constraintStart_toStartOf="@+id/btnStop"
+            tools:layout_editor_absoluteY="92dp" />
+
+    </android.support.constraint.ConstraintLayout>
 
 
 </android.support.constraint.ConstraintLayout>

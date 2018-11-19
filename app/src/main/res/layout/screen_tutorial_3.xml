@@ -19,8 +19,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="36dp"
+        android:fontFamily="@font/open_regular"
         android:onClick="saltar"
         android:text="Finalizar"
+        android:textColor="#00B6C7"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/indicador"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/indicador" />
@@ -29,11 +32,15 @@
         android:id="@+id/textView4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/open_regular"
         android:gravity="center_horizontal"
         android:text="En los tres roles existe una pantalla donde se transcribe audio a tiempo real"
+        android:textColor="#666666"
+        android:textSize="17sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_percent="0.7" />
 
@@ -68,9 +75,12 @@
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:fontFamily="@font/opensans_bold"
         android:text="TRANSCRIPCIÓN"
+        android:textColor="#005466"
+        android:textSize="17sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textStyle="bold" />
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

@@ -42,6 +42,9 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
     private Button btnPlay;
     private Button btnStop;
     private Button btnPlayPause;
+    private TextView playText;
+    private TextView pauseText;
+    private TextView stopText;
     private TextView transcription;
 
     private String newText ="";
@@ -58,6 +61,9 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
         btnPlay = findViewById( R.id.btnStart );
         btnPlayPause = findViewById( R.id.btnPlayPause );
         btnStop = findViewById( R.id.btnStop );
+        pauseText = findViewById( R.id.pauseText );
+        playText = findViewById( R.id.playText );
+        stopText = findViewById( R.id.stopText );
 
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
@@ -81,9 +87,12 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
         muteAudio();
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         btnPlay.setVisibility(View.GONE);
+        playText.setVisibility( View.GONE );
         btnStop.setBackgroundResource( R.drawable.ic_stop_off );
         btnPlayPause.setVisibility(View.VISIBLE);
+        pauseText.setVisibility( View.VISIBLE );
         btnStop.setVisibility(View.VISIBLE);
+        stopText.setVisibility( View.VISIBLE );
         chronoState = false;
 
         startVoiceRecognitionCycle(speechIntent);

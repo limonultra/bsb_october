@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:ignore="ExtraText">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -97,10 +98,55 @@
         android:selectAllOnFocus="false"
         android:singleLine="false"
         android:textColor="#666666"
+        android:textSize="12sp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/transcription" />
+
+    <TextView
+        android:id="@+id/playText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Iniciar"
+        android:textColor="#00b6c7"
+        app:layout_constraintEnd_toEndOf="@+id/btnStart"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="@+id/btnStart"
+        app:layout_constraintTop_toBottomOf="@+id/btnStart" />
+
+    <TextView
+        android:id="@+id/pauseText"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Pausar"
+        android:textColor="#00b6c7"
+        app:layout_constraintEnd_toEndOf="@+id/btnPlayPause"
+        app:layout_constraintStart_toStartOf="@+id/btnPlayPause"
+        app:layout_constraintTop_toBottomOf="@+id/btnPlayPause" />
+
+    <TextView
+        android:id="@+id/stopText"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/opensans_semibold"
+        android:text="Detener"
+        android:textColor="#00b6c7"
+        app:layout_constraintEnd_toEndOf="@+id/btnStop"
+        app:layout_constraintStart_toStartOf="@+id/btnStop"
+        app:layout_constraintTop_toBottomOf="@+id/btnStop" />"
+
 
 </android.support.constraint.ConstraintLayout>
