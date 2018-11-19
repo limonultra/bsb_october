@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,73 +10,114 @@
     android:fitsSystemWindows="true"
     tools:layout_editor_absoluteY="81dp">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar5"
-        android:layout_width="match_parent"
-        android:layout_height="53dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@color/colorAccent"
-        android:minHeight="?attr/actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="Crear Sala"
-        app:titleTextColor="@android:color/white"
-        android:theme="@style/ToolbarTheme"
-        app:titleTextAppearance="@style/ToolbarTheme">
-
-    </android.support.v7.widget.Toolbar>
-
     <TextView
         android:id="@+id/descripcion"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_alignParentStart="true"
+        android:layout_width="249dp"
+        android:layout_height="61dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="136dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/open_regular"
         android:gravity="center"
-        android:text="indique a los asistentes su red wifi y el siguiente codigo"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
+        android:text="Indique a los asistentes a que red WiFi esta conectado asi como el siguiente código"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#666666"
         android:textSize="14sp"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText"
+        tools:layout_editor_absoluteX="68dp" />
 
     <Button
         android:id="@+id/RoomStart"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_alignEnd="@+id/pinName"
-        android:layout_centerVertical="true"
-        android:background="@mipmap/rightarrow"
-        tools:ignore="HardcodedText" />
-
-    <TextView
-        android:id="@+id/wifiName"
-        android:layout_width="match_parent"
-        android:layout_height="68dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:background="@color/light"
-        android:gravity="center"
-        android:hint="Nombre del WIFI"
-        android:text="No se detecta red WiFi"
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
-        tools:ignore="HardcodedText" />
-
-    <TextView
-        android:id="@+id/pinName"
         android:layout_width="252dp"
         android:layout_height="37dp"
         android:layout_centerInParent="true"
+        android:layout_marginTop="16dp"
         android:background="@drawable/custom_button"
+        android:fontFamily="@font/opensans_semibold"
         android:gravity="center"
-        android:hint="Codigo"
+        android:text="Iniciar Sesión"
         android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView13"
+        app:layout_constraintStart_toStartOf="@+id/textView13"
+        app:layout_constraintTop_toBottomOf="@+id/textView13"
         tools:ignore="HardcodedText" />
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="109dp"
+        android:layout_height="17dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="60dp"
+        android:text="Sin conexión WiFi"
+        android:textAlignment="center"
+        android:textColor="#4d4d4d"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/descripcion"
+        app:layout_constraintStart_toStartOf="@+id/descripcion"
+        app:layout_constraintTop_toBottomOf="@+id/descripcion" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/opensans_semibold"
+        android:text="CODIGO"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView6"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/open_regular"
+        android:text="Idioma"
+        android:textAlignment="center"
+        android:textColor="#666666"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/RoomStart"
+        app:layout_constraintStart_toStartOf="@+id/RoomStart"
+        app:layout_constraintTop_toBottomOf="@+id/RoomStart" />
+
+    <TextView
+        android:id="@+id/ChangeWiFi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/open_regular"
+        android:text="@string/cambiar"
+        android:textAlignment="center"
+        android:textColor="#005466"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/descripcion"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        tools:layout_editor_absoluteY="181dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/changeIdiom2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/open_regular"
+        android:text="@string/cambiar"
+        android:textAlignment="center"
+        android:textColor="#005466"
+        android:textSize="10sp"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        tools:layout_editor_absoluteY="344dp"
+        tools:ignore="MissingConstraints" />
+
+
+</android.support.constraint.ConstraintLayout>
