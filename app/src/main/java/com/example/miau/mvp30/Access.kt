@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.net.ConnectivityManager
+import android.net.wifi.SupplicantState
 import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
@@ -178,9 +179,14 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
                 profPin.setEnabled(true)
                 b2.isEnabled = true
             }
+        } else {
+            val wifiManager = getApplicationContext().getSystemService(Context.WIFI_SERVICE) as WifiManager
+            val wifiInfo = wifiManager.connectionInfo
+
+            if (wifiInfo.getSupplicantState() == SupplicantState.COMPLETED) {
+                wifiname.text = wifiInfo.getSSID().replace("\"", "");
+            }
         }
-        else
-            wifiname.text="detección del nombre del wifi en desarrollo para android 9"
         wifiname.visibility = View.VISIBLE
     }
     override fun onNetworkConnectionChanged(isConnected: Boolean) {

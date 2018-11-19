@@ -68,15 +68,22 @@ class Menu : AppCompatActivity() {
     private fun checkDoNotDisturb() {
         val mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (mNotificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_NONE)
-                startActivityForResult(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0);
-            else
+            if (mNotificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_ALL) {
+                if (mNotificationManager.isNotificationPolicyAccessGranted)
+                    deactivateDoNotDisturb()
+                else
+
+                    startActivityForResult(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0)
+            } else
                 goToInstructor()
 
         } else {
-            if (android.provider.Settings.Global.getInt(contentResolver, "zen_mode") != 0)
-                startActivityForResult(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0);
-            else
+            if (android.provider.Settings.Global.getInt(contentResolver, "zen_mode") != 0) {
+                if (mNotificationManager.isNotificationPolicyAccessGranted)
+                    deactivateDoNotDisturb()
+                else
+                    startActivityForResult(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0)
+            } else
                 goToInstructor()
         }
     }

@@ -93,7 +93,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         btnStop = findViewById(R.id.btnStop);
         btnPlayPause = findViewById(R.id.btnPlayPause);
         chrono = findViewById(R.id.chronometer);
-        countDownParrafo = new CountDownParrafo(4000, 2000);
+        countDownParrafo = new CountDownParrafo(3000, 1500);
 
         Toolbar toolbar = findViewById(R.id.toolbar5);
         setSupportActionBar(toolbar);
