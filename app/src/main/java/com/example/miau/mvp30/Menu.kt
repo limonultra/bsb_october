@@ -85,13 +85,13 @@ class Menu : AppCompatActivity() {
     private fun deactivateDoNotDisturb() {
         val mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (mNotificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_NONE) {
-                mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE)
+            if (mNotificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_ALL) {
+                mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
                 goToInstructor()
             }
         } else {
             if (android.provider.Settings.Global.getInt(contentResolver, "zen_mode") != 0) {
-                android.provider.Settings.Global.putInt(getContentResolver(), "zen_mode", 0)
+                android.provider.Settings.Global.putInt(contentResolver, "zen_mode", 0)
                 goToInstructor()
             }
         }
