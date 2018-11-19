@@ -346,7 +346,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     public void onBackPressed() {
         new AlertDialog.Builder(Room.this).
                 setTitle("Cerrar sesión").
-                setMessage("¿Desea volver a la pantalla de creacion de sala?").
+                setMessage("¿Desea volver al menú principal?").
                 setCancelable(false).
                 setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
@@ -354,6 +354,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
                         if(listening) {
                             serverControl.broadcast( endSpeech );
                             stopVoiceRecognition();
+                            serverControl.broadcast( endSpeech );
                             resetAudio();
                         }
                         try {
