@@ -91,6 +91,19 @@ public class RoomCreate extends AppCompatActivity {
         }
     };
 
+    private void updateUI(boolean isConnected) {
+
+        if(!isConnected) {
+            WIFI.setText( "No estás conectado" );
+            PIN.setText( "0000" );
+            btnCreate.setEnabled( false );
+        } else {
+            WIFI.setText( getWIFIName() );
+            btnCreate.setEnabled( true );
+            PIN.setText( getHex() );
+        }
+    }
+
     @Override
     protected
     void onStart() {
@@ -150,20 +163,6 @@ public class RoomCreate extends AppCompatActivity {
 
         return wifiFinalName;
     } // Get WiFi SSID
-
-
-    private void updateUI(boolean isConnected) {
-
-        if(!isConnected) {
-            WIFI.setText( "No estás conectado" );
-            PIN.setText( "0000" );
-            btnCreate.setEnabled( false );
-        } else {
-            WIFI.setText( getWIFIName() );
-            btnCreate.setEnabled( true );
-            PIN.setText( getHex() );
-        }
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

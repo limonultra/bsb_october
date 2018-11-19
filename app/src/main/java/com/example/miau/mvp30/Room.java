@@ -80,7 +80,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
     private TranscriptionDFragment transcriptionDialog;
 
-    InetSocketAddress inetSocketAddress = new InetSocketAddress(80);
+    InetSocketAddress inetSocketAddress = new InetSocketAddress(8080);
     Server serverControl;
 
     @Override
@@ -476,8 +476,4 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             startVoiceRecognitionCycle(speechIntent);
         }
     }
-
-
-
-
 }

@@ -154,7 +154,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
 
         val prefixIp = splitIp()
 
-        SERVER_URL = "ws://$prefixIp.$toInt.$toInt2:80"
+        SERVER_URL = "ws://$prefixIp.$toInt.$toInt2:8080"
         return SERVER_URL
     }
     override fun onResume() {
@@ -333,10 +333,8 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
     fun splitIp(): String {
         val ip = getIp()
         val ipNumbers = ip.split("[.]".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-        if (ipNumbers.size < 3) {
-            return ipNumbers[0] + "." + ipNumbers[1]
-        }
-        return "Error"
+
+        return ipNumbers[0] + "." + ipNumbers[1]
     }
 
 }
