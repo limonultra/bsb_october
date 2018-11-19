@@ -109,6 +109,7 @@
         android:fontFamily="@font/open_regular"
         android:text="Instructor"
         android:textColor="#005466"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/bprof"
         app:layout_constraintStart_toStartOf="@+id/bprof"
         app:layout_constraintTop_toBottomOf="@+id/bprof" />

@@ -4,45 +4,126 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:layout_editor_absoluteY="81dp"
     android:background="@android:color/white"
     android:keyboardNavigationCluster="false"
-    android:windowSoftInputMode="stateHidden|adjustResize">
+    android:windowSoftInputMode="stateHidden|adjustResize"
+    tools:layout_editor_absoluteY="81dp">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorAccent"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Transcripción"
+        app:titleTextColor="@android:color/white"
+        android:theme="@style/ToolbarTheme"
+        app:titleTextAppearance="@style/ToolbarTheme" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView4"
+        android:layout_width="0dp"
+        android:layout_height="72dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginStart="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/separador"
+                android:layout_width="1dp"
+                android:layout_height="44dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="#666666"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/wifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="80dp"
+                android:layout_marginStart="76dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/separador"
+                app:layout_constraintEnd_toStartOf="@+id/separador"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/separador"
+                app:srcCompat="@drawable/ic_nombredelawifi" />
+
+            <ImageView
+                android:id="@+id/code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="76dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/separador"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/separador"
+                app:layout_constraintTop_toTopOf="@+id/separador"
+                app:layout_constraintVertical_bias="0.666"
+                app:srcCompat="@drawable/ic_codigos" />
+
+            <TextView
+                android:id="@+id/wifi_text"
+                android:layout_width="80dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="8dp"
+                android:text=""
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@+id/wifi"
+                app:layout_constraintHorizontal_bias="0.562"
+                app:layout_constraintStart_toStartOf="@+id/wifi"
+                app:layout_constraintTop_toBottomOf="@+id/wifi" />
+
+            <TextView
+                android:id="@+id/code_text"
+                android:layout_width="80dp"
+                android:layout_height="19dp"
+                android:text=""
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@+id/code"
+                app:layout_constraintHorizontal_bias="0.491"
+                app:layout_constraintStart_toStartOf="@+id/code"
+                app:layout_constraintTop_toBottomOf="@+id/code" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
 
     <TextView
         android:id="@+id/profText"
-        android:layout_width="387dp"
-        android:layout_height="510dp"
+        android:layout_width="373dp"
+        android:layout_height="443dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="8dp"
         android:fontFamily="@font/open_regular"
-        android:gravity="top"
+        android:gravity="start"
         android:keepScreenOn="true"
         android:keyboardNavigationCluster="false"
         android:padding="12dp"
         android:text="Recibiendo datos..."
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAlignment="textStart"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar3"
-        android:layout_width="match_parent"
-        android:layout_height="63dp"
-        android:background="@color/colorAccent"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="Transcripción"
-        android:elevation="@dimen/cardview_compat_inset_shadow"
-        app:titleTextColor="@color/background" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView4" />
 
 </android.support.constraint.ConstraintLayout>

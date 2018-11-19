@@ -28,8 +28,7 @@ class Settings : AppCompatActivity() {
         val color_button: Button = findViewById(R.id.color_button) as Button
         color_button.setOnClickListener {
             // Handler code here.
-//            val intent = Intent(this, RoomCreate::class.java)
-//            startActivity(intent)
+            setContentView(R.layout.activity_transcription)
         }
 
         val idiom_button: Button = findViewById(R.id.idiom_button) as Button
