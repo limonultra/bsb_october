@@ -98,7 +98,11 @@ public class RoomCreate extends AppCompatActivity {
             PIN.setText( "0000" );
             btnCreate.setEnabled( false );
         } else {
-            WIFI.setText( getWIFIName() );
+            String wifiName = getWIFIName();
+            if (wifiName.contains("unknown"))
+                updateUI(isConnected);
+            else
+                WIFI.setText(wifiName);
             btnCreate.setEnabled( true );
             PIN.setText( getHex() );
         }
@@ -157,9 +161,6 @@ public class RoomCreate extends AppCompatActivity {
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         String[] wifiName = wifiInfo.toString().split(",");
         String wifiFinalName = wifiName[0].replace("SSID: "," ");
-        wifiName[1].replace( wifiName[0]," " );
-
-        String s = wifiInfo.getSSID();
 
         return wifiFinalName;
     } // Get WiFi SSID
