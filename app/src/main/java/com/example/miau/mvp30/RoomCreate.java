@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
@@ -23,14 +24,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import static com.example.miau.mvp30.Adapter.CustomAdapter.getStringFromIdiom;
+
 
 public class RoomCreate extends AppCompatActivity {
 
     private TextView WIFI;
     private  Button btnCreate;
     private  TextView PIN;
-    private TextView changeWiFi;
-    private TextView changeIdiom;
+    private TextView idiom;
 
 
     @Override
@@ -44,12 +46,15 @@ public class RoomCreate extends AppCompatActivity {
         btnCreate = findViewById( R.id.RoomStart );
         PIN = findViewById( R.id.pinName );
         WIFI = findViewById(R.id.wifiName);
-        changeIdiom = findViewById( R.id.changeIdiom );
-        changeWiFi = findViewById( R.id.changeWiFi );
+        idiom = findViewById( R.id.idiomText );
 
-        String[] tempPerms = {Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.ACCESS_NETWORK_STATE};
-
+        String[] tempPerms = {Manifest.permission.RECORD_AUDIO};
         hasPermissions( this,tempPerms );
+
+        SharedPreferences sharedPref =  this.getSharedPreferences( "config",MODE_PRIVATE );
+
+        String idiomPref = getStringFromIdiom( sharedPref.getString( "idioma", "" ) );
+        idiom.setText( idiomPref );
 
         WIFI.setText( getWIFIName() );
 

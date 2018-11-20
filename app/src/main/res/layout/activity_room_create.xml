@@ -64,101 +64,94 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="230dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="8dp"
-        android:orientation="horizontal"
+    <TextView
+        android:id="@+id/idiomText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/open_regular"
         android:gravity="center"
-        app:layout_constraintEnd_toEndOf="@+id/RoomStart"
-        app:layout_constraintStart_toStartOf="@+id/RoomStart"
-        app:layout_constraintTop_toBottomOf="@+id/RoomStart">
+        android:text="Idioma"
+        android:textAlignment="center"
+        android:textColor="#666666"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/textView13"
+        app:layout_constraintTop_toBottomOf="@+id/RoomStart" />
 
-        <TextView
-            android:id="@+id/idiomText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/open_regular"
-            android:gravity="center"
-            android:text="Idioma"
-            android:textAlignment="center"
-            android:textColor="#666666"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@+id/changeIdiom"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/RoomStart"
-            app:layout_constraintTop_toBottomOf="@+id/RoomStart" />
+    <TextView
+        android:id="@+id/changeIdiom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:fontFamily="@font/open_regular"
+        android:gravity="center"
+        android:onClick="setChangeIdiom"
+        android:text="@string/cambiar"
+        android:textColor="#005466"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/textView13"
+        app:layout_constraintTop_toBottomOf="@+id/RoomStart"
+        tools:ignore="MissingConstraints" />
 
-        <TextView
-            android:id="@+id/changeIdiom"
-            android:layout_width="67dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/open_regular"
-            android:gravity="center"
-            android:text="@string/cambiar"
-            android:clickable="true"
-            android:onClick="setChangeIdiom"
-            android:textColor="#005466"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@+id/RoomStart"
-            app:layout_constraintStart_toEndOf="@+id/idiomText"
-            app:layout_constraintTop_toBottomOf="@+id/RoomStart"
-            tools:ignore="MissingConstraints" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/wifiName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/open_regular"
+        android:gravity="center"
+        android:text="Sin conexión"
+        android:textColor="#4d4d4d"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/descripcion" />
 
-    <LinearLayout
-        android:layout_width="261dp"
-        android:layout_height="44dp"
+    <TextView
+        android:id="@+id/changeWiFi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:fontFamily="@font/open_regular"
+        android:gravity="center"
+        android:onClick="setChangeWiFi"
+        android:text="@string/cambiar"
+        android:textColor="#005466"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/descripcion"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/descripcion"
-        app:layout_constraintHorizontal_bias="0.928"
-        app:layout_constraintStart_toStartOf="@+id/descripcion"
-        app:layout_constraintTop_toBottomOf="@+id/descripcion">
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descripcion" />
 
-        <TextView
-            android:id="@+id/wifiName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="Sin conexión"
-            android:textColor="#4d4d4d"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@+id/changeWiFi"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/descripcion"
-            app:layout_constraintTop_toBottomOf="@+id/descripcion" />
-
-        <TextView
-            android:id="@+id/changeWiFi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:clickable="true"
-            android:fontFamily="@font/open_regular"
-            android:gravity="center"
-            android:onClick="setChangeWiFi"
-            android:text="@string/cambiar"
-            android:textAlignment="center"
-            android:textColor="#005466"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@+id/descripcion"
-            app:layout_constraintStart_toEndOf="@+id/wifiName"
-            app:layout_constraintTop_toBottomOf="@+id/descripcion"
-            tools:ignore="MissingConstraints" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RoomStart" />
 
 </android.support.constraint.ConstraintLayout>

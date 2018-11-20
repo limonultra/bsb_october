@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -30,6 +31,7 @@ import android.widget.Chronometer;
 import android.widget.TextView;
 
 import com.example.miau.mvp30.Fragment.TranscriptionDFragment;
+import static com.example.miau.mvp30.Adapter.CustomAdapter.getStringFromIdiom;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -74,6 +76,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
     private TextView playText;
     private TextView pauseText;
     private TextView stopText;
+    private TextView idiom;
     private boolean listening = false;
 
     private Intent speechIntent;
@@ -96,6 +99,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         btnStop = findViewById(R.id.btnStop);
         btnPlayPause = findViewById(R.id.btnPlayPause);
         chrono = findViewById(R.id.chronometer);
+        idiom = findViewById( R.id.idiom );
         countDownParrafo = new CountDownParrafo(3000, 1500);
 
         Toolbar toolbar = findViewById(R.id.toolbar5);
@@ -103,9 +107,12 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
         this.registerReceiver(mWifiStateChangedReceiver, new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION));
 
-
         transcriptionDialog = new TranscriptionDFragment();
 
+        SharedPreferences sharedPref =  this.getSharedPreferences( "config",MODE_PRIVATE );
+
+        String idiomPref = getStringFromIdiom( sharedPref.getString( "idioma", "" ) );
+        idiom.setText( "Reconocimiento de voz: " + idiomPref );
 
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
@@ -138,6 +145,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         btnStop.setBackgroundResource( R.drawable.ic_stop_off );
         chrono.setBase(SystemClock.elapsedRealtime() + stopTime);
         chronoState = false;
+        btnStop.setEnabled(false);
         startVoiceRecognitionCycle(speechIntent);
         countDownParrafo.start();
 

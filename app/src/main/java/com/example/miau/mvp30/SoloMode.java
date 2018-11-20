@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
@@ -13,13 +14,13 @@ import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import static com.example.miau.mvp30.Adapter.CustomAdapter.getStringFromIdiom;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -51,9 +52,9 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
     private TextView pauseText;
     private TextView stopText;
     private TextView transcription;
+    private TextView idiom;
     private EditText editableText;
-    private Button supressbtn;
-    private Button supressbtn2;
+
 
     private String newText ="";
     private String oldText="";
@@ -73,10 +74,15 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
         playText = findViewById( R.id.playText );
         stopText = findViewById( R.id.stopText );
         editableText = findViewById( R.id.editableText );
-        supressbtn = findViewById( R.id.supressBtn );
-        supressbtn2 = findViewById( R.id.supressBtn2 );
+        idiom = findViewById( R.id.idiom );
 
         String[] tempPerms = { Manifest.permission.ACCESS_NETWORK_STATE };
+
+        SharedPreferences sharedPref =  this.getSharedPreferences( "config",MODE_PRIVATE );
+
+        String idiomPref = getStringFromIdiom( sharedPref.getString( "idioma", "" ) );
+        idiom.setText( "Reconocimiento de voz: " + idiomPref );
+
 
         hasPermissions(this, tempPerms );
 
@@ -113,6 +119,7 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
         btnPlayPause.setVisibility(View.VISIBLE);
         pauseText.setVisibility( View.VISIBLE );
         btnStop.setVisibility(View.VISIBLE);
+        btnStop.setEnabled(false);
         stopText.setVisibility( View.VISIBLE );
         chronoState = false;
 
