@@ -38,7 +38,7 @@ class Menu : AppCompatActivity() {
         val bprof: ImageView = findViewById(R.id.bprof) as ImageView
         bprof.setOnClickListener {
             // Handler code here.
-            checkDoNotDisturb();
+            checkDoNotDisturb(0);
 
         }
 
@@ -51,8 +51,7 @@ class Menu : AppCompatActivity() {
 
         val bsm = findViewById(R.id.bsm) as ImageView
         bsm.setOnClickListener {
-            val intent = Intent(this, SoloMode::class.java)
-            startActivity(intent)
+            checkDoNotDisturb(1);
         }
 
         val info = findViewById(R.id.info) as ImageView
@@ -65,43 +64,51 @@ class Menu : AppCompatActivity() {
 
 
     @SuppressLint("NewApi")
-    private fun checkDoNotDisturb() {
+    private fun checkDoNotDisturb(requestCode: Int) {
         val mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (mNotificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_ALL) {
                 if (mNotificationManager.isNotificationPolicyAccessGranted)
-                    deactivateDoNotDisturb()
+                    deactivateDoNotDisturb(requestCode)
                 else
 
-                    startActivityForResult(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0)
+                    startActivityForResult(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), requestCode)
             } else
-                goToInstructor()
+                goNextScreen(requestCode)
 
         } else {
             if (android.provider.Settings.Global.getInt(contentResolver, "zen_mode") != 0) {
                 if (mNotificationManager.isNotificationPolicyAccessGranted)
-                    deactivateDoNotDisturb()
+                    deactivateDoNotDisturb(requestCode)
                 else
-                    startActivityForResult(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0)
+                    startActivityForResult(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), requestCode)
             } else
-                goToInstructor()
+                goNextScreen(requestCode)
         }
     }
 
     @SuppressLint("NewApi")
-    private fun deactivateDoNotDisturb() {
+    private fun deactivateDoNotDisturb(requestCode: Int) {
         val mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (mNotificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_ALL) {
                 mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
-                goToInstructor()
+                goNextScreen(requestCode)
             }
         } else {
             if (android.provider.Settings.Global.getInt(contentResolver, "zen_mode") != 0) {
                 android.provider.Settings.Global.putInt(contentResolver, "zen_mode", 0)
-                goToInstructor()
+                goNextScreen(requestCode)
             }
         }
+    }
+
+    private fun goNextScreen(requestCode: Int) {
+        if (requestCode == 0)
+            goToInstructor()
+        else
+            goToSoloMode()
+
     }
 
     fun checkInternetPermission() {
@@ -152,6 +159,11 @@ class Menu : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun goToSoloMode() {
+        val intent = Intent(this, SoloMode::class.java)
+        startActivity(intent)
+    }
+
 
     @SuppressLint("NewApi")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -159,7 +171,7 @@ class Menu : AppCompatActivity() {
         if (requestCode == 0) {
             val mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             if (mNotificationManager.isNotificationPolicyAccessGranted)
-                deactivateDoNotDisturb()
+                deactivateDoNotDisturb(requestCode)
         }
     }
 }
