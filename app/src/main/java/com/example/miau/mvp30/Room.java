@@ -434,8 +434,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
                     setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent backToCreateRoom = new Intent(Room.this, RoomCreate.class);
-                            startActivity(backToCreateRoom);
+                            finish();
                         }
                     }).show();
 
