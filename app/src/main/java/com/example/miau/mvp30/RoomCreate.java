@@ -83,6 +83,15 @@ public class RoomCreate extends AppCompatActivity {
                     updateUI(true);
                     break;
                 case WifiManager.WIFI_STATE_ENABLING:
+                    String wifi = getWIFIName();
+                    while (wifi.contains("unknown")) {
+                        wifi = getWIFIName();
+                    }
+                    String ip = getHex();
+                    while (ip.equals("0000")) {
+                        ip = getHex();
+                    }
+                    updateUI(true);
                     break;
                 case WifiManager.WIFI_STATE_UNKNOWN:
                     break;
@@ -94,13 +103,18 @@ public class RoomCreate extends AppCompatActivity {
     private void updateUI(boolean isConnected) {
 
         if(!isConnected) {
-            WIFI.setText( "No estás conectado" );
+            WIFI.setText("No hay conexión WiFi");
             PIN.setText( "0000" );
             btnCreate.setEnabled( false );
         } else {
             String wifiName = getWIFIName();
-            if (wifiName.contains("unknown"))
-                updateUI(isConnected);
+            if (wifiName.contains("unknown")) {
+                wifiName = getWIFIName();
+                if (wifiName.contains("unknown"))
+                    WIFI.setText("No hay conexión WiFi");
+                else
+                    WIFI.setText(wifiName);
+            }
             else
                 WIFI.setText(wifiName);
             btnCreate.setEnabled( true );
