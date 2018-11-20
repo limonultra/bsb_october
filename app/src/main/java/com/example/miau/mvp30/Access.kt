@@ -69,10 +69,10 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         registerReceiver(connectivityReceiver, //wifi
                 IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
 
+
         val cambiar_wifi: Button = findViewById(R.id.cambiar_wifi) as Button
         cambiar_wifi.setOnClickListener {
-            //val intent = Intent(Intent.ACTION_VIEW, (Settings.ACTION_WIFI_SETTINGS))
-           // startActivity(intent)
+            startActivity(Intent(WifiManager.ACTION_PICK_WIFI_NETWORK))
         }
 
         profPin.setFilters(arrayOf(InputFilter.LengthFilter(4), InputFilter.AllCaps()))
@@ -234,8 +234,6 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         }
         override fun onMessage(message: String) {
             runOnUiThread {
-                wifi_text.text=wifiname.text
-                code_text.text=profPin.text
                 //                var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 //                profText.setOnTouchListener { v, m ->
 //                    val imm = v.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -257,6 +255,8 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         override fun onMessage(message: ByteBuffer) {
             if (Arrays.toString(message.array()) == "[0, 0, 1, 1]") {
                 runOnUiThread {
+                    wifi_text.text=wifiname.text
+                    code_text.text=profPin.text
                     onrepeat = true
                     val builder = AlertDialog.Builder(this@Access)
                     builder.setMessage("Sesion Finalizada por su instructor")
