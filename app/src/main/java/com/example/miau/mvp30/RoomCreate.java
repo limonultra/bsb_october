@@ -29,6 +29,8 @@ public class RoomCreate extends AppCompatActivity {
     private TextView WIFI;
     private  Button btnCreate;
     private  TextView PIN;
+    private TextView changeWiFi;
+    private TextView changeIdiom;
 
 
     @Override
@@ -42,9 +44,12 @@ public class RoomCreate extends AppCompatActivity {
         btnCreate = findViewById( R.id.RoomStart );
         PIN = findViewById( R.id.pinName );
         WIFI = findViewById(R.id.wifiName);
+        changeIdiom = findViewById( R.id.changeIdiom );
+        changeWiFi = findViewById( R.id.changeWiFi );
 
-        checkAudioPermission();
-        checkNetWorkPermission();
+        String[] tempPerms = {Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.ACCESS_NETWORK_STATE};
+
+        hasPermissions( this,tempPerms );
 
         WIFI.setText( getWIFIName() );
 
@@ -73,6 +78,13 @@ public class RoomCreate extends AppCompatActivity {
     }
 
 
+    public void setChangeIdiom(View view){
+        Intent toSettings = new Intent( this,Settings.class );
+        startActivity( toSettings );
+    }
+    public void setChangeWiFi(View view){
+        startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+    }
 
     private BroadcastReceiver mWifiStateChangedReceiver = new BroadcastReceiver() {
 
@@ -147,20 +159,16 @@ public class RoomCreate extends AppCompatActivity {
             updateUI( false );
     }
 
-    public void checkAudioPermission() {
-        if (ContextCompat.checkSelfPermission( this, Manifest.permission.RECORD_AUDIO )
-                != PackageManager.PERMISSION_GRANTED) {
-            String[] tempPerms = {Manifest.permission.RECORD_AUDIO};
-            ActivityCompat.requestPermissions( this, tempPerms, 1 );
-        }
-    }
 
-    public void checkNetWorkPermission(){
-        if (ContextCompat.checkSelfPermission( this, Manifest.permission.ACCESS_NETWORK_STATE )
-                != PackageManager.PERMISSION_GRANTED) {
-            String[] tempPerms = {Manifest.permission.ACCESS_NETWORK_STATE};
-            ActivityCompat.requestPermissions( this, tempPerms, 2 );
+    private boolean hasPermissions (Context ctx, String[] permissions) {
+        if(ctx != null && permissions != null) {
+            for(String permission: permissions) {
+                if(ActivityCompat.checkSelfPermission(ctx, permission) != PackageManager.PERMISSION_GRANTED)
+                    ActivityCompat.requestPermissions( this, permissions, 2 );
+                return false;
+            }
         }
+        return true;
     }
 
     public  String getIp(){
@@ -207,3 +215,4 @@ public class RoomCreate extends AppCompatActivity {
     }
 
 }
+
