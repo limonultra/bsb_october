@@ -10,6 +10,8 @@ import com.example.miau.mvp30.Adapter.TutorialPagerAdapter;
 
 public class TutorialActivity extends AppCompatActivity {
 
+    private  boolean firstTime = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,9 +21,20 @@ public class TutorialActivity extends AppCompatActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setAdapter(new TutorialPagerAdapter(this, getIntent().getBooleanExtra("First", false)));
 
+
+
     }
 
     public void saltar(View v) {
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        if(!firstTime){
+        super.onBackPressed();
+        }
+    }
 }
+
+

@@ -14,6 +14,7 @@
         android:layout_height="53dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:elevation="@dimen/cardview_compat_inset_shadow"
         android:background="@color/colorAccent"
         android:minHeight="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +27,7 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="221dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,6 +45,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:background="@color/transcription_color"
+            android:elevation="@dimen/cardview_compat_inset_shadow"
             android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.4"
@@ -118,7 +120,7 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="379dp"
+        android:layout_width="0dp"
         android:layout_height="105dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -127,7 +129,7 @@
 
         <EditText
             android:id="@+id/editableText"
-            android:layout_width="361dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
@@ -136,6 +138,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:background="@color/transcription_color"
+            android:elevation="@dimen/cardview_compat_inset_shadow"
             android:ems="10"
             android:fontFamily="@font/open_regular"
             android:hint="Escriba su texto aqui"
@@ -209,16 +212,16 @@
         app:layout_constraintTop_toBottomOf="@+id/btnStop" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/idiom"
         android:layout_width="175dp"
         android:layout_height="17dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="Idioma elegido:"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playText" />"
+        app:layout_constraintStart_toStartOf="parent" />"
 
 
 </android.support.constraint.ConstraintLayout>

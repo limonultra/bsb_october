@@ -76,7 +76,9 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
         supressbtn = findViewById( R.id.supressBtn );
         supressbtn2 = findViewById( R.id.supressBtn2 );
 
-        checkAudioPermission();
+        String[] tempPerms = { Manifest.permission.ACCESS_NETWORK_STATE };
+
+        hasPermissions(this, tempPerms );
 
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
@@ -325,12 +327,14 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
             transcription.setText(newText.concat(message));
         }
     }
-
-    public void checkAudioPermission() {
-        if (ContextCompat.checkSelfPermission( this, Manifest.permission.RECORD_AUDIO )
-                != PackageManager.PERMISSION_GRANTED) {
-            String[] tempPerms = {Manifest.permission.RECORD_AUDIO};
-            ActivityCompat.requestPermissions( this, tempPerms, 1 );
+    private boolean hasPermissions (Context ctx, String[] permissions) {
+        if(ctx != null && permissions != null) {
+            for(String permission: permissions) {
+                if(ActivityCompat.checkSelfPermission(ctx, permission) != PackageManager.PERMISSION_GRANTED)
+                    ActivityCompat.requestPermissions( this, permissions, 2 );
+                return false;
+            }
         }
+        return true;
     }
 }

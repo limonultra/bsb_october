@@ -10,7 +10,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar5"
         android:layout_width="match_parent"
-        android:layout_height="53dp"
+        android:layout_height="56dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@color/colorAccent"
@@ -19,6 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="Sesion"
+        android:elevation="@dimen/cardview_compat_inset_shadow"
         app:titleTextColor="@android:color/white"
         android:theme="@style/ToolbarTheme"
         app:titleTextAppearance="@style/ToolbarTheme">
@@ -35,7 +36,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar5"
-        android:elevation="12dp">
+        android:elevation="@dimen/cardview_compat_inset_shadow">
 
         <ImageView
             android:id="@+id/imageView4"
@@ -137,8 +138,8 @@
     <RelativeLayout
         android:id="@+id/chronoRelative"
         android:layout_width="match_parent"
-        android:layout_height="217dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="32dp"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -148,8 +149,8 @@
 
         <Chronometer
             android:id="@+id/chronometer"
-            android:layout_width="269dp"
-            android:layout_height="172dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:fontFamily="@font/opensans_bold"
             android:gravity="center_vertical"
@@ -164,7 +165,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="123dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="50dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -268,6 +269,18 @@
             app:layout_constraintTop_toBottomOf="@+id/btnStop" />
 
     </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Idioma"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 
 </android.support.constraint.ConstraintLayout>
