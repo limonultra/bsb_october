@@ -55,13 +55,15 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
     lateinit var toInt2 :String
     lateinit var wifi:String
     var trans=false
+    lateinit var connectivityReceiver: ConnectivityReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_access)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        registerReceiver(ConnectivityReceiver(), //wifi
+        connectivityReceiver = ConnectivityReceiver()
+        registerReceiver(connectivityReceiver, //wifi
                 IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
         profPin.setFilters(arrayOf(InputFilter.LengthFilter(4), InputFilter.AllCaps()))
         profPin.addTextChangedListener(object : TextWatcher {
@@ -145,6 +147,13 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
             mclient.close()
         }
     }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(connectivityReceiver)
+    }
+
+
     fun getIP(): String {
         hex1 = profPin.text.substring(0, 2)
         hex2 = profPin.text.substring(2, 4)

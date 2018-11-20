@@ -101,10 +101,11 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         Toolbar toolbar = findViewById(R.id.toolbar5);
         setSupportActionBar(toolbar);
 
+        this.registerReceiver(mWifiStateChangedReceiver, new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION));
 
 
         transcriptionDialog = new TranscriptionDFragment();
-        this.registerReceiver(mWifiStateChangedReceiver,new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION));
+
 
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
@@ -210,6 +211,12 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             speech = null;
 
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(mWifiStateChangedReceiver);
     }
 
     //Mutes Beep Speech Sound

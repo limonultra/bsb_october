@@ -30,6 +30,7 @@ public class RoomCreate extends AppCompatActivity {
     private  Button btnCreate;
     private  TextView PIN;
 
+
     @Override
     public void onCreate(Bundle SavedInstanceState) {
         super.onCreate( SavedInstanceState );
@@ -58,6 +59,19 @@ public class RoomCreate extends AppCompatActivity {
             }
         } );
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(mWifiStateChangedReceiver);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.registerReceiver(mWifiStateChangedReceiver, new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION));
+    }
+
 
 
     private BroadcastReceiver mWifiStateChangedReceiver = new BroadcastReceiver() {
