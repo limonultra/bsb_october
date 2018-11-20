@@ -16,12 +16,13 @@
         android:layout_alignParentTop="true"
         android:background="@color/colorAccent"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/solomode"
-        app:titleTextColor="@android:color/white" />
+        app:title="Modo Individual"
+        app:titleTextColor="@android:color/white"
+        android:theme="@style/ToolbarTheme"
+        app:titleTextAppearance="@style/ToolbarTheme" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"

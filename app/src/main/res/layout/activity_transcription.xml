@@ -58,11 +58,12 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="80dp"
                 android:layout_marginStart="76dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="2dp"
                 app:layout_constraintBottom_toBottomOf="@+id/separador"
                 app:layout_constraintEnd_toStartOf="@+id/separador"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/separador"
+                app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/ic_nombredelawifi" />
 
             <ImageView
@@ -72,12 +73,11 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="76dp"
                 android:layout_marginStart="80dp"
-                android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/separador"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/separador"
                 app:layout_constraintTop_toTopOf="@+id/separador"
-                app:layout_constraintVertical_bias="0.666"
+                app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/ic_codigos" />
 
             <TextView
@@ -85,10 +85,12 @@
                 android:layout_width="80dp"
                 android:layout_height="19dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
                 android:text=""
                 android:textAlignment="center"
+                android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="@+id/wifi"
-                app:layout_constraintHorizontal_bias="0.562"
+                app:layout_constraintHorizontal_bias="0.524"
                 app:layout_constraintStart_toStartOf="@+id/wifi"
                 app:layout_constraintTop_toBottomOf="@+id/wifi" />
 
@@ -96,10 +98,12 @@
                 android:id="@+id/code_text"
                 android:layout_width="80dp"
                 android:layout_height="19dp"
-                android:text=""
+                android:layout_marginTop="8dp"
+                android:text="p"
                 android:textAlignment="center"
+                android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="@+id/code"
-                app:layout_constraintHorizontal_bias="0.491"
+                app:layout_constraintHorizontal_bias="0.516"
                 app:layout_constraintStart_toStartOf="@+id/code"
                 app:layout_constraintTop_toBottomOf="@+id/code" />
         </android.support.constraint.ConstraintLayout>
@@ -113,12 +117,11 @@
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:fontFamily="@font/open_regular"
-        android:gravity="start"
+        android:gravity="top"
         android:keepScreenOn="true"
         android:keyboardNavigationCluster="false"
         android:padding="12dp"
         android:text="Recibiendo datos..."
-        android:textAlignment="textStart"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

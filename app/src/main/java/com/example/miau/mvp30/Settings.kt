@@ -10,6 +10,9 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import com.example.miau.mvp30.utils.AppPreferences
+import android.webkit.WebView
+
+
 
 class Settings : AppCompatActivity() {
 
@@ -40,9 +43,9 @@ class Settings : AppCompatActivity() {
 
         val privacity_button: Button= findViewById(R.id.privacity_button) as Button
         privacity_button.setOnClickListener {
-            // Handler code here.
-//            val intent = Intent(this, RoomCreate::class.java)
-//            startActivity(intent)
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.setDataAndType(Uri.parse("http://docs.google.com/viewer?url=" + "https://www.talentumtelefonica.com/POL%C3%8DTICA%20DE%20PROTECCI%C3%93N%20DE%20DATOS.pdf"), "text/html")
+            startActivity(intent)
         }
 
         val facebook: ImageButton= findViewById(R.id.facebook) as ImageButton

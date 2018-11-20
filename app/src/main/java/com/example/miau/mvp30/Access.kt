@@ -3,9 +3,11 @@ package com.example.miau.mvp30
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.net.ConnectivityManager
+import android.net.Uri
 import android.net.wifi.SupplicantState
 import android.net.wifi.WifiManager
 import android.os.Build
@@ -23,6 +25,7 @@ import android.util.Log
 import android.view.*
 import android.view.Menu
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
 import kotlinx.android.synthetic.main.activity_access.*
 import kotlinx.android.synthetic.main.activity_transcription.*
 import org.java_websocket.client.WebSocketClient
@@ -63,17 +66,27 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         registerReceiver(ConnectivityReceiver(), //wifi
                 IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+
+        val cambiar_wifi: Button = findViewById(R.id.cambiar_wifi) as Button
+        cambiar_wifi.setOnClickListener {
+            //val intent = Intent(Intent.ACTION_VIEW, (Settings.ACTION_WIFI_SETTINGS))
+           // startActivity(intent)
+        }
+
         profPin.setFilters(arrayOf(InputFilter.LengthFilter(4), InputFilter.AllCaps()))
         profPin.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+                deviceOnline.text=""
+                deviceOnline.visibility = View.INVISIBLE
                 b2.isEnabled = profPin.text.toString().length >= 4
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                b2.isEnabled=false
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 //        if(ciegos_mode.isChecked) {
-        b2.visibility = View.VISIBLE
+
         b2.setOnClickListener {
             var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(b2.getWindowToken(), 0)
@@ -83,7 +96,6 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
                 isHex = regex.matches(profPin.text.toString()) //averiguamos si el pin es hexadecimal
                 if (isHex) { // si hexadecimal=true
                     mclient = ChatClient(URI(getIP()), Draft_6455(), emptyMap(), 100000)
-                    profPin.setText("")
                     mclient.connect()
                     var count = Countdown()
                     count.start()
@@ -96,8 +108,8 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         }
         //  }
         //else {
-        profPin.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+        /*profPin.setOnKeyListener(View.OnKeyListener { v, keyCode, event -> //NO BORRAR, ES PARA DARLE A "CONTINUAR" DESDE EL TECLADO
+            if (profPin.text.toString().length == 4 && keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                 if (profPin.text.toString().length == 4) {
                     isHex = true //para saber si nos han introducido texto hexadecimal
                     regex = "^[0-9a-fA-F]+$".toRegex() //expresion regular para comprobar que nos han introducido un hexadecimal
@@ -117,9 +129,13 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
                     deviceOnline.visibility = View.VISIBLE
                 }
                 return@OnKeyListener true
+            } else if(profPin.text.toString().length != 4){
+                deviceOnline.setText("El PIN no está completo")
+                deviceOnline.visibility = View.VISIBLE
             }
             false
-        })
+
+        })*/
         // }
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -141,6 +157,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
     override fun onBackPressed() {
         super.onBackPressed()
         if (open) {
+            profPin.setText("")
             trans = false
             mclient.close()
         }
@@ -151,9 +168,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         var SERVER_URL = ""
         toInt = Long.parseLong(hex1, 16).toString()
         toInt2 = Long.parseLong(hex2, 16).toString()
-
         val prefixIp = splitIp()
-
         SERVER_URL = "ws://$prefixIp.$toInt.$toInt2:8080"
         return SERVER_URL
     }
@@ -161,7 +176,6 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         super.onResume()
         ConnectivityReceiver.connectivityReceiverListener = this
     }
-
     private fun showMessage(isConnected: Boolean) {
         if (Build.VERSION.SDK_INT <=27) {
             val connManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -182,7 +196,6 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         } else {
             val wifiManager = getApplicationContext().getSystemService(Context.WIFI_SERVICE) as WifiManager
             val wifiInfo = wifiManager.connectionInfo
-
             if (wifiInfo.getSupplicantState() == SupplicantState.COMPLETED) {
                 wifiname.text = wifiInfo.getSSID().replace("\"", "");
             }
@@ -212,6 +225,8 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         }
         override fun onMessage(message: String) {
             runOnUiThread {
+                wifi_text.text=wifiname.text
+                code_text.text=profPin.text
                 //                var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 //                profText.setOnTouchListener { v, m ->
 //                    val imm = v.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -322,7 +337,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
             }
         }
     }
-     fun getIp(): String {
+    fun getIp(): String {
         val wifiMgr = applicationContext.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
         @SuppressLint("MissingPermission") val wifiInfo = wifiMgr!!.connectionInfo
         val ip = wifiInfo.ipAddress
@@ -333,8 +348,6 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
     fun splitIp(): String {
         val ip = getIp()
         val ipNumbers = ip.split("[.]".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-
         return ipNumbers[0] + "." + ipNumbers[1]
     }
-
 }
