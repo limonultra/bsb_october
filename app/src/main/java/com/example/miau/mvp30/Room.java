@@ -352,11 +352,10 @@ public class Room extends AppCompatActivity implements RecognitionListener {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if(listening) {
-                            serverControl.broadcast( endSpeech );
                             stopVoiceRecognition();
-                            serverControl.broadcast( endSpeech );
-                            resetAudio();
                         }
+                        serverControl.broadcast( endSpeech );
+                        resetAudio();
                         try {
                             serverControl.stop();
                             ServerSingleton.setServerNull();

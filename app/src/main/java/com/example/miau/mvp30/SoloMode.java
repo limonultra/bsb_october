@@ -1,19 +1,24 @@
 package com.example.miau.mvp30;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -46,6 +51,9 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
     private TextView pauseText;
     private TextView stopText;
     private TextView transcription;
+    private EditText editableText;
+    private Button supressbtn;
+    private Button supressbtn2;
 
     private String newText ="";
     private String oldText="";
@@ -64,11 +72,15 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
         pauseText = findViewById( R.id.pauseText );
         playText = findViewById( R.id.playText );
         stopText = findViewById( R.id.stopText );
+        editableText = findViewById( R.id.editableText );
+        supressbtn = findViewById( R.id.supressBtn );
+        supressbtn2 = findViewById( R.id.supressBtn2 );
+
+        checkAudioPermission();
 
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
         saveCurrentAudio();
-
     }
 
     @Override
@@ -81,6 +93,13 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         transcription.setText(savedInstanceState.getString("oldText"));
+    }
+
+    public void supressEditableEvent(View view){
+        editableText.setText( "" );
+    }
+    public void setSupressbtn1(View view){
+        transcription.setText( "" );
     }
 
     public void ButtonStartEvent(View view) {
@@ -304,6 +323,14 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
             String message = speechResults.toString().replace("[", "").replace("]", "");
             oldText = newText.concat(message);
             transcription.setText(newText.concat(message));
+        }
+    }
+
+    public void checkAudioPermission() {
+        if (ContextCompat.checkSelfPermission( this, Manifest.permission.RECORD_AUDIO )
+                != PackageManager.PERMISSION_GRANTED) {
+            String[] tempPerms = {Manifest.permission.RECORD_AUDIO};
+            ActivityCompat.requestPermissions( this, tempPerms, 1 );
         }
     }
 }

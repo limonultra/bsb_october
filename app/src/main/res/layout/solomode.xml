@@ -23,17 +23,44 @@
         app:title="@string/solomode"
         app:titleTextColor="@android:color/white" />
 
-    <TextView
-        android:layout_margin="16dp"
-        android:id="@+id/transcription"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="8dp"
-        app:layout_constraintHeight_percent="0.4"
-        android:background="@color/transcription_color"
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="221dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <TextView
+            android:id="@+id/transcription"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/transcription_color"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/supressBtn2"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="29dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/ic_xicon"
+            android:backgroundTint="#4d4d4d"
+            android:onClick="setSupressbtn1" />
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btnPlayPause"
@@ -49,9 +76,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnStart"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
-        app:layout_constraintVertical_bias="0.486" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.342" />
 
     <Button
         android:id="@+id/btnStart"
@@ -66,7 +94,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.342"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -83,29 +112,57 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnStart"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.342" />
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="16dp"
-        android:padding="8dp"
-        app:layout_constraintHeight_percent="0.20"
-        android:background="@color/transcription_color"
-        android:ems="10"
-        android:fontFamily="@font/open_regular"
-        android:hint="Escriba su texto aqui"
-        android:inputType="textPersonName"
-        android:selectAllOnFocus="false"
-        android:singleLine="false"
-        android:textColor="#666666"
-        android:textSize="12sp"
-        android:visibility="visible"
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="379dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/transcription" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
+
+        <EditText
+            android:id="@+id/editableText"
+            android:layout_width="361dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/transcription_color"
+            android:ems="10"
+            android:fontFamily="@font/open_regular"
+            android:hint="Escriba su texto aqui"
+            android:inputType="text"
+            android:padding="8dp"
+            android:selectAllOnFocus="false"
+            android:singleLine="false"
+            android:textColor="#666666"
+            android:textSize="12sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.20"
+            app:layout_constraintHorizontal_bias="0.444"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/supressBtn"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="29dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/ic_xicon"
+            android:backgroundTint="#4d4d4d"
+            android:onClick="supressEditableEvent" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/playText"
@@ -148,7 +205,19 @@
         android:textColor="#00b6c7"
         app:layout_constraintEnd_toEndOf="@+id/btnStop"
         app:layout_constraintStart_toStartOf="@+id/btnStop"
-        app:layout_constraintTop_toBottomOf="@+id/btnStop" />"
+        app:layout_constraintTop_toBottomOf="@+id/btnStop" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="175dp"
+        android:layout_height="17dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Idioma elegido:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playText" />"
 
 
 </android.support.constraint.ConstraintLayout>
