@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,7 +21,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import static com.example.miau.mvp30.Adapter.CustomAdapter.getStringFromIdiom;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Queue;
 
 import static android.content.ContentValues.TAG;
+import static com.example.miau.mvp30.Adapter.CustomAdapter.getStringFromIdiom;
 
 public class SoloMode extends AppCompatActivity implements RecognitionListener {
 
@@ -76,7 +77,7 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
         editableText = findViewById( R.id.editableText );
         idiom = findViewById( R.id.idiom );
 
-        String[] tempPerms = { Manifest.permission.ACCESS_NETWORK_STATE };
+        String[] tempPerms = {Manifest.permission.RECORD_AUDIO};
 
         SharedPreferences sharedPref =  this.getSharedPreferences( "config",MODE_PRIVATE );
 
@@ -345,5 +346,15 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
             }
         }
         return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 2)
+            if (grantResults[0] == PackageManager.PERMISSION_DENIED)
+                finish();
+
+
     }
 }
