@@ -18,7 +18,7 @@
         <item name="android:statusBarColor">@color/barra_estado</item>
     </style>
     <style name="SplashTheme" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="android:windowBackground">@mipmap/fondo</item>
     </style>
 
 
