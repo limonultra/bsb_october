@@ -82,21 +82,22 @@
 
             <TextView
                 android:id="@+id/wifi_text"
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="19dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/wifi"
-                app:layout_constraintHorizontal_bias="0.524"
                 app:layout_constraintStart_toStartOf="@+id/wifi"
-                app:layout_constraintTop_toBottomOf="@+id/wifi" />
+                app:layout_constraintTop_toBottomOf="@+id/wifi"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/code_text"
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="19dp"
                 android:layout_marginTop="8dp"
                 android:textAlignment="center"

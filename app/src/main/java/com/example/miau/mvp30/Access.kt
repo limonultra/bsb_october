@@ -40,6 +40,7 @@ import java.util.*
 
 class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverListener {
 
+    val args = Bundle()
     var timing = false
     var hex1 = ""
     var hex2 = ""
@@ -69,6 +70,8 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         registerReceiver(connectivityReceiver, //wifi
                 IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
 
+        subsFragment = SubsFragment()
+
 
         val cambiar_wifi: Button = findViewById(R.id.cambiar_wifi) as Button
         cambiar_wifi.setOnClickListener {
@@ -97,6 +100,8 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
                 regex = "^[0-9a-fA-F]+$".toRegex() //expresion regular para comprobar que nos han introducido un hexadecimal
                 isHex = regex.matches(profPin.text.toString()) //averiguamos si el pin es hexadecimal
                 if (isHex) { // si hexadecimal=true
+                    args.putString("wifi", wifiname.toString())
+                    args.putString("code", profPin.toString())
                     mclient = ChatClient(URI(getIP()), Draft_6455(), emptyMap(), 100000)
                     mclient.connect()
                     var count = Countdown()
@@ -157,12 +162,12 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         return super.onOptionsItemSelected(item)
     }
     override fun onBackPressed() {
-        super.onBackPressed()
-        if (open) {
+        if (trans) {
             profPin.setText("")
-            trans = false
             mclient.close()
         }
+        else
+            finish()
     }
 
     override fun onStop() {
@@ -219,21 +224,24 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
             this.uri = urin
         }
         override fun onOpen(handshakedata: ServerHandshake?) {
-            subsFragment = SubsFragment()
             open = true
-            trans=true
             profPin.isClickable = false
             b2.isClickable = false
             runOnUiThread {
+                trans=true
+                subsFragment.setArguments(args)
                 val fragmentManager = getSupportFragmentManager()
                 val transaction = fragmentManager.beginTransaction()
                 transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 transaction.add(android.R.id.content, subsFragment).commit()
+
             }
             Log.e("Open: ", "new connection opened")
         }
         override fun onMessage(message: String) {
             runOnUiThread {
+                wifi_text.text=wifiname.text
+                code_text.text=profPin.text
                 //                var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 //                profText.setOnTouchListener { v, m ->
 //                    val imm = v.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -255,6 +263,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         override fun onMessage(message: ByteBuffer) {
             if (Arrays.toString(message.array()) == "[0, 0, 1, 1]") {
                 runOnUiThread {
+                    trans=false
                     wifi_text.text=wifiname.text
                     code_text.text=profPin.text
                     onrepeat = true
@@ -319,6 +328,14 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
             }
             return super.onOptionsItemSelected(item)
         }
+
+        fun asignarVariables(){
+            while (null == wifi_text)
+                Log.e("error", "error")
+            wifi_text.setText(getArguments()?.getString("wifi"))
+            code_text.setText(getArguments()?.getString("code"))
+        }
+
         fun escribirSubs(message: String, newtext: String) {
             // if(ciegos_mode.isChecked)
             profText.text = Editable.Factory.getInstance().newEditable("$newtext $message")
