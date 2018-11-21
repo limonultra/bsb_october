@@ -29,7 +29,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/statebar"
         android:layout_width="0dp"
-        android:layout_height="84dp"
+        android:layout_height="72dp"
         android:background="#ffffff"
         app:layout_constraintBottom_toTopOf="@+id/chronoRelative"
         app:layout_constraintEnd_toEndOf="parent"

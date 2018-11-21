@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.net.ConnectivityManager
-import android.net.Uri
 import android.net.wifi.SupplicantState
 import android.net.wifi.WifiManager
 import android.os.Build
@@ -17,6 +16,7 @@ import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.CardView
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
@@ -58,6 +58,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
     lateinit var toInt : String
     lateinit var toInt2 :String
     lateinit var wifi:String
+    lateinit var code: String
     var trans=false
     lateinit var connectivityReceiver: ConnectivityReceiver
 
@@ -96,8 +97,8 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
                 regex = "^[0-9a-fA-F]+$".toRegex() //expresion regular para comprobar que nos han introducido un hexadecimal
                 isHex = regex.matches(profPin.text.toString()) //averiguamos si el pin es hexadecimal
                 if (isHex) { // si hexadecimal=true
-                    args.putString("wifi", wifiname.toString())
-                    args.putString("code", profPin.toString())
+                    args.putString("wifi", wifiname.text.toString())
+                    args.putString("code", profPin.text.toString())
                     mclient = ChatClient(URI(getIP()), Draft_6455(), emptyMap(), 100000)
                     mclient.connect()
                     var count = Countdown()
@@ -169,6 +170,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         if (trans) {
             profPin.setText("")
             mclient.close()
+
         }
         else
             super.onBackPressed()
@@ -233,19 +235,18 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
             b2.isClickable = false
             runOnUiThread {
                 trans=true
-                subsFragment.setArguments(args)
+                wifi_text.text = args.getString("wifi")
+                code_text.text = args.getString("code")
                 val fragmentManager = getSupportFragmentManager()
                 val transaction = fragmentManager.beginTransaction()
                 transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 transaction.add(android.R.id.content, subsFragment).commit()
-
+                showInfoBar(true)
             }
             Log.e("Open: ", "new connection opened")
         }
         override fun onMessage(message: String) {
             runOnUiThread {
-                wifi_text.text=wifiname.text
-                code_text.text=profPin.text
                 //                var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 //                profText.setOnTouchListener { v, m ->
 //                    val imm = v.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -268,8 +269,6 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
             if (Arrays.toString(message.array()) == "[0, 0, 1, 1]") {
                 runOnUiThread {
                     trans=false
-                    wifi_text.text=wifiname.text
-                    code_text.text=profPin.text
                     onrepeat = true
                     val builder = AlertDialog.Builder(this@Access)
                     builder.setMessage("Sesion Finalizada por su instructor")
@@ -295,6 +294,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
                     val builder = AlertDialog.Builder(this@Access)
                     builder.setMessage("Sesion Finalizada")
                     builder.setNegativeButton("Ok") { _, _ ->
+                        showInfoBar(false)
                         finish()
                     }
                     trans=false
@@ -308,6 +308,15 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
             trans=false
             Log.e("Error: ", "an error occurred:$ex")
         }
+    }
+
+    private fun showInfoBar(abrir: Boolean) {
+        val cardView: CardView = findViewById(R.id.cardView4)
+        if (abrir)
+            cardView.visibility = View.VISIBLE
+        else
+            cardView.visibility = View.INVISIBLE
+
     }
 
     class SubsFragment : DialogFragment() {
@@ -333,12 +342,6 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
             return super.onOptionsItemSelected(item)
         }
 
-        fun asignarVariables(){
-            while (null == wifi_text)
-                Log.e("error", "error")
-            wifi_text.setText(getArguments()?.getString("wifi"))
-            code_text.setText(getArguments()?.getString("code"))
-        }
 
         fun escribirSubs(message: String, newtext: String) {
             // if(ciegos_mode.isChecked)
