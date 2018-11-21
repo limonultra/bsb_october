@@ -215,13 +215,12 @@
         android:id="@+id/idiom"
         android:layout_width="175dp"
         android:layout_height="17dp"
-        android:layout_marginBottom="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Idioma elegido:"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="540dp" />"
 
 
 </android.support.constraint.ConstraintLayout>

@@ -100,7 +100,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         btnPlayPause = findViewById(R.id.btnPlayPause);
         chrono = findViewById(R.id.chronometer);
         idiom = findViewById( R.id.idiom );
-        countDownParrafo = new CountDownParrafo(3000, 1500);
+        countDownParrafo = new CountDownParrafo(3000, 1000);
 
         Toolbar toolbar = findViewById(R.id.toolbar5);
         setSupportActionBar(toolbar);
@@ -484,6 +484,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         @Override
         public void onFinish() {
             serverControl.broadcast(speechSalto);
+            Log.d("TAG",speechSalto.toString());
             oldText = newText.concat("\n");
             if (transcriptionDialog.isAdded())
                 transcriptionDialog.appendSalto(newText);

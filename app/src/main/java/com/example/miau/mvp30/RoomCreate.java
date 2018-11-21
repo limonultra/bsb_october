@@ -51,11 +51,6 @@ public class RoomCreate extends AppCompatActivity {
         String[] tempPerms = {Manifest.permission.RECORD_AUDIO};
         hasPermissions( this,tempPerms );
 
-        SharedPreferences sharedPref =  this.getSharedPreferences( "config",MODE_PRIVATE );
-
-        String idiomPref = getStringFromIdiom( sharedPref.getString( "idioma", "" ) );
-        idiom.setText( idiomPref );
-
         WIFI.setText( getWIFIName() );
 
         btnCreate.setOnClickListener( new View.OnClickListener() {
@@ -151,6 +146,10 @@ public class RoomCreate extends AppCompatActivity {
             btnCreate.setEnabled( true );
             PIN.setText( getHex() );
         }
+        SharedPreferences sharedPref =  this.getSharedPreferences( "config",MODE_PRIVATE );
+
+        String idiomPref = getStringFromIdiom( sharedPref.getString( "idioma", "" ) );
+        idiom.setText( idiomPref );
     }
 
     @Override
