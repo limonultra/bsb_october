@@ -21,6 +21,8 @@ import org.jetbrains.anko.defaultSharedPreferences
 
 class Menu : AppCompatActivity() {
 
+    private var gpsGranted: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
@@ -28,10 +30,7 @@ class Menu : AppCompatActivity() {
         val toolbar = findViewById(R.id.toolbar4) as Toolbar
         setSupportActionBar(toolbar)
         Log.i("", resources.displayMetrics.densityDpi.toString())
-        checkInternetPermission()
-        if (Build.VERSION.SDK_INT > 25) {
-            checkGPSPermission();
-        }
+
 
         checkForTutorial()
 
@@ -45,8 +44,7 @@ class Menu : AppCompatActivity() {
         val bpup: ImageView = findViewById(R.id.bpup) as ImageView
         bpup.setOnClickListener {
             // Handler code here.
-            val intent = Intent(this, Access::class.java)
-            startActivity(intent)
+            checkGPSPermission(2)
         }
 
         val bsm = findViewById(R.id.bsm) as ImageView
@@ -71,10 +69,9 @@ class Menu : AppCompatActivity() {
                 if (mNotificationManager.isNotificationPolicyAccessGranted)
                     deactivateDoNotDisturb(requestCode)
                 else
-
                     startActivityForResult(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), requestCode)
             } else
-                goNextScreen(requestCode)
+                checkGPSPermission(requestCode)
 
         } else {
             if (android.provider.Settings.Global.getInt(contentResolver, "zen_mode") != 0) {
@@ -83,7 +80,7 @@ class Menu : AppCompatActivity() {
                 else
                     startActivityForResult(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), requestCode)
             } else
-                goNextScreen(requestCode)
+                checkGPSPermission(requestCode)
         }
     }
 
@@ -93,36 +90,23 @@ class Menu : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (mNotificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_ALL) {
                 mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
-                goNextScreen(requestCode)
+                checkGPSPermission(requestCode)
             }
         } else {
             if (android.provider.Settings.Global.getInt(contentResolver, "zen_mode") != 0) {
                 android.provider.Settings.Global.putInt(contentResolver, "zen_mode", 0)
-                goNextScreen(requestCode)
+                checkGPSPermission(requestCode)
             }
         }
     }
 
-    private fun goNextScreen(requestCode: Int) {
-        if (requestCode == 0)
-            goToInstructor()
-        else
-            goToSoloMode()
 
-    }
-
-    fun checkInternetPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
-            val tempPerms = arrayOf<String>(Manifest.permission.INTERNET)
-            ActivityCompat.requestPermissions(this, tempPerms, 3)
-        }
-    }
-
-
-    fun checkGPSPermission() {
+    fun checkGPSPermission(requestCode: Int) {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             val tempPerms = arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION)
-            ActivityCompat.requestPermissions(this, tempPerms, 4)
+            ActivityCompat.requestPermissions(this, tempPerms, requestCode)
+        } else {
+            goNextScreen(requestCode)
         }
     }
 
@@ -154,6 +138,17 @@ class Menu : AppCompatActivity() {
         }
     }
 
+
+    private fun goNextScreen(requestCode: Int) {
+        if (requestCode == 0)
+            goToInstructor()
+        else if (requestCode == 1)
+            goToSoloMode()
+        else
+            goToAccess()
+
+    }
+
     fun goToInstructor() {
         val intent = Intent(this, RoomCreate::class.java)
         startActivity(intent)
@@ -161,6 +156,11 @@ class Menu : AppCompatActivity() {
 
     fun goToSoloMode() {
         val intent = Intent(this, SoloMode::class.java)
+        startActivity(intent)
+    }
+
+    private fun goToAccess() {
+        val intent = Intent(this, Access::class.java)
         startActivity(intent)
     }
 
@@ -173,5 +173,11 @@ class Menu : AppCompatActivity() {
             if (mNotificationManager.isNotificationPolicyAccessGranted)
                 deactivateDoNotDisturb(requestCode)
         }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            goNextScreen(requestCode)
     }
 }

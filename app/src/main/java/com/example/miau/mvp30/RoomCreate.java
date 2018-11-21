@@ -15,7 +15,6 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.Formatter;
 import android.util.Log;
@@ -148,7 +147,7 @@ public class RoomCreate extends AppCompatActivity {
         }
         SharedPreferences sharedPref =  this.getSharedPreferences( "config",MODE_PRIVATE );
 
-        String idiomPref = getStringFromIdiom( sharedPref.getString( "idioma", "" ) );
+        String idiomPref = getStringFromIdiom(sharedPref.getString("idioma", "es_ES"));
         idiom.setText( idiomPref );
     }
 
