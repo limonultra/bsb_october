@@ -66,10 +66,6 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_access)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        connectivityReceiver = ConnectivityReceiver()
-        registerReceiver(connectivityReceiver, //wifi
-                IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
-
         subsFragment = SubsFragment()
 
 
@@ -145,6 +141,14 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
         })*/
         // }
     }
+
+    override fun onStart(){
+    super.onStart()
+        connectivityReceiver = ConnectivityReceiver()
+        registerReceiver(connectivityReceiver, //wifi
+                IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
@@ -167,7 +171,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
             mclient.close()
         }
         else
-            finish()
+            super.onBackPressed()
     }
 
     override fun onStop() {
