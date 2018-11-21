@@ -72,7 +72,10 @@ class Menu : AppCompatActivity() {
                 else
                     startActivityForResult(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), requestCode)
             } else
-                checkGPSPermission(requestCode)
+                if (requestCode == 1)
+                    goNextScreen(requestCode)
+                else
+                    checkGPSPermission(requestCode)
 
         } else {
             if (android.provider.Settings.Global.getInt(contentResolver, "zen_mode") != 0) {
@@ -81,7 +84,10 @@ class Menu : AppCompatActivity() {
                 else
                     startActivityForResult(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), requestCode)
             } else
-                checkGPSPermission(requestCode)
+                if (requestCode == 1)
+                    goNextScreen(requestCode)
+                else
+                    checkGPSPermission(requestCode)
         }
     }
 
@@ -91,12 +97,18 @@ class Menu : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (mNotificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_ALL) {
                 mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
-                checkGPSPermission(requestCode)
+                if (requestCode == 1)
+                    goNextScreen(requestCode)
+                else
+                    checkGPSPermission(requestCode)
             }
         } else {
             if (android.provider.Settings.Global.getInt(contentResolver, "zen_mode") != 0) {
                 android.provider.Settings.Global.putInt(contentResolver, "zen_mode", 0)
-                checkGPSPermission(requestCode)
+                if (requestCode == 1)
+                    goNextScreen(requestCode)
+                else
+                    checkGPSPermission(requestCode)
             }
         }
     }
@@ -182,7 +194,6 @@ class Menu : AppCompatActivity() {
                 goToAccess()
         }
     }
-
 
 
     @SuppressLint("NewApi")
