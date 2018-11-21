@@ -31,7 +31,7 @@ class Settings : AppCompatActivity() {
         val color_button: Button = findViewById(R.id.color_button) as Button
         color_button.setOnClickListener {
             // Handler code here.
-            setContentView(R.layout.activity_transcription)
+            setContentView(R.layout.activity_colors)
         }
 
         val idiom_button: Button = findViewById(R.id.idiom_button) as Button
@@ -44,7 +44,7 @@ class Settings : AppCompatActivity() {
         val privacity_button: Button= findViewById(R.id.privacity_button) as Button
         privacity_button.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.setDataAndType(Uri.parse("http://docs.google.com/viewer?url=" + "https://www.talentumtelefonica.com/POL%C3%8DTICA%20DE%20PROTECCI%C3%93N%20DE%20DATOS.pdf"), "text/html")
+            intent.setDataAndType(Uri.parse("https://www.telefonica.com/es/web/about_telefonica/centro-de-privacidad"), "text/html")
             startActivity(intent)
         }
 
