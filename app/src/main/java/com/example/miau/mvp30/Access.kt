@@ -296,6 +296,7 @@ class Access : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverLis
             Log.e("Error: ", "an error occurred:$ex")
         }
     }
+
     class SubsFragment : DialogFragment() {
         private var rootView: View? = null
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
