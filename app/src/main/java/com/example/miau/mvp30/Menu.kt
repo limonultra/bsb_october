@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
@@ -16,12 +17,13 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
+import com.example.miau.mvp30.utils.ActivateGPS
 import org.jetbrains.anko.defaultSharedPreferences
 
 
 class Menu : AppCompatActivity() {
 
-    private var gpsGranted: Boolean = false
+    private var selected: Int = 10
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -140,12 +142,16 @@ class Menu : AppCompatActivity() {
 
 
     private fun goNextScreen(requestCode: Int) {
-        if (requestCode == 0)
-            goToInstructor()
-        else if (requestCode == 1)
-            goToSoloMode()
-        else
-            goToAccess()
+        if (Build.VERSION.SDK_INT < 28) {
+            if (requestCode == 0)
+                goToInstructor()
+            else if (requestCode == 1)
+                goToSoloMode()
+            else
+                goToAccess()
+        } else {
+            statusCheck(requestCode)
+        }
 
     }
 
@@ -164,6 +170,22 @@ class Menu : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun statusCheck(requestCode: Int) {
+        val manager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            selected = requestCode
+            ActivateGPS.displayLocationSettingsRequest(this)
+        } else {
+            if (requestCode == 0)
+                goToInstructor()
+            else if (requestCode == 1)
+                goToSoloMode()
+            else
+                goToAccess()
+        }
+    }
+
+
 
     @SuppressLint("NewApi")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -172,6 +194,8 @@ class Menu : AppCompatActivity() {
             val mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             if (mNotificationManager.isNotificationPolicyAccessGranted)
                 deactivateDoNotDisturb(requestCode)
+        } else if (requestCode == 6) {
+            statusCheck(selected)
         }
     }
 
