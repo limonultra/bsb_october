@@ -1,13 +1,18 @@
 package com.example.miau.mvp30.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.example.miau.mvp30.R;
+import com.example.miau.mvp30.TutorialActivity;
 
 public class TutorialPagerAdapter extends PagerAdapter {
 
@@ -25,14 +30,47 @@ public class TutorialPagerAdapter extends PagerAdapter {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         ViewGroup layout = (ViewGroup) inflater.inflate(getLayoutResId(position), collection, false);
         collection.addView(layout);
-        TextView saltar = layout.findViewById(R.id.saltar);
+        final TextView saltar = layout.findViewById(R.id.saltar);
         if (first) {
             saltar.setVisibility(View.INVISIBLE);
         }
         if (getLayoutResId(position) == R.layout.screen_tutorial_3) {
+            CheckBox checkBox = layout.findViewById(R.id.checkBox);
+            if (first) {
+                saltar.setTextColor(Color.parseColor("#4d4d4d"));
+                checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (!isChecked)
+                            saltar.setTextColor(Color.parseColor("#4d4d4d"));
+                        else
+                            saltar.setTextColor(ResourcesCompat.getColor(mContext.getResources(), R.color.colorAccent, null));
+                    }
+                });
+            } else {
+                TextView terminos = layout.findViewById(R.id.textView13);
+                checkBox.setVisibility(View.INVISIBLE);
+                terminos.setVisibility(View.INVISIBLE);
+                saltar.setTextColor(ResourcesCompat.getColor(mContext.getResources(), R.color.colorAccent, null));
+            }
             saltar.setVisibility(View.VISIBLE);
             saltar.setText("Continuar");
+        } else {
+            saltar.setTextColor(Color.parseColor("#4d4d4d"));
         }
+
+        saltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (first) {
+                    if (saltar.getCurrentTextColor() == mContext.getResources().getColor(R.color.colorAccent))
+                        ((TutorialActivity) mContext).finish();
+                } else {
+                    ((TutorialActivity) mContext).finish();
+                }
+            }
+        });
+
         return layout;
     }
 

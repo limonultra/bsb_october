@@ -9,6 +9,7 @@
     <string name="salto_linea">\n</string>
     <string name="saltar">Saltar</string>
     <string name="cambiar"><u>Cambiar</u></string>
+    <string name="terminos">He leído y acepto las condiciones y la <a href="https://www.talentumtelefonica.com/POLÍTICA DE PROTECCIÓN DE DATOS.pdf">política de privacidad</a> de Breaking Barriers</string>
 
     <array name="temas">
         <item>Negro - Blanco</item>

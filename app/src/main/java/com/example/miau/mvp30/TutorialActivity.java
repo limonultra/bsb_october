@@ -4,7 +4,6 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import com.example.miau.mvp30.Adapter.TutorialPagerAdapter;
 
@@ -23,10 +22,6 @@ public class TutorialActivity extends AppCompatActivity {
 
 
 
-    }
-
-    public void saltar(View v) {
-        finish();
     }
 
     @Override
