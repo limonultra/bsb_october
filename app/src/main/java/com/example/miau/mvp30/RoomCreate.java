@@ -14,6 +14,7 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.Formatter;
@@ -203,6 +204,17 @@ public class RoomCreate extends AppCompatActivity {
 
         return wifiFinalName;
     } // Get WiFi SSID
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 2)
+            if (grantResults[0] == PackageManager.PERMISSION_DENIED)
+                finish();
+
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
