@@ -108,6 +108,8 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
     }
     public void setSupressbtn1(View view){
         transcription.setText( "" );
+        oldText = "";
+        newText = "";
     }
 
     public void ButtonStartEvent(View view) {
