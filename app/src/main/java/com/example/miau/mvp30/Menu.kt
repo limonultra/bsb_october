@@ -18,7 +18,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import com.example.miau.mvp30.utils.ActivateGPS
-import org.jetbrains.anko.defaultSharedPreferences
 
 
 class Menu : AppCompatActivity() {
@@ -131,9 +130,8 @@ class Menu : AppCompatActivity() {
     }
 
     fun checkForTutorial() {
-        val sharedPreferences = defaultSharedPreferences
+        val sharedPreferences = getSharedPreferences("config", Context.MODE_PRIVATE)
         if (!sharedPreferences.getBoolean("tutorial", false)) {
-            sharedPreferences.edit().putBoolean("tutorial", true).apply();
             val intent = Intent(this, TutorialActivity::class.java)
             intent.putExtra("First", true)
             startActivity(intent)

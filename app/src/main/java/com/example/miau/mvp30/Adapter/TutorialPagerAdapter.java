@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.PagerAdapter;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,9 @@ public class TutorialPagerAdapter extends PagerAdapter {
         }
         if (getLayoutResId(position) == R.layout.screen_tutorial_3) {
             CheckBox checkBox = layout.findViewById(R.id.checkBox);
+            TextView terminos = layout.findViewById(R.id.textView13);
             if (first) {
+                terminos.setMovementMethod(LinkMovementMethod.getInstance());
                 saltar.setTextColor(Color.parseColor("#4d4d4d"));
                 checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -48,7 +51,7 @@ public class TutorialPagerAdapter extends PagerAdapter {
                     }
                 });
             } else {
-                TextView terminos = layout.findViewById(R.id.textView13);
+
                 checkBox.setVisibility(View.INVISIBLE);
                 terminos.setVisibility(View.INVISIBLE);
                 saltar.setTextColor(ResourcesCompat.getColor(mContext.getResources(), R.color.colorAccent, null));
@@ -63,8 +66,11 @@ public class TutorialPagerAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 if (first) {
-                    if (saltar.getCurrentTextColor() == mContext.getResources().getColor(R.color.colorAccent))
+                    if (saltar.getCurrentTextColor() == mContext.getResources().getColor(R.color.colorAccent)) {
+                        mContext.getSharedPreferences("config", Context.MODE_PRIVATE).edit()
+                                .putBoolean("tutorial", true).apply();
                         ((TutorialActivity) mContext).finish();
+                    }
                 } else {
                     ((TutorialActivity) mContext).finish();
                 }
