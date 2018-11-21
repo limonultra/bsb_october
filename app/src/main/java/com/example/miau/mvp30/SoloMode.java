@@ -76,7 +76,7 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
         editableText = findViewById( R.id.editableText );
         idiom = findViewById( R.id.idiom );
 
-        String[] tempPerms = { Manifest.permission.ACCESS_NETWORK_STATE };
+        //String[] tempPerms = { Manifest.permission.ACCESS_NETWORK_STATE };
 
         SharedPreferences sharedPref =  this.getSharedPreferences( "config",MODE_PRIVATE );
 
@@ -84,7 +84,7 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
         idiom.setText( "Reconocimiento de voz: " + idiomPref );
 
 
-        hasPermissions(this, tempPerms );
+        //hasPermissions(this, tempPerms );
 
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
@@ -336,7 +336,7 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
             transcription.setText(newText.concat(message));
         }
     }
-    private boolean hasPermissions (Context ctx, String[] permissions) {
+   /* private boolean hasPermissions (Context ctx, String[] permissions) {
         if(ctx != null && permissions != null) {
             for(String permission: permissions) {
                 if(ActivityCompat.checkSelfPermission(ctx, permission) != PackageManager.PERMISSION_GRANTED)
@@ -345,5 +345,5 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
             }
         }
         return true;
-    }
+    }*/
 }
