@@ -10,6 +10,22 @@
     android:fitsSystemWindows="true"
     tools:layout_editor_absoluteY="81dp">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarp"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorAccent"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Crear sesión"
+        app:titleTextColor="@android:color/white"
+        android:theme="@style/ToolbarTheme"
+        app:titleTextAppearance="@style/ToolbarTheme"/>
+
     <TextView
         android:id="@+id/descripcion"
         android:layout_width="280dp"
@@ -21,7 +37,7 @@
         android:layout_marginTop="120dp"
         android:fontFamily="@font/open_regular"
         android:gravity="center"
-        android:text="Indique a los asistentes a que red WiFi esta conectado asi como el siguiente código"
+        android:text="Indique a los asistentes a qué red WiFi está conectado así como el siguiente código"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="#666666"
         android:textSize="18sp"
@@ -56,11 +72,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="284dp"
         android:fontFamily="@font/opensans_semibold"
         android:text="CODIGO"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

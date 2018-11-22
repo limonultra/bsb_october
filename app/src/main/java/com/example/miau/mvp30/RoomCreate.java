@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.MenuItem;
@@ -40,6 +41,8 @@ public class RoomCreate extends AppCompatActivity {
         super.onCreate( SavedInstanceState );
         setContentView( R.layout.activity_room_create );
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        Toolbar toolbar = findViewById(R.id.toolbarp) ;
+        setSupportActionBar(toolbar);
 
         this.registerReceiver(mWifiStateChangedReceiver,new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION));
 
