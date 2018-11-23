@@ -5,14 +5,16 @@ import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.widget.Toolbar
 import android.text.Editable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.miau.mvp30.R
 import kotlinx.android.synthetic.main.activity_transcription.*
+import android.R.attr.key
 
 
-class TranscriptionDFragment() : DialogFragment() {
+class TranscriptionDFragment(): DialogFragment() {
 
     private var rootView: View? = null
     private var salto_linea = "\n"
@@ -22,7 +24,7 @@ class TranscriptionDFragment() : DialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         if (rootView == null) {
-            rootView = inflater.inflate(R.layout.activity_transcription, container, false)
+            rootView = inflater.inflate(R.layout.activity_transcription_prof, container, false)
             toolbar = rootView?.findViewById(R.id.toolbar3) as Toolbar
             toolbar.inflateMenu(R.menu.menu_profesor)
             toolbar.setOnMenuItemClickListener(
