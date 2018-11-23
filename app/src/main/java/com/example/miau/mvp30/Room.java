@@ -130,7 +130,16 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         pinName.setText(PIN);
         wifiName.setText(WIFI);
 
+        CharSequence pupilsNumber = pupilsNo.getText();
+
+        Bundle dFragBundle = new Bundle();
+        dFragBundle.putString( "pin", PIN );
+        dFragBundle.putString( "wifi", WIFI );
+        dFragBundle.putCharSequence( "pupils", pupilsNumber );
+        transcriptionDialog.setArguments( dFragBundle );
     }
+
+
 
 
     public void ButtonStartEvent(View view) {

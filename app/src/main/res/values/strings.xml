@@ -27,7 +27,64 @@
         <item>de_DE</item>
         <item>fr_FR</item>
         <item>pt_PT</item>
-        <item>es_MX</item>
+        <item>es_AR</item>
+        <item>es_CO</item>
+        <item>af_AF</item>
+        <item>am-AM</item>
+        <item>hy-HY</item>
+        <item>az-AZ</item>
+        <item>eu-EU</item>
+        <item>bn-BN</item>
+        <item>bg-BG</item>
+        <item>ca-CA</item>
+        <item>cs-CS</item>
+        <item>da-DA</item>
+        <item>nl-NL</item>
+        <item>en-AU</item>!!!!
+        <item>en-CA</item>
+        <item>en-NZ</item>
+        <item>en-GB</item>
+        <item>fi-FI</item>
+        <item>gl-GL</item>
+        <item>ka-KA</item>
+        <item>el-EL</item>
+        <item>gu-GU</item>
+        <item>he-HE</item>
+        <item>hu-HU</item>
+        <item>is-IS</item>
+        <item>it-IT</item>
+        <item>id-ID</item>
+        <item>ja-JA</item>
+        <item>jv-JV</item>
+        <item>kn-KN</item>
+        <item>ko-KO</item>
+        <item>km-KM</item>
+        <item>lo-LO</item>
+        <item>la-LA</item>
+        <item>lv-LV</item>
+        <item>lt-LT</item>
+        <item>ms-MS</item>
+        <item>ml-ML</item>
+        <item>mr-MR</item>
+        <item>ne-NE</item>
+        <item>no-NO</item>
+        <item>fa-FA</item>
+        <item>pl-PL</item>
+        <item>ro-RO</item>
+        <item>ru-RU</item>
+        <item>sr-SR</item>
+        <item>si-SI</item>
+        <item>sk-SK</item>
+        <item>su-SU</item>
+        <item>sw-SW</item>
+        <item>sv-SV</item>
+        <item>ta-TA</item>
+        <item>te-TE</item>
+        <item>tr-TR</item>
+        <item>ur-UR</item>
+        <item>zu-ZU</item>
+        <item>vi-VI</item>
+
     </array>
 
 </resources>

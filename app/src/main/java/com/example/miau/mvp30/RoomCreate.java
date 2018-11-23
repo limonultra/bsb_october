@@ -82,8 +82,8 @@ public class RoomCreate extends AppCompatActivity {
 
 
     public void setChangeIdiom(View view){
-        Intent toSettings = new Intent( this,Settings.class );
-        startActivity( toSettings );
+        Intent toIdiom = new Intent( this,IdiomaActivity.class );
+        startActivity( toIdiom );
     }
     public void setChangeWiFi(View view){
         startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
