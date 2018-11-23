@@ -31,7 +31,6 @@ import android.widget.Chronometer;
 import android.widget.TextView;
 
 import com.example.miau.mvp30.Fragment.TranscriptionDFragment;
-import static com.example.miau.mvp30.Adapter.CustomAdapter.getStringFromIdiom;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -41,6 +40,7 @@ import java.util.List;
 import java.util.Queue;
 
 import static android.content.ContentValues.TAG;
+import static com.example.miau.mvp30.Adapter.CustomAdapter.getStringFromIdiom;
 
 public class Room extends AppCompatActivity implements RecognitionListener {
 
@@ -104,8 +104,6 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
         Toolbar toolbar = findViewById(R.id.toolbar5);
         setSupportActionBar(toolbar);
-
-        this.registerReceiver(mWifiStateChangedReceiver, new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION));
 
         transcriptionDialog = new TranscriptionDFragment();
 
@@ -191,6 +189,16 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             countDownParrafo.start();
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.registerReceiver(mWifiStateChangedReceiver, new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION));
+
+        if (listening)
+            restartSpeechOnNewConnection();
+    }
+
 
     private SpeechRecognizer getSpeechRecognizer() {
         if (speech == null) {
@@ -306,6 +314,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
                 message = "error from server";
                 break;
             case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
+                restartSpeechOnNewConnection();
                 message = "No speech input";
                 break;
             default:
