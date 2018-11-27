@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3f51b5</color>
-    <color name="colorPrimaryDark">#101f7c</color>
+    <color name="colorPrimary">#005466</color>
+    <color name="colorPrimaryDark">#008ea6</color>
     <color name="colorAccent">#00b6c7</color>
     <color name="light">#7BB6FF</color>
-    <color name="background">#EEEEEE</color>
+    <color name="background">#ffffff</color>
     <color name="button">#00b6c7</color>
-    <color name="error">#b71c1c</color>
+    <color name="error">#662d91</color>
     <color name="barra_estado">#008ea6</color>
     <color name="transcription_color">#f4f4f4</color>
 
@@ -21,6 +21,34 @@
     <color name="toolbar_dark_extra">#282828</color>
     <color name="toolbar_dark_extra_2">#535353</color>
     <color name="text_extra">#999999</color>
+
+    <array name="whitePattern">
+        <item>#005466</item>
+        <item>#111111</item>
+        <item>#ff0014</item>
+        <item>#4c8c28</item>
+    </array>
+
+    <array name="blackPattern">
+        <item>#ffffff</item>
+        <item>#00b6c7</item>
+        <item>#ffeb4e</item>
+        <item>#ff0014</item>
+        <item>#4c8c28</item>
+    </array>
+
+    <array name="yellowPattern">
+        <item>#111111</item>
+    </array>
+
+    <array name="redPattern">
+        <item>#111111</item>
+    </array>
+
+    <array name="greenPattern">
+        <item>#ffffff</item>
+        <item>#111111</item>
+    </array>
 
 
 

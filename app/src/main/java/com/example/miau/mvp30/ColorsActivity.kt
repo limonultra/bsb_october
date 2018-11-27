@@ -22,6 +22,12 @@ class ColorsActivity : AppCompatActivity() {
 
         pref = getSharedPreferences("colors", Context.MODE_PRIVATE)
 
+        arrayListOf<String>("#005466", "#111111", "#ff0014", "4c8c28") //WhitePattern
+        arrayListOf<String>("#ffffff", "#00b6c7", "#ffeb4e", "#ff0014", "#4c8c28") // blackPattern
+        arrayListOf<String>("#111111") //yellowPattern
+        arrayListOf<String>("#111111") //redPattern
+        arrayListOf<String>("#ffffff", "#111111") //greenPattern
+
         val toolbar = findViewById(R.id.toolbarc) as Toolbar
         setSupportActionBar(toolbar)
     }

@@ -34,7 +34,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/open_regular"
         android:gravity="center_horizontal"
-        android:text="Instructor y asistente deben usar la misma WiFi y utilizar el código que se genera en cada sesión"
+        android:text="Una vez el instructor inicie sesión, el asistente debe utilizar si misma WiFi y código."
         android:textColor="#666666"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"

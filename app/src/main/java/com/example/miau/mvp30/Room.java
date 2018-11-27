@@ -109,9 +109,14 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         transcriptionDialog = new TranscriptionDFragment();
 
         SharedPreferences sharedPref =  this.getSharedPreferences( "config",MODE_PRIVATE );
+        SharedPreferences colorSharedPref =  this.getSharedPreferences( "colors",MODE_PRIVATE );
 
-        String idiomPref = getStringFromIdiom(sharedPref.getString("idioma", "es_ES"));
+        String idiomPref = getStringFromIdiom( sharedPref.getString( "idioma", "" ) );
         idiom.setText( "Reconocimiento de voz: " + idiomPref );
+
+        String backgroundPref = colorSharedPref.getString( "background","#ffffff" );
+        String buttonPref = colorSharedPref.getString( "button",  "#00b6c7");
+        String textPref = colorSharedPref.getString(   "text", "#666666");
 
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 

@@ -81,12 +81,19 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
         String[] tempPerms = {Manifest.permission.RECORD_AUDIO};
 
         SharedPreferences sharedPref =  this.getSharedPreferences( "config",MODE_PRIVATE );
+        SharedPreferences colorSharedPref =  this.getSharedPreferences( "colors",MODE_PRIVATE );
 
         String idiomPref = getStringFromIdiom( sharedPref.getString( "idioma", "es_ES" ) );
         idiom.setText( "Reconocimiento de voz: " + idiomPref );
 
+        String backgroundPref = colorSharedPref.getString( "background","#ffffff" );
+        String buttonPref = colorSharedPref.getString( "button",  "#00b6c7");
+        String textPref = colorSharedPref.getString(   "text", "#666666");
 
-        hasPermissions(this, tempPerms );
+        editableText.setBackgroundColor( Color.parseColor(backgroundPref) );
+        editableText.setTextColor( Color.parseColor(textPref) );
+        transcription.setBackgroundColor( Color.parseColor(backgroundPref) );
+        transcription.setTextColor( Color.parseColor(textPref) );
 
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 

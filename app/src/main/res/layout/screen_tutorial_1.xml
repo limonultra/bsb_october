@@ -28,14 +28,14 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="342dp"
+        android:layout_height="70dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/open_regular"
         android:gravity="center_horizontal"
         android:lines="2"
-        android:text="Elija la modalidad que se ajuste a su rol instructor, asistente o solo mode"
+        android:text="Elija la modalidad que se ajuste a su rol instructor, asistente o modo individual."
         android:textColor="#666666"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"

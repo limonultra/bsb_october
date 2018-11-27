@@ -35,7 +35,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/open_regular"
         android:gravity="center_horizontal"
-        android:text="En los tres roles existe una pantalla donde se transcribe audio a tiempo real"
+        android:text="En los tres roles existe una pantalla donde se transcribe audio a tiempo real."
         android:textColor="#666666"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
