@@ -83,6 +83,12 @@
             android:screenOrientation="portrait">
 
         </activity>
+
+        <activity
+            android:name=".ColorsActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>

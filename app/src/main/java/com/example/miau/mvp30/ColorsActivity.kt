@@ -1,32 +1,57 @@
 package com.example.miau.mvp30
 
-import android.Manifest
-import android.annotation.SuppressLint
-import android.app.NotificationManager
 import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
+import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
+import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
-import org.jetbrains.anko.defaultSharedPreferences
+import android.widget.TextView
 
 
 class ColorsActivity : AppCompatActivity() {
+
+    lateinit var pref: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_colors)
 
+        pref = getSharedPreferences("colors", Context.MODE_PRIVATE)
+
         val toolbar = findViewById(R.id.toolbarc) as Toolbar
         setSupportActionBar(toolbar)
+    }
+
+    fun onClickBackground(v: View) {
+        val imageView = (v as ImageView)
+        setBackgroundColor(Integer.parseInt(imageView.contentDescription.toString()))
+    }
+
+
+    fun onClickFont(v: View) {
+        setTextColor((v as TextView).currentTextColor)
+    }
+
+    fun setBackgroundColor(pos: Int) {
+        val layout = findViewById<ConstraintLayout>(R.id.layout)
+
+        when (pos) {
+            1 -> pref.edit().putString("background", "#f4f4f4").apply()
+            2 -> pref.edit().putString("background", "#111111").apply()
+            3 -> pref.edit().putString("background", "#ffeb4e").apply()
+            4 -> pref.edit().putString("background", "#ff0014").apply()
+            5 -> pref.edit().putString("background", "#4c8c28").apply()
+        }
+
+        layout.setBackgroundColor(Color.parseColor(pref.getString("background", "#f4f4f4")))
+    }
+
+    fun setTextColor(color: Int) {
+        pref.edit().putInt("text", color).apply()
     }
 }
 

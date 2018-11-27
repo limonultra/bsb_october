@@ -110,7 +110,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
         SharedPreferences sharedPref =  this.getSharedPreferences( "config",MODE_PRIVATE );
 
-        String idiomPref = getStringFromIdiom( sharedPref.getString( "idioma", "" ) );
+        String idiomPref = getStringFromIdiom(sharedPref.getString("idioma", "es_ES"));
         idiom.setText( "Reconocimiento de voz: " + idiomPref );
 
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
