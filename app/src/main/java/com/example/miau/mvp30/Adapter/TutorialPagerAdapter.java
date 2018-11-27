@@ -59,7 +59,7 @@ public class TutorialPagerAdapter extends PagerAdapter {
             saltar.setVisibility(View.VISIBLE);
             saltar.setText("Continuar");
         } else {
-            saltar.setTextColor(Color.parseColor("#4d4d4d"));
+            saltar.setTextColor(ResourcesCompat.getColor(mContext.getResources(), R.color.colorAccent, null));
         }
 
         saltar.setOnClickListener(new View.OnClickListener() {
