@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3f51b5</color>
-    <color name="colorPrimaryDark">#101f7c</color>
-    <color name="colorAccent">#00b6c7</color>
-    <color name="light">#7BB6FF</color>
-    <color name="background">#EEEEEE</color>
-    <color name="button">#00b6c7</color>
-    <color name="error">#b71c1c</color>
-    <color name="barra_estado">#008ea6</color>
-    <color name="transcription_color">#f4f4f4</color>
+    <color name="primary_dark">#008ea6</color>!
+    <color name="colorAccent">#00b6c7</color>!
+    <color name="background">#ffffff</color>
+    <color name="error">#662d91</color>!
+    <color name="barra_estado">#008ea6</color>!
+    <color name="text_light">#666666</color>!
+    <color name="text_dark">#4d4d4d</color>!
+    <color name="Second_color">#005466</color>!
+    <color name="background_transcrip">#f4f4f4</color>!
+
+    <color name="yellow">#ffeb4e</color>
+    <color name="red">#ff0014</color>
+    <color name="black">#111111</color>
+    <color name="resources">#5c5c5a</color>
+    <color name="data_dark">#2d2d2d</color>
+    <color name="toolbar_dark">#1c1c1c</color>
+    <color name="toolbar_dark_extra">#282828</color>
+    <color name="toolbar_dark_extra_2">#535353</color>
+    <color name="text_extra">#999999</color>
+
 
 
 

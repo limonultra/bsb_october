@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
@@ -118,7 +119,7 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         btnPlay.setVisibility(View.GONE);
         playText.setVisibility( View.GONE );
-        btnStop.setBackgroundResource( R.drawable.ic_stop_off );
+        btnStop.setBackgroundResource( R.drawable.ic_stopbutton_gray );
         btnPlayPause.setVisibility(View.VISIBLE);
         pauseText.setVisibility( View.VISIBLE );
         btnStop.setVisibility(View.VISIBLE);
@@ -138,11 +139,13 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
             chronoState = true;
             isPausePressed = false;
             btnStop.setBackgroundResource( R.drawable.ic_stopboton1 );
+            stopText.setTextColor( Color.parseColor("#00b6c7"));
             btnStop.setEnabled(true);
         } else {
             btnPlayPause.setBackgroundResource(R.drawable.ic_pauseboton1);
             startVoiceRecognitionCycle(speechIntent);
-            btnStop.setBackgroundResource( R.drawable.ic_stop_off );
+            btnStop.setBackgroundResource( R.drawable.ic_stopbutton_gray );
+            stopText.setTextColor( Color.parseColor("#999999"));
             chronoState = false;
             isPausePressed = true;
             listening = true;

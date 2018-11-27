@@ -9,16 +9,16 @@
     <string name="salto_linea">\n</string>
     <string name="saltar">Saltar</string>
     <string name="cambiar"><u>Cambiar</u></string>
-    <string name="terminos">He leído y acepto las condiciones y la <a href="https://www.telefonica.com/es/web/about_telefonica/centro-de-privacidad">política de privacidad</a> de Breaking Barriers</string>
+    <string name="terminos">He leído y acepto las condiciones y la <a href="https://www.telefonica.com/es/web/about_telefonica/centro_de_privacidad">política de privacidad</a> de Breaking Barriers</string>
 
     <array name="temas">
-        <item>Negro - Blanco</item>
-        <item>Negro - Amarillo</item>
-        <item>Rojo - Blanco</item>
-        <item>Verde - Blanco</item>
-        <item>Blanco - Rojo</item>
-        <item>Amarillo - Negro</item>
-        <item>Blanco - Verde</item>
+        <item>Negro _ Blanco</item>
+        <item>Negro _ Amarillo</item>
+        <item>Rojo _ Blanco</item>
+        <item>Verde _ Blanco</item>
+        <item>Blanco _ Rojo</item>
+        <item>Amarillo _ Negro</item>
+        <item>Blanco _ Verde</item>
     </array>
 
     <array name="idiomas">
@@ -30,60 +30,60 @@
         <item>es_AR</item>
         <item>es_CO</item>
         <item>af_AF</item>
-        <item>am-AM</item>
-        <item>hy-HY</item>
-        <item>az-AZ</item>
-        <item>eu-EU</item>
-        <item>bn-BN</item>
-        <item>bg-BG</item>
-        <item>ca-CA</item>
-        <item>cs-CS</item>
-        <item>da-DA</item>
-        <item>nl-NL</item>
-        <item>en-AU</item>!!!!
-        <item>en-CA</item>
-        <item>en-NZ</item>
-        <item>en-GB</item>
-        <item>fi-FI</item>
-        <item>gl-GL</item>
-        <item>ka-KA</item>
-        <item>el-EL</item>
-        <item>gu-GU</item>
-        <item>he-HE</item>
-        <item>hu-HU</item>
-        <item>is-IS</item>
-        <item>it-IT</item>
-        <item>id-ID</item>
-        <item>ja-JA</item>
-        <item>jv-JV</item>
-        <item>kn-KN</item>
-        <item>ko-KO</item>
-        <item>km-KM</item>
-        <item>lo-LO</item>
-        <item>la-LA</item>
-        <item>lv-LV</item>
-        <item>lt-LT</item>
-        <item>ms-MS</item>
-        <item>ml-ML</item>
-        <item>mr-MR</item>
-        <item>ne-NE</item>
-        <item>no-NO</item>
-        <item>fa-FA</item>
-        <item>pl-PL</item>
-        <item>ro-RO</item>
-        <item>ru-RU</item>
-        <item>sr-SR</item>
-        <item>si-SI</item>
-        <item>sk-SK</item>
-        <item>su-SU</item>
-        <item>sw-SW</item>
-        <item>sv-SV</item>
-        <item>ta-TA</item>
-        <item>te-TE</item>
-        <item>tr-TR</item>
-        <item>ur-UR</item>
-        <item>zu-ZU</item>
-        <item>vi-VI</item>
+        <item>am_AM</item>
+        <item>hy_HY</item>
+        <item>az_AZ</item>
+        <item>eu_EU</item>
+        <item>bn_BN</item>
+        <item>bg_BG</item>
+        <item>ca_CA</item>
+        <item>cs_CS</item>
+        <item>da_DA</item>
+        <item>nl_NL</item>
+        <item>en_AU</item>
+        <item>en_CA</item>
+        <item>en_NZ</item>
+        <item>en_GB</item>
+        <item>fi_FI</item>
+        <item>gl_GL</item>
+        <item>ka_KA</item>
+        <item>el_EL</item>
+        <item>gu_GU</item>
+        <item>he_HE</item>
+        <item>hu_HU</item>
+        <item>is_IS</item>
+        <item>it_IT</item>
+        <item>id_ID</item>
+        <item>ja_JA</item>
+        <item>jv_JV</item>
+        <item>kn_KN</item>
+        <item>ko_KO</item>
+        <item>km_KM</item>
+        <item>lo_LO</item>
+        <item>la_LA</item>
+        <item>lv_LV</item>
+        <item>lt_LT</item>
+        <item>ms_MS</item>
+        <item>ml_ML</item>
+        <item>mr_MR</item>
+        <item>ne_NE</item>
+        <item>no_NO</item>
+        <item>fa_FA</item>
+        <item>pl_PL</item>
+        <item>ro_RO</item>
+        <item>ru_RU</item>
+        <item>sr_SR</item>
+        <item>si_SI</item>
+        <item>sk_SK</item>
+        <item>su_SU</item>
+        <item>sw_SW</item>
+        <item>sv_SV</item>
+        <item>ta_TA</item>
+        <item>te_TE</item>
+        <item>tr_TR</item>
+        <item>ur_UR</item>
+        <item>zu_ZU</item>
+        <item>vi_VI</item>
 
     </array>
 

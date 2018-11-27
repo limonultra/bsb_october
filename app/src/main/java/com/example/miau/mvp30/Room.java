@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -139,7 +140,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
 
 
-
+    /*
+    *
+    */
     public void ButtonStartEvent(View view) {
         muteAudio();
         btnPlay.setVisibility(View.GONE);
@@ -150,6 +153,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         stopText.setVisibility( View.VISIBLE );
         chrono.start();
         btnStop.setBackgroundResource( R.drawable.ic_stop_off );
+        stopText.setTextColor( Color.parseColor("#999999"));
         chrono.setBase(SystemClock.elapsedRealtime() + stopTime);
         chronoState = false;
         btnStop.setEnabled(false);
@@ -158,6 +162,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
     }
 
+    /*
+    *
+    */
     public void ButtonStopEvent(View view) {
         if(!isPausePressed) {
             btnStop.setBackgroundResource(R.drawable.ic_stopboton2);
@@ -171,6 +178,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         }
     }
 
+    /*
+    *
+    */
     public void ButtonPlayPauseEvent(View view) {
         if (!chronoState) {
             chrono.stop();
@@ -182,6 +192,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             chronoState = true;
             isPausePressed = false;
             btnStop.setBackgroundResource( R.drawable.ic_stopboton1 );
+            stopText.setTextColor( Color.parseColor("#00b6c7"));
             btnStop.setEnabled(true);
             countDownParrafo.cancel();
             serverControl.broadcast(speechSalto);
@@ -191,6 +202,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             chrono.setBase(SystemClock.elapsedRealtime() + stopTime);
             startVoiceRecognitionCycle(speechIntent);
             btnStop.setBackgroundResource( R.drawable.ic_stop_off );
+            stopText.setTextColor( Color.parseColor("#999999"));
             chronoState = false;
             isPausePressed = true;
             listening = true;
@@ -208,6 +220,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             restartSpeechOnNewConnection();
     }
 
+    /*
+    * Starts Voice Recognizer
+    */
 
     private SpeechRecognizer getSpeechRecognizer() {
         if (speech == null) {
@@ -217,7 +232,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         return speech;
     }
 
-    //Init speech recognizer
+    /*
+    * Get desired language and restart recognizer
+    */
     public void startVoiceRecognitionCycle(Intent speechIntent) {
         android.content.SharedPreferences preferences = this.getSharedPreferences("config", MODE_PRIVATE);
         speechIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, preferences.getString("idioma", "es_ES"));
@@ -227,7 +244,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         listening = true;
     }
 
-    //Cancel speech recognition
+    /*
+     * Cancel speech recognition
+     */
     public void stopVoiceRecognition() {
         if (speech != null) {
             speech.stopListening();
@@ -244,7 +263,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         unregisterReceiver(mWifiStateChangedReceiver);
     }
 
-    //Mutes Beep Speech Sound
+    /*
+     * Mutes Beep Speech Sound
+     */
     public void muteAudio() {
         AudioManager amanager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true);
@@ -253,20 +274,26 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         amanager.setStreamMute(AudioManager.STREAM_RING, true);
     }
 
-    //Save User Audio
+    /*
+     * Save User Audio
+     */
     public void saveCurrentAudio() {
         AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         current_volume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
     }
 
-    //Reset to beginning
+    /*
+     * Reset to beginning
+     */
     public void resetAudio() {
         audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         audio.setStreamVolume(AudioManager.STREAM_MUSIC, audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
                 AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
     }
 
-    //Listener Class
+    /*
+     * Listener Class
+     */
     @Override
     public void onReadyForSpeech(Bundle params) {
         Log.d(TAG, "onReadyForSpeech");
@@ -284,8 +311,6 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
     @Override
     public void onBufferReceived(byte[] buffer) {
-        Log.d(TAG, "onBufferReceived");
-
     }
 
     @Override
@@ -335,7 +360,7 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
     @Override
     public void onResults(Bundle results) {
-        startVoiceRecognitionCycle(speechIntent);
+        restartSpeechOnNewConnection();
         serverControl.broadcast(speechRestart);
         newText = oldText;
     }
@@ -355,6 +380,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         Log.d(TAG, "onEvent");
     }
 
+    /*
+     *  gets data from speech and send it to Acess
+     */
     private void receiveResults(Bundle results) {
         if ((results != null) && results.containsKey(SpeechRecognizer.RESULTS_RECOGNITION)) {
             List<String> heard = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
@@ -375,6 +403,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         }
     }
 
+    /*
+     * Checks if you want to leave session
+     */
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(Room.this).
@@ -412,6 +443,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
 
     }
 
+    /*
+     *
+     */
     private BroadcastReceiver mWifiStateChangedReceiver = new BroadcastReceiver() {
 
         @Override
@@ -443,7 +477,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         }
     };
 
-
+    /*
+     * Updates WiFi & PIN
+     */
     private void updateUI(boolean isConnected) {
 
         if (!isConnected) {
@@ -467,6 +503,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         }
     }
 
+    /*
+     *
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -481,6 +520,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         }
     }
 
+    /*
+     *
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater findMenuItems = getMenuInflater();
@@ -488,6 +530,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /*
+     *
+     */
     public class CountDownParrafo extends CountDownTimer {
 
         public CountDownParrafo(long millisInFuture, long countDownInterval) {
@@ -511,6 +556,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         }
     }
 
+    /*
+     *
+     */
     public void restartSpeechOnNewConnection() {
         if(listening) {
             stopVoiceRecognition();

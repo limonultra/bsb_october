@@ -101,169 +101,169 @@ public class CustomAdapter extends ArrayAdapter<String> {
             case "es_AR":
                 defIdioma = "Español (AR)";
                 break;
-            case "af-AF":
+            case "af_AF":
                 defIdioma = "Afrikaans";
                 break;
-            case "am-AM":
+            case "am_AM":
                 defIdioma = "Amharic";
                 break;
-            case "hy-HY":
+            case "hy_HY":
                 defIdioma = "Armenio";
                 break;
-            case "az-AZ":
+            case "az_AZ":
                 defIdioma = "Azerbaiano";
                 break;
-            case "eu-EU":
+            case "eu_EU":
                 defIdioma = "Vasco";
                 break;
-            case "bn-BN":
+            case "bn_BN":
                 defIdioma = "Bangla";
                 break;
-            case "bg-BG":
+            case "bg_BG":
                 defIdioma = "Bulgaro";
                 break;
-            case "ca-CA":
+            case "ca_CA":
                 defIdioma = "Catalan";
                 break;
-            case "cs-CS":
+            case "cs_CS":
                 defIdioma = "Checo";
                 break;
-            case "da-DA":
+            case "da_DA":
                 defIdioma = "Danés";
                 break;
-            case "nl-NL":
+            case "nl_NL":
                 defIdioma = "Belga";
                 break;
-            case "en-AU":
+            case "en_AU":
                 defIdioma = "Inglés (AU)";
                 break;
-            case "en-CA":
+            case "en_CA":
                 defIdioma = "Inglés (CA)";
                 break;
-            case "en-NZ":
+            case "en_NZ":
                 defIdioma = "Inglés (NZ)";
                 break;
-            case "en-GB":
+            case "en_GB":
                 defIdioma = "Inglés (GB)";
                 break;
-            case "fi-FI":
+            case "fi_FI":
                 defIdioma = "Fines";
                 break;
-            case "gl-GL":
+            case "gl_GL":
                 defIdioma = "Gallego";
                 break;
-            case "ka-KA":
+            case "ka_KA":
                 defIdioma = "Georgiano";
                 break;
-            case "el-EL":
+            case "el_EL":
                 defIdioma = "Griego";
                 break;
-            case "gu-GU":
+            case "gu_GU":
                 defIdioma = "Gujarati";
                 break;
-            case "he-HE":
+            case "he_HE":
                 defIdioma = "Hebreo";
                 break;
-            case "hu-HU":
+            case "hu_HU":
                 defIdioma = "Hungaro";
                 break;
-            case "is-IS":
+            case "is_IS":
                 defIdioma = "Islandés";
                 break;
-            case "it-IT":
+            case "it_IT":
                 defIdioma = "Italiano";
                 break;
-            case "id-ID":
+            case "id_ID":
                 defIdioma = "Indonesio";
                 break;
-            case "ja-JA":
+            case "ja_JA":
                 defIdioma = "Japonés";
                 break;
-            case "jv-JV":
+            case "jv_JV":
                 defIdioma = "Javanés";
                 break;
-            case "kn-KN":
+            case "kn_KN":
                 defIdioma = "Kannada";
                 break;
-            case "ko-KO":
+            case "ko_KO":
                 defIdioma = "Coreano";
                 break;
-            case "km-KM":
+            case "km_KM":
                 defIdioma = "Khmer";
                 break;
-            case "lo-LO":
+            case "lo_LO":
                 defIdioma = "Lao";
                 break;
-            case "la-LA":
+            case "la_LA":
                 defIdioma = "Latin";
                 break;
-            case "lv-LV":
+            case "lv_LV":
                 defIdioma = "Latvio";
                 break;
-            case "lt-LT":
+            case "lt_LT":
                 defIdioma = "Lituano";
                 break;
-            case "ms-MS":
+            case "ms_MS":
                 defIdioma = "Malayo";
                 break;
-            case "ml-ML":
+            case "ml_ML":
                 defIdioma = "Malabar";
                 break;
-            case "mr-MR":
+            case "mr_MR":
                 defIdioma = "Marathi";
                 break;
-            case "ne-NE":
+            case "ne_NE":
                 defIdioma = "Nepalí";
                 break;
-            case "no-NO":
+            case "no_NO":
                 defIdioma = "Noruego";
                 break;
-            case "fa-FA":
+            case "fa_FA":
                 defIdioma = "Persa";
                 break;
-            case "pl-PL":
+            case "pl_PL":
                 defIdioma = "Polaco";
                 break;
-            case "ro-RO":
+            case "ro_RO":
                 defIdioma = "Rumano";
                 break;
-            case "ru-RU":
+            case "ru_RU":
                 defIdioma = "Ruso";
                 break;
-            case "sr-SR":
+            case "sr_SR":
                 defIdioma = "Serbio";
                 break;
-            case "si-SI":
+            case "si_SI":
                 defIdioma = "Sinhala";
                 break;
-            case "sk-SK":
+            case "sk_SK":
                 defIdioma = "Esloveno";
                 break;
-            case "su-SU":
+            case "su_SU":
                 defIdioma = "Suadanés";
                 break;
-            case "sw-SW":
+            case "sw_SW":
                 defIdioma = "Swahili";
                 break;
-            case "sv-SV":
+            case "sv_SV":
                 defIdioma = "Sueco";
                 break;
-            case "ta-TA":
+            case "ta_TA":
                 defIdioma = "Tamil";
                 break;
-            case "te-TE":
+            case "te_TE":
                 defIdioma = "Telugu";
                 break;
-            case "tr-TR":
+            case "tr_TR":
                 defIdioma = "Turco";
                 break;
-            case "ur-UR":
+            case "ur_UR":
                 defIdioma = "Urdu";
                 break;
-            case "zu-ZU":
+            case "zu_ZU":
                 defIdioma = "Zulu";
                 break;
-            case "vi-VI":
+            case "vi_VI":
                 defIdioma = "Vietnamita";
                 break;
             default:
