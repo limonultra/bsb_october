@@ -79,6 +79,7 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
         idiom = findViewById( R.id.idiom );
 
         String[] tempPerms = {Manifest.permission.RECORD_AUDIO};
+        hasPermissions( this, tempPerms );
 
         SharedPreferences sharedPref =  this.getSharedPreferences( "config",MODE_PRIVATE );
         SharedPreferences colorSharedPref =  this.getSharedPreferences( "colors",MODE_PRIVATE );

@@ -21,6 +21,7 @@ import android.speech.SpeechRecognizer;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -142,8 +143,6 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         dFragBundle.putCharSequence( "pupils", pupilsNumber );
         transcriptionDialog.setArguments( dFragBundle );
     }
-
-
 
     /*
     *
@@ -570,4 +569,5 @@ public class Room extends AppCompatActivity implements RecognitionListener {
             startVoiceRecognitionCycle(speechIntent);
         }
     }
+
 }
