@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.View
@@ -22,14 +23,20 @@ class ColorsActivity : AppCompatActivity() {
 
         pref = getSharedPreferences("colors", Context.MODE_PRIVATE)
 
-        arrayListOf<String>("#005466", "#111111", "#ff0014", "4c8c28") //WhitePattern
-        arrayListOf<String>("#ffffff", "#00b6c7", "#ffeb4e", "#ff0014", "#4c8c28") // blackPattern
-        arrayListOf<String>("#111111") //yellowPattern
-        arrayListOf<String>("#111111") //redPattern
-        arrayListOf<String>("#ffffff", "#111111") //greenPattern
-
         val toolbar = findViewById(R.id.toolbarc) as Toolbar
         setSupportActionBar(toolbar)
+
+        initColor()
+    }
+
+    private fun initColor() {
+        val layout = findViewById<ConstraintLayout>(R.id.layout)
+        layout.setBackgroundColor(Color.parseColor(pref.getString("background", "#f4f4f4")))
+        setTextColor(pref.getInt("text", ContextCompat.getColor(this, R.color.black)))
+        putShapeColors(pref.getInt("pos", 1))
+
+        if (pref.getString("background", "#f4f4f4").equals("#111111"))
+            changeShapeWhite()
     }
 
     fun onClickBackground(v: View) {
@@ -46,19 +53,92 @@ class ColorsActivity : AppCompatActivity() {
         val layout = findViewById<ConstraintLayout>(R.id.layout)
 
         when (pos) {
-            1 -> pref.edit().putString("background", "#f4f4f4").apply()
-            2 -> pref.edit().putString("background", "#111111").apply()
-            3 -> pref.edit().putString("background", "#ffeb4e").apply()
-            4 -> pref.edit().putString("background", "#ff0014").apply()
-            5 -> pref.edit().putString("background", "#4c8c28").apply()
+            1 -> {
+                pref.edit().putString("background", "#f4f4f4").putInt("pos", pos).apply()
+                setTextColor(Color.parseColor("#111111"))
+                changeShapeBlack()
+            }
+            2 -> {
+                pref.edit().putString("background", "#111111").putInt("pos", pos).apply()
+                setTextColor(Color.parseColor("#f4f4f4"))
+                changeShapeWhite()
+            }
+            3 -> {
+                pref.edit().putString("background", "#ffeb4e").putInt("pos", pos).apply()
+                setTextColor(Color.parseColor("#111111"))
+                changeShapeGrey()
+            }
+            4 -> {
+                pref.edit().putString("background", "#ff0014").putInt("pos", pos).apply()
+                setTextColor(Color.parseColor("#111111"))
+                changeShapeGrey()
+            }
+            5 -> {
+                pref.edit().putString("background", "#4c8c28").putInt("pos", pos).apply()
+                setTextColor(Color.parseColor("#111111"))
+                changeShapeGrey()
+            }
         }
 
+        putShapeColors(pos)
         layout.setBackgroundColor(Color.parseColor(pref.getString("background", "#f4f4f4")))
+    }
+
+    private fun changeShapeWhite() {
+        val textView = findViewById<TextView>(R.id.a_button1);
+        val textView2 = findViewById<TextView>(R.id.a_button2);
+        val textView3 = findViewById<TextView>(R.id.a_button3);
+        val textView4 = findViewById<TextView>(R.id.a_button4);
+        val textView5 = findViewById<TextView>(R.id.a_button5);
+
+        textView.setBackgroundResource(R.drawable.a_button_white)
+        textView2.setBackgroundResource(R.drawable.a_button_white)
+        textView3.setBackgroundResource(R.drawable.a_button_white)
+        textView4.setBackgroundResource(R.drawable.a_button_white)
+        textView5.setBackgroundResource(R.drawable.a_button_white)
+
+        val imageView = findViewById<ImageView>(R.id.imageView8)
+        imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_gotadecolor_light_gray))
+    }
+
+    private fun changeShapeBlack() {
+        val textView = findViewById<TextView>(R.id.a_button1);
+        val textView2 = findViewById<TextView>(R.id.a_button2);
+        val textView3 = findViewById<TextView>(R.id.a_button3);
+        val textView4 = findViewById<TextView>(R.id.a_button4);
+        val textView5 = findViewById<TextView>(R.id.a_button5);
+
+        textView.setBackgroundResource(R.drawable.a_button)
+        textView2.setBackgroundResource(R.drawable.a_button)
+        textView3.setBackgroundResource(R.drawable.a_button)
+        textView4.setBackgroundResource(R.drawable.a_button)
+        textView5.setBackgroundResource(R.drawable.a_button)
+
+        val imageView = findViewById<ImageView>(R.id.imageView8)
+        imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_gotadecolor))
+    }
+
+    private fun changeShapeGrey() {
+        val textView = findViewById<TextView>(R.id.a_button1);
+        val textView2 = findViewById<TextView>(R.id.a_button2);
+        val textView3 = findViewById<TextView>(R.id.a_button3);
+        val textView4 = findViewById<TextView>(R.id.a_button4);
+        val textView5 = findViewById<TextView>(R.id.a_button5);
+
+        textView.setBackgroundResource(R.drawable.a_button_grey)
+        textView2.setBackgroundResource(R.drawable.a_button_grey)
+        textView3.setBackgroundResource(R.drawable.a_button_grey)
+        textView4.setBackgroundResource(R.drawable.a_button_grey)
+        textView5.setBackgroundResource(R.drawable.a_button_grey)
+
+        val imageView = findViewById<ImageView>(R.id.imageView8)
+        imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_gotacolor_negro))
     }
 
     fun setTextColor(color: Int) {
         pref.edit().putInt("text", color).apply()
         changeTextsColor(color)
+
     }
 
     fun changeTextsColor(color: Int) {
@@ -72,5 +152,60 @@ class ColorsActivity : AppCompatActivity() {
         textView3.setTextColor(color)
         textView4.setTextColor(color)
     }
-}
 
+    fun putShapeColors(pos: Int) {
+        val textView = findViewById<TextView>(R.id.a_button1);
+        val textView2 = findViewById<TextView>(R.id.a_button2);
+        val textView3 = findViewById<TextView>(R.id.a_button3);
+        val textView4 = findViewById<TextView>(R.id.a_button4);
+        val textView5 = findViewById<TextView>(R.id.a_button5);
+
+        textView.visibility = View.VISIBLE
+        textView2.visibility = View.VISIBLE
+        textView3.visibility = View.VISIBLE
+        textView4.visibility = View.VISIBLE
+        textView5.visibility = View.VISIBLE
+
+        when (pos) {
+            1 -> {
+                textView.setTextColor(Color.parseColor("#005466"))
+                textView2.setTextColor(Color.parseColor("#111111"))
+                textView3.setTextColor(Color.parseColor("#ff0014"))
+                textView4.setTextColor(Color.parseColor("#4c8c28"))
+                textView5.visibility = View.INVISIBLE
+
+            }
+            2 -> {
+                textView.setTextColor(Color.parseColor("#ffffff"))
+                textView2.setTextColor(Color.parseColor("#00b6c7"))
+                textView3.setTextColor(Color.parseColor("#ffeb4e"))
+                textView4.setTextColor(Color.parseColor("#ff0014"))
+                textView5.setTextColor(Color.parseColor("#4c8c28"))
+            }
+            3 -> {
+                textView.setTextColor(Color.parseColor("#111111"))
+                textView2.visibility = View.INVISIBLE
+                textView3.visibility = View.INVISIBLE
+                textView4.visibility = View.INVISIBLE
+                textView5.visibility = View.INVISIBLE
+
+            }
+            4 -> {
+                textView.setTextColor(Color.parseColor("#111111"))
+                textView2.visibility = View.INVISIBLE
+                textView3.visibility = View.INVISIBLE
+                textView4.visibility = View.INVISIBLE
+                textView5.visibility = View.INVISIBLE
+
+            }
+            5 -> {
+                textView.setTextColor(Color.parseColor("#ffffff"))
+                textView2.setTextColor(Color.parseColor("#111111"))
+                textView3.visibility = View.INVISIBLE
+                textView4.visibility = View.INVISIBLE
+                textView5.visibility = View.INVISIBLE
+
+            }
+        }
+    }
+}

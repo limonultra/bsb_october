@@ -21,7 +21,6 @@ import android.speech.SpeechRecognizer;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -110,14 +109,9 @@ public class Room extends AppCompatActivity implements RecognitionListener {
         transcriptionDialog = new TranscriptionDFragment();
 
         SharedPreferences sharedPref =  this.getSharedPreferences( "config",MODE_PRIVATE );
-        SharedPreferences colorSharedPref =  this.getSharedPreferences( "colors",MODE_PRIVATE );
 
-        String idiomPref = getStringFromIdiom( sharedPref.getString( "idioma", "" ) );
+        String idiomPref = getStringFromIdiom(sharedPref.getString("idioma", "es_ES"));
         idiom.setText( "Reconocimiento de voz: " + idiomPref );
-
-        String backgroundPref = colorSharedPref.getString( "background","#ffffff" );
-        String buttonPref = colorSharedPref.getString( "button",  "#00b6c7");
-        String textPref = colorSharedPref.getString(   "text", "#666666");
 
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 

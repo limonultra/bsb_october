@@ -47,26 +47,26 @@ public class TutorialPagerAdapter extends PagerAdapter {
                         if (!isChecked)
                             saltar.setTextColor(Color.parseColor("#4d4d4d"));
                         else
-                            saltar.setTextColor(ResourcesCompat.getColor(mContext.getResources(), R.color.primary, null));
+                            saltar.setTextColor(ResourcesCompat.getColor(mContext.getResources(), R.color.colorAccent, null));
                     }
                 });
             } else {
 
                 checkBox.setVisibility(View.INVISIBLE);
                 terminos.setVisibility(View.INVISIBLE);
-                saltar.setTextColor(ResourcesCompat.getColor(mContext.getResources(), R.color.primary, null));
+                saltar.setTextColor(ResourcesCompat.getColor(mContext.getResources(), R.color.colorAccent, null));
             }
             saltar.setVisibility(View.VISIBLE);
             saltar.setText("Continuar");
         } else {
-            saltar.setTextColor(ResourcesCompat.getColor(mContext.getResources(), R.color.primary, null));
+            saltar.setTextColor(ResourcesCompat.getColor(mContext.getResources(), R.color.colorAccent, null));
         }
 
         saltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (first) {
-                    if (saltar.getCurrentTextColor() == mContext.getResources().getColor(R.color.primary)) {
+                    if (saltar.getCurrentTextColor() == mContext.getResources().getColor(R.color.colorAccent)) {
                         mContext.getSharedPreferences("config", Context.MODE_PRIVATE).edit()
                                 .putBoolean("tutorial", true).apply();
                         ((TutorialActivity) mContext).finish();

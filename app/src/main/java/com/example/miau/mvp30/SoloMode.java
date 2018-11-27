@@ -16,6 +16,7 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -85,16 +86,15 @@ public class SoloMode extends AppCompatActivity implements RecognitionListener {
         SharedPreferences colorSharedPref =  this.getSharedPreferences( "colors",MODE_PRIVATE );
 
         String idiomPref = getStringFromIdiom( sharedPref.getString( "idioma", "es_ES" ) );
-        idiom.setText( "Reconocimiento de voz: " + idiomPref );
+        idiom.setText("Reconocimiento de voz: ".concat(idiomPref));
 
-        String backgroundPref = colorSharedPref.getString( "background","#ffffff" );
-        String buttonPref = colorSharedPref.getString( "button",  "#00b6c7");
-        String textPref = colorSharedPref.getString(   "text", "#666666");
+        String backgroundPref = colorSharedPref.getString("background", "#f4f4f4");
+        int textPref = colorSharedPref.getInt("text", ContextCompat.getColor(this, R.color.black));
 
         editableText.setBackgroundColor( Color.parseColor(backgroundPref) );
-        editableText.setTextColor( Color.parseColor(textPref) );
+        editableText.setTextColor(textPref);
         transcription.setBackgroundColor( Color.parseColor(backgroundPref) );
-        transcription.setTextColor( Color.parseColor(textPref) );
+        transcription.setTextColor(textPref);
 
         speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
