@@ -52,6 +52,19 @@ class ColorsActivity : AppCompatActivity() {
 
     fun setTextColor(color: Int) {
         pref.edit().putInt("text", color).apply()
+        changeTextsColor(color)
+    }
+
+    fun changeTextsColor(color: Int) {
+        val textView1 = findViewById<TextView>(R.id.textView14)
+        val textView2 = findViewById<TextView>(R.id.textView15)
+        val textView3 = findViewById<TextView>(R.id.textView16)
+        val textView4 = findViewById<TextView>(R.id.textView17)
+
+        textView1.setTextColor(color)
+        textView2.setTextColor(color)
+        textView3.setTextColor(color)
+        textView4.setTextColor(color)
     }
 }
 

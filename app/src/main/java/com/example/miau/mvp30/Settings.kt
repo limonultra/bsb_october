@@ -29,8 +29,8 @@ class Settings : AppCompatActivity() {
 
         val color_button: Button = findViewById(R.id.color_button) as Button
         color_button.setOnClickListener {
-            // Handler code here.
-            //setContentView(R.layout.activity_colors)
+            val intent = Intent(this, ColorsActivity::class.java)
+            startActivity(intent)
         }
 
         val idiom_button: Button = findViewById(R.id.idiom_button) as Button
