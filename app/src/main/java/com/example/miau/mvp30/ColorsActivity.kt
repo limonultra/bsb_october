@@ -31,11 +31,11 @@ class ColorsActivity : AppCompatActivity() {
 
     private fun initColor() {
         val layout = findViewById<ConstraintLayout>(R.id.layout)
-        layout.setBackgroundColor(Color.parseColor(pref.getString("background", "#f4f4f4")))
+        layout.setBackgroundColor(Color.parseColor(pref.getString("background", "#ffffff")))
         setTextColor(pref.getInt("text", ContextCompat.getColor(this, R.color.black)))
         putShapeColors(pref.getInt("pos", 1))
 
-        if (pref.getString("background", "#f4f4f4").equals("#111111"))
+        if (pref.getString("background", "#ffffff").equals("#111111"))
             changeShapeWhite()
     }
 
@@ -54,13 +54,13 @@ class ColorsActivity : AppCompatActivity() {
 
         when (pos) {
             1 -> {
-                pref.edit().putString("background", "#f4f4f4").putInt("pos", pos).apply()
+                pref.edit().putString("background", "#ffffff").putInt("pos", pos).apply()
                 setTextColor(Color.parseColor("#005466"))
                 changeShapeBlue()
             }
             2 -> {
                 pref.edit().putString("background", "#111111").putInt("pos", pos).apply()
-                setTextColor(Color.parseColor("#f4f4f4"))
+                setTextColor(Color.parseColor("#ffffff"))
                 changeShapeWhite()
             }
             3 -> {
@@ -81,7 +81,7 @@ class ColorsActivity : AppCompatActivity() {
         }
 
         putShapeColors(pos)
-        layout.setBackgroundColor(Color.parseColor(pref.getString("background", "#f4f4f4")))
+        layout.setBackgroundColor(Color.parseColor(pref.getString("background", "#ffffff")))
     }
 
     private fun changeShapeWhite() {

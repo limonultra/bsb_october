@@ -21,6 +21,7 @@
     <color name="toolbar_dark_extra">#282828</color>
     <color name="toolbar_dark_extra_2">#535353</color>
     <color name="text_extra">#999999</color>
+    <color name="shape_grey">#666666</color>
 
     <array name="whitePattern">
         <item>#005466</item>
