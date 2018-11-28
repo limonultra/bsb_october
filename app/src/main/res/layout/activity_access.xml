@@ -21,6 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="Código"
+        android:elevation="@dimen/cardview_compat_inset_shadow"
         app:titleTextColor="@android:color/white"
         android:theme="@style/ToolbarTheme"
         app:titleTextAppearance="@style/ToolbarTheme"/>

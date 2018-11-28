@@ -55,8 +55,8 @@ class ColorsActivity : AppCompatActivity() {
         when (pos) {
             1 -> {
                 pref.edit().putString("background", "#f4f4f4").putInt("pos", pos).apply()
-                setTextColor(Color.parseColor("#111111"))
-                changeShapeBlack()
+                setTextColor(Color.parseColor("#005466"))
+                changeShapeBlue()
             }
             2 -> {
                 pref.edit().putString("background", "#111111").putInt("pos", pos).apply()
@@ -66,17 +66,17 @@ class ColorsActivity : AppCompatActivity() {
             3 -> {
                 pref.edit().putString("background", "#ffeb4e").putInt("pos", pos).apply()
                 setTextColor(Color.parseColor("#111111"))
-                changeShapeGrey()
+                changeShapeBlack()
             }
             4 -> {
                 pref.edit().putString("background", "#ff0014").putInt("pos", pos).apply()
                 setTextColor(Color.parseColor("#111111"))
-                changeShapeGrey()
+                changeShapeBlack()
             }
             5 -> {
                 pref.edit().putString("background", "#4c8c28").putInt("pos", pos).apply()
                 setTextColor(Color.parseColor("#111111"))
-                changeShapeGrey()
+                changeShapeBlack()
             }
         }
 
@@ -101,7 +101,7 @@ class ColorsActivity : AppCompatActivity() {
         imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_gotadecolor_light_gray))
     }
 
-    private fun changeShapeBlack() {
+    private fun changeShapeBlue() {
         val textView = findViewById<TextView>(R.id.a_button1);
         val textView2 = findViewById<TextView>(R.id.a_button2);
         val textView3 = findViewById<TextView>(R.id.a_button3);
@@ -118,7 +118,7 @@ class ColorsActivity : AppCompatActivity() {
         imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_gotadecolor))
     }
 
-    private fun changeShapeGrey() {
+    private fun changeShapeBlack() {
         val textView = findViewById<TextView>(R.id.a_button1);
         val textView2 = findViewById<TextView>(R.id.a_button2);
         val textView3 = findViewById<TextView>(R.id.a_button3);

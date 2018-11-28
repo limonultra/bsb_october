@@ -11,6 +11,7 @@
         android:id="@+id/toolbar4"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:elevation="@dimen/cardview_compat_inset_shadow"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@color/colorAccent"
